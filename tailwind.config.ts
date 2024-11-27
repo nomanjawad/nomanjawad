@@ -9,8 +9,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#0b346c",
+        secondary: "#010812",
+        accent: "#cec7d1",
+      },
+      backgroundImage: {
+        customgradient:
+          "linear-gradient(180deg, rgba(11,52,108,1) 0%, rgba(1,8,18,1) 90%)",
+      },
+      fontFamily: {
+        heading: ["Playfair Display", "serif"],
+        body: ["Titillium Web", "sans-serif"],
       },
     },
   },

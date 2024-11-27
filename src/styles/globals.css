@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -14,8 +16,141 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+button {
+  @apply bg-accent text-primary px-10 py-3;
+}
+
+/* #menu-btn-container {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  width: 39px;
+  margin: 0 auto;
+  transform: translateY(-50%) scale(2);
+} */
+
+#menu-btn {
+  width: 39px;
+  overflow: hidden;
+}
+
+#menu-checkbox {
+  display: none;
+}
+
+#menu-label {
+  position: relative;
+  display: block;
+  height: 29px;
+  cursor: pointer;
+}
+
+#menu-bar {
+  position: relative;
+  height: 5px;
+  top: 24px;
+  background-color: #fff;
+}
+
+#menu-bar:before {
+  content: "MENU";
+  position: absolute;
+  top: -17px; /* Initial position for MENU */
+  right: 0;
+  left: 0;
+  transition: top 0.4s ease-in-out;
+  opacity: 1;
+}
+
+#menu-bar:after {
+  content: "CLOSE";
+  position: absolute;
+  top: 50px; /* Positioned well below the view initially */
+  right: 0;
+  left: 0;
+  transition: top 0.4s ease-in-out;
+  opacity: 1;
+}
+
+#menu-checkbox:checked + #menu-label #menu-bar:before {
+  top: -50px; /* Moves MENU far up out of view */
+}
+
+#menu-checkbox:checked + #menu-label #menu-bar:after {
+  top: -17px; /* Moves CLOSE up to take the place of MENU */
+}
+
+#menu-checkbox:not(:checked) + #menu-label #menu-bar:before {
+  top: -17px; /* Brings MENU back down to its original position */
+}
+
+#menu-checkbox:not(:checked) + #menu-label #menu-bar:after {
+  top: 50px; /* Moves CLOSE back down and out of view */
+}
+
+@keyframes moveUpThenDown {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: -27px;
+  }
+  100% {
+    top: -14px;
+  }
+}
+
+@keyframes shakeWhileMovingUp {
+  0% {
+    transform: rotateZ(0);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  50% {
+    transform: rotateZ(0deg);
+  }
+  75% {
+    transform: rotateZ(10deg);
+  }
+  100% {
+    transform: rotateZ(0);
+  }
+}
+
+@keyframes shakeWhileMovingDown {
+  0% {
+    transform: rotateZ(0);
+  }
+  80% {
+    transform: rotateZ(3deg);
+  }
+  90% {
+    transform: rotateZ(-3deg);
+  }
+  100% {
+    transform: rotateZ(0);
+  }
+}
+
+/* Base styles */
+.mobile-menu {
+  position: fixed;
+  top: 65px; /* Initially hidden off-screen */
+  right: -100%;
+  width: 50%; /* Full width */
+  height: 100%; /* Full height */
+  box-shadow: -4px 0 6px rgba(255, 255, 255, 0.042);
+  transition: right 0.9s cubic-bezier(0.99, -0.02, 0.18, 0.73);
+}
+
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: right;
 }

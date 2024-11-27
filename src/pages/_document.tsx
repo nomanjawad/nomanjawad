@@ -22,7 +22,7 @@ const Document = () => {
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body className="bg-gray-50 text-gray-800">
+      <body className="bg-customgradient bg-no-repeat bg-cover min-h-screen w-full max-w-[1200px] mx-auto font-body">
         <Main />
         <NextScript />
       </body>
