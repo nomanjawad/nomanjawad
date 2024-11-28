@@ -68,8 +68,14 @@ const Header = () => {
       </div>
 
       {/* Header Lower */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black bg-opacity-0"
+          onClick={() => setIsMobileMenuOpen(false)} // Close menu on backdrop click
+        ></div>
+      )}
       <div
-        className="mobile-menu z-40 bg-accent bg-opacity-20"
+        className="mobile-menu z-40 bg-accent bg-opacity-10"
         style={{
           right: isMobileMenuOpen ? "0" : "-100%",
         }}
@@ -80,7 +86,7 @@ const Header = () => {
               <li key={index}>
                 <Link
                   href={link.href}
-                  className="menu-link font-body text-accent font-semibold"
+                  className="menu-link font-body text-accent font-medium"
                   onClick={() => setIsMobileMenuOpen(false)} // Close menu on link click
                 >
                   {link.label}
