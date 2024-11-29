@@ -89,6 +89,79 @@ button {
   top: 50px; /* Moves CLOSE back down and out of view */
 }
 
+/* Base styles */
+.mobile-menu {
+  position: fixed;
+  top: 65px; /* Initially hidden off-screen */
+  right: -100%;
+  width: 50%; /* Full width */
+  height: 100%; /* Full height */
+  box-shadow: -4px 0 6px rgba(255, 255, 255, 0.042);
+  transition: right 0.9s cubic-bezier(0.99, -0.02, 0.18, 0.73);
+}
+
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: right;
+}
+
+.bg-lines span {
+  top: 0;
+  z-index: -1;
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  -webkit-animation: leftRightOne 18s infinite;
+  animation: leftRightOne 18s infinite;
+  background: rgba(255, 255, 255, 0.05);
+}
+.bg-lines span:nth-child(1) {
+  left: 10%;
+}
+.bg-lines span:nth-child(2) {
+  left: 20%;
+}
+.bg-lines span:nth-child(3) {
+  left: 30%;
+}
+.bg-lines span:nth-child(4) {
+  left: 40%;
+}
+.bg-lines span:nth-child(5) {
+  left: 50%;
+}
+.bg-lines span:nth-child(6) {
+  left: 60%;
+}
+.bg-lines span:nth-child(7) {
+  left: 70%;
+}
+.bg-lines span:nth-child(8) {
+  left: 80%;
+}
+.bg-lines span:nth-child(9) {
+  left: 90%;
+}
+
+/* Animations  */
+
+@keyframes leftRightOne {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  50% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+  }
+}
+
 @keyframes moveUpThenDown {
   0% {
     top: 0;
@@ -132,25 +205,4 @@ button {
   100% {
     transform: rotateZ(0);
   }
-}
-
-/* Base styles */
-.mobile-menu {
-  position: fixed;
-  top: 65px; /* Initially hidden off-screen */
-  right: -100%;
-  width: 50%; /* Full width */
-  height: 100%; /* Full height */
-  box-shadow: -4px 0 6px rgba(255, 255, 255, 0.042);
-  transition: right 0.9s cubic-bezier(0.99, -0.02, 0.18, 0.73);
-}
-
-.menu-list {
-  list-style: none;
-  margin: 0;
-  padding: 20px 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  text-align: right;
 }

@@ -12,9 +12,9 @@ const Header = () => {
   ];
 
   return (
-    <header className="relative left-0 top-0 w-full transition-all duration-500 ease-in-out">
+    <header className="fixed left-0 top-0 w-full transition-all duration-500 ease-in-out z-50">
       {/* Header Upper */}
-      <div className="container max-w-full px-6 md:px-14 lg:px-20 flex items-center justify-between py-4 z-50 relative bg-primary">
+      <div className="container max-w-full px-6 md:px-14 lg:px-20 flex items-center justify-between py-4 z-50 relative bg-transparent">
         {/* Logo */}
         <div className="flex-none">
           <h2 className="font-heading text-3xl font-bold text-white">
