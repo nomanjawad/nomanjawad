@@ -21,16 +21,15 @@ export const LampContainer = ({
 }) => {
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
   const config = isMobile ? lampConfig.mobile : lampConfig.desktop;
-  console.log(lampConfig);
 
   return (
     <div
       className={cn(
-        `relative flex lg:min-h-screen  md:min-h-[70vh] sm:min-h-[60vh] flex-col items-center justify-center overflow-hidden bg-${lampConfig.lampColors.backgroundColor} w-full z-0`,
+        `relative flex lg:min-h-screen sm:min-h-[75vh] flex-col items-center justify-center overflow-hidden bg-${lampConfig.lampColors.backgroundColor} w-full z-0`,
         className
       )}
     >
-      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
+      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 mt-60">
         <motion.div
           initial={{
             opacity: 0.5,
@@ -90,7 +89,7 @@ export const LampContainer = ({
           className={`absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md`}
         ></div>
         <div
-          className={`absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-${lampConfig.lampColors.lightColor} opacity-50 blur-3xl`}
+          className={`absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-${lampConfig.lampColors.lightColor} opacity-20 blur-3xl`}
         ></div>
         <motion.div
           initial={{ width: "8rem" }}
@@ -116,21 +115,20 @@ export const LampContainer = ({
         <div
           className={`absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-${lampConfig.lampColors.backgroundColor} `}
         ></div>
-        <div className="bg-lines">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
       </div>
-
-      <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">
+      <div className="bg-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div className="relative z-50 flex -translate-y-60 flex-col items-center px-5">
         {children}
       </div>
     </div>
