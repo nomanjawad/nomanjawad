@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 const BannerText = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -10,6 +10,7 @@ const BannerText = () => {
   const h3Ref = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
+    console.log(sectionRef.current);
     gsap.registerPlugin(ScrollTrigger);
 
     const tl = gsap.timeline({
@@ -17,31 +18,33 @@ const BannerText = () => {
         trigger: sectionRef.current,
         start: "top 80%", // When the top of the section is 80% from the top of the viewport
         end: "bottom 20%", // When the bottom of the section reaches 20% from the top of the viewport
-        toggleActions: "play none none none", // Play animation when triggered
+        toggleActions: "play play play play", // Play animation when triggered
       },
     });
 
-    tl.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 })
+    tl.fromTo(
+      sectionRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: "power4.out" }
+    )
       .fromTo(
         h4Ref.current,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5 },
-        "<0.2"
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power4.out" }
       )
       .fromTo(
         h1Ref.current,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5 },
-        "<0.2"
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power4.out" }
       )
       .fromTo(
         h3Ref.current,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5 },
-        "<0.2"
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power4.out" }
       );
+    ScrollTrigger.refresh();
   }, []);
-
+  console.log(sectionRef.current);
   return (
     <div className="container">
       <div

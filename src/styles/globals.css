@@ -112,13 +112,13 @@ button {
 
 .bg-lines span {
   top: 0;
-  z-index: -1;
+  z-index: 1;
   width: 1px;
   height: 100%;
   position: absolute;
   -webkit-animation: leftRightOne 18s infinite;
   animation: leftRightOne 18s infinite;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
 }
 .bg-lines span:nth-child(1) {
   left: 10%;
@@ -205,4 +205,12 @@ button {
   100% {
     transform: rotateZ(0);
   }
+}
+
+.gsap-marker-start,
+.gsap-marker-end {
+  z-index: 1000 !important; /* Ensure markers appear on top */
+  background-color: red !important; /* Make markers more visible */
+  color: white !important;
+  font-size: 12px !important;
 }
