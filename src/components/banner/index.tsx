@@ -2,8 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { LampContainer } from "@/components/ui/lamp";
-import { scrollDown } from "@/assets/lottie";
-import { Player } from "@lottiefiles/react-lottie-player";
 
 const Banner = () => {
   const lampConfig = {
@@ -91,14 +89,6 @@ const Banner = () => {
               Frontend Developer
             </motion.h3>
           </motion.div>
-        </div>
-        <div className="mt-9">
-          <Player
-            src={scrollDown}
-            autoplay
-            loop
-            style={{ height: "auto", width: "30px" }}
-          />
         </div>
       </motion.h1>
     </LampContainer>

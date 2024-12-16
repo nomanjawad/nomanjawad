@@ -1,100 +1,96 @@
-import Link from "next/link";
-import { useState } from "react";
+"use client";
+import React from "react";
+import Image from "next/image";
 
-const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const menuLinks = [
-    { label: "Home", href: "#" },
-    { label: "About", href: "/about.html" },
-    { label: "Projects", href: "#" },
-    { label: "Contact", href: "/contact.html" },
-  ];
-
+const Header: React.FC = () => {
   return (
-    <header className="fixed left-0 top-0 w-full transition-all duration-500 ease-in-out z-50">
-      {/* Header Upper */}
-      <div className="container max-w-full px-6 md:px-14 lg:px-20 flex items-center justify-between py-4 z-50 relative bg-transparent">
-        {/* Logo */}
-        <div className="flex-none">
-          <h2 className="font-heading text-3xl font-bold text-white">
-            Noman Jawad
-          </h2>
-        </div>
+    <header className="main-header">
+      <div className="header-upper">
+        <div className="container">
+          <div className="header-inner d-flex align-items-center">
+            {/* Logo Section */}
+            <div className="logo-outer">
+              <div className="logo">
+                <Image
+                  src="/assets/images/logo.png"
+                  alt="Logo"
+                  title="Logo"
+                  width={100}
+                  height={50}
+                />
+              </div>
+            </div>
 
-        {/* Navigation */}
-        <div className="flex-grow mx-auto hidden lg:flex justify-center items-center">
-          <nav>
-            <ul className="flex items-center gap-6">
-              {menuLinks.map((link, index) => (
-                <li key={index} className="relative group">
-                  <Link href={link.href} className="text-white hover:underline">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+            {/* Navigation Section */}
+            <div className="nav-outer clearfix mx-auto">
+              <nav className="main-menu navbar-expand-lg">
+                <div className="navbar-header">
+                  <div className="mobile-logo">
+                    <Image
+                      src="/assets/images/logo.png"
+                      alt="Mobile Logo"
+                      title="Mobile Logo"
+                      width={100}
+                      height={50}
+                    />
+                  </div>
+                  {/* Mobile Toggle Button */}
+                  <button
+                    type="button"
+                    className="navbar-toggle"
+                    data-bs-toggle="collapse"
+                    data-bs-target=".navbar-collapse"
+                  >
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
+                </div>
+                <div className="navbar-collapse collapse">
+                  <ul className="navigation onepage clearfix">
+                    <li>
+                      <a className="nav-link-click" href="#about">
+                        About
+                      </a>
+                    </li>
+                    <li>
+                      <a className="nav-link-click" href="#service">
+                        Services
+                      </a>
+                    </li>
+                    <li>
+                      <a className="nav-link-click" href="#works">
+                        Works
+                      </a>
+                    </li>
+                    <li>
+                      <a className="nav-link-click" href="#pricing">
+                        Pricing
+                      </a>
+                    </li>
+                    <li>
+                      <a className="nav-link-click" href="#blog">
+                        Blog
+                      </a>
+                    </li>
+                    <li>
+                      <a className="nav-link-click" href="#contact">
+                        Contact
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
 
-        {/* Menu Buttons */}
-        <div className="flex items-center gap-3">
-          <button className="hidden lg:flex">
-            <Link href="/contact">Let&apos;s Talk</Link>
-          </button>
-          {/* Sidebar Button */}
-          <div id="menu-btn-container" className="scale-125 lg:hidden sm:block">
-            <div id="menu-btn">
-              <input
-                type="checkbox"
-                id="menu-checkbox"
-                checked={isMobileMenuOpen}
-                readOnly
-              />
-              <label
-                htmlFor="menu-checkbox"
-                id="menu-label"
-                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-                className="text-center"
-              >
-                <div
-                  id="menu-bar"
-                  className="font-body text-[0.65rem] text-white text-centers font-bold tracking-widest"
-                ></div>
-              </label>
+            {/* Hire Me Button */}
+            <div className="menu-btns">
+              <a href="#contact" className="theme-btn">
+                Hire Me<i className="ri-shake-hands-line"></i>
+              </a>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Header Lower */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-30 bg-black bg-opacity-0"
-          onClick={() => setIsMobileMenuOpen(false)} // Close menu on backdrop click
-        ></div>
-      )}
-      <div
-        className="mobile-menu z-40 bg-accent bg-opacity-10"
-        style={{
-          right: isMobileMenuOpen ? "0" : "-100%",
-        }}
-      >
-        <nav>
-          <ul className="menu-list">
-            {menuLinks.map((link, index) => (
-              <li key={index}>
-                <Link
-                  href={link.href}
-                  className="menu-link font-body text-accent font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)} // Close menu on link click
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
     </header>
   );
