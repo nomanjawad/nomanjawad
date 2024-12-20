@@ -1,8 +1,45 @@
 "use client";
-import React from "react";
-import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { FaHandshake } from "react-icons/fa6";
 
 const Header: React.FC = () => {
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsNavbarOpen(!isNavbarOpen);
+  };
+
+  useEffect(() => {
+    // Function to handle scroll behavior for fixed header and scroll-top button
+    function headerStyle() {
+      const siteHeader = document.querySelector(".main-header") as HTMLElement;
+      const scrollLink = document.querySelector(".scroll-top") as HTMLElement;
+
+      if (siteHeader) {
+        const windowpos = window.scrollY;
+
+        if (windowpos >= 250) {
+          siteHeader.classList.add("fixed-header");
+          if (scrollLink) scrollLink.style.display = "block"; // Show scroll-top button
+        } else {
+          siteHeader.classList.remove("fixed-header");
+          if (scrollLink) scrollLink.style.display = "none"; // Hide scroll-top button
+        }
+      }
+    }
+
+    // Initial call to set the header style based on current scroll position
+    headerStyle();
+
+    // Add event listener for scroll event
+    window.addEventListener("scroll", headerStyle);
+
+    // Cleanup the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", headerStyle);
+    };
+  }, []);
+
   return (
     <header className="main-header">
       <div className="header-upper">
@@ -10,43 +47,32 @@ const Header: React.FC = () => {
           <div className="header-inner d-flex align-items-center">
             {/* Logo Section */}
             <div className="logo-outer">
-              <div className="logo">
-                <Image
-                  src="/assets/images/logo.png"
-                  alt="Logo"
-                  title="Logo"
-                  width={100}
-                  height={50}
-                />
-              </div>
+              <div className="logo">Noman Jawad</div>
             </div>
 
             {/* Navigation Section */}
             <div className="nav-outer clearfix mx-auto">
               <nav className="main-menu navbar-expand-lg">
                 <div className="navbar-header">
-                  <div className="mobile-logo">
-                    <Image
-                      src="/assets/images/logo.png"
-                      alt="Mobile Logo"
-                      title="Mobile Logo"
-                      width={100}
-                      height={50}
-                    />
-                  </div>
+                  <div className="mobile-logo logo">Noman Jawad</div>
                   {/* Mobile Toggle Button */}
                   <button
                     type="button"
                     className="navbar-toggle"
                     data-bs-toggle="collapse"
                     data-bs-target=".navbar-collapse"
+                    onClick={handleToggle}
                   >
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
                 </div>
-                <div className="navbar-collapse collapse">
+                <div
+                  className={`navbar-collapse collapse ${
+                    isNavbarOpen ? "show" : ""
+                  }`}
+                >
                   <ul className="navigation onepage clearfix">
                     <li>
                       <a className="nav-link-click" href="#about">
@@ -86,7 +112,7 @@ const Header: React.FC = () => {
             {/* Hire Me Button */}
             <div className="menu-btns">
               <a href="#contact" className="theme-btn">
-                Hire Me<i className="ri-shake-hands-line"></i>
+                Hire Me <FaHandshake />
               </a>
             </div>
           </div>

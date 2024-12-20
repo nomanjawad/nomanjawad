@@ -411,6 +411,10 @@ html {
   text-transform: none;
   -webkit-transition: 0.3s;
   transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
 }
 
 .menu-btns a.theme-btn {
@@ -895,6 +899,8 @@ html {
   z-index: 9;
   padding: 2px 0;
   position: relative;
+  font-size: 21px;
+  font-weight: 500;
 }
 
 .main-header .logo img {
@@ -2257,6 +2263,7 @@ ul.extra-skills li i {
   padding: 50px 30px 20px 40px;
   border-radius: 10px;
   border: 1px solid var(--border-color);
+  height: 100%;
 }
 
 .contact-page-content h6 {
