@@ -80,23 +80,8 @@ const Header: React.FC = () => {
                       </a>
                     </li>
                     <li>
-                      <a className="nav-link-click" href="#service">
-                        Services
-                      </a>
-                    </li>
-                    <li>
                       <a className="nav-link-click" href="#works">
                         Works
-                      </a>
-                    </li>
-                    <li>
-                      <a className="nav-link-click" href="#pricing">
-                        Pricing
-                      </a>
-                    </li>
-                    <li>
-                      <a className="nav-link-click" href="#blog">
-                        Blog
                       </a>
                     </li>
                     <li>

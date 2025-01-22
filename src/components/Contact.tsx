@@ -6,7 +6,34 @@ import {
   FaRegUser,
 } from "react-icons/fa6";
 
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
+
 const Contact = () => {
+  const form = useRef<HTMLFormElement>(null);
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (form.current) {
+      emailjs
+        .sendForm(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
+          form.current,
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ""
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+            alert("Message sent successfully!");
+          },
+          (error) => {
+            console.log(error.text);
+            alert("Failed to send the message. Please try again.");
+          }
+        );
+    }
+  };
+
   return (
     <>
       <section id="contact" className="contact-area">
@@ -34,8 +61,8 @@ const Contact = () => {
                         color="var(--primary-color)"
                       />
                     </div>
-                    <h2>our office:</h2>
-                    <p>Gonobhavan, Bangladesh</p>
+                    <h2>Address:</h2>
+                    <p>Dhaka, Bangladesh</p>
                   </div>
                   {/* / END CONTACT SINGLEDESIGN AREA */}
                   {/* START CONTACT SINGLEDESIGN AREA */}
@@ -47,7 +74,7 @@ const Contact = () => {
                       <FaPhone fontSize={21} color="var(--primary-color)" />
                     </div>
                     <h2>contact number:</h2>
-                    <p>+1234321321</p>
+                    <p>+880 17 1328-9142</p>
                   </div>
                   {/* / END CONTACT SINGLEDESIGN AREA */}
                   {/* START CONTACT SINGLEDESIGN AREA */}
@@ -59,7 +86,7 @@ const Contact = () => {
                       <FaEnvelope fontSize={21} color="var(--primary-color)" />
                     </div>
                     <h2>Email us:</h2>
-                    <p>khunihashina@mail.com</p>
+                    <p>nomanzawad@gmail.com</p>
                   </div>
                   {/* / END CONTACT SINGLEDESIGN AREA */}
                 </div>
@@ -71,8 +98,9 @@ const Contact = () => {
                     id="contactForm"
                     className="contactForm"
                     name="contactForm"
-                    action="assets/php/form-process.php"
                     method="post"
+                    ref={form}
+                    onSubmit={sendEmail}
                   >
                     <div className="row">
                       <div className="col-md-6">
@@ -83,7 +111,7 @@ const Contact = () => {
                             id="name"
                             name="name"
                             className="form-control"
-                            value=""
+                            defaultValue=""
                             placeholder="Steve Milner"
                             required
                             data-error="Please enter your Name"
@@ -102,7 +130,7 @@ const Contact = () => {
                             id="email"
                             name="email"
                             className="form-control"
-                            value=""
+                            defaultValue=""
                             placeholder="hello@websitename.com"
                             required
                             data-error="Please enter your Email"

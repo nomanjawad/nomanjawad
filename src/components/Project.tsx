@@ -1,4 +1,40 @@
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { fetchProjects } from "@/lib/projectData";
+import { MdArrowOutward } from "react-icons/md";
+
+// Define the type for the Project object
+type ProjectData = {
+  id: number;
+  title: string;
+  featureImage: string;
+  websiteurl: string;
+};
+
 const Project = () => {
+  const [projects, setProjects] = useState<ProjectData[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getProjects = async () => {
+      try {
+        const rawData = await fetchProjects();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const data: ProjectData[] = rawData.map((project: any) => ({
+          id: Number(project.id),
+          title: project.title || "",
+          featureImage: project.featureImage,
+          websiteurl: project.websiteurl || "",
+        }));
+        setProjects(data);
+      } catch (error) {
+        setError("Failed to load projects");
+        console.error(error);
+      }
+    };
+    getProjects();
+  }, []);
+
   return (
     <section id="works" className="projects-area">
       <div className="container">
@@ -9,32 +45,36 @@ const Project = () => {
                 <h2>Works & Projects</h2>
                 <p>
                   Check out some of my design projects, meticulously crafted
-                  with love and dedication, each one reflecting the passion and
-                  soul I poured into every detail.
+                  with love and dedication.
                 </p>
               </div>
             </div>
           </div>
-          <div className="row project-masonry-active">
-            {/* START SINGLE PORTFOLIO DESIGN AREA */}
-            <div className="col-lg-4 col-md-6 item design marketing graphics">
-              <div className="project-item style-two wow fadeInUp delay-0-8s">
-                <div className="project-image">
-                  <img src="assets/images/projects/work6.jpg" alt="Project" />
+          <div className="row project-masonry-active row-gap-5">
+            {error && <p>{error}</p>}
+            {projects.map((project) => (
+              <div key={project.id} className="col-lg-4 col-md-6 item">
+                <div className="project-item style-two wow fadeInUp delay-0-8s">
+                  <Image
+                    src={project.featureImage}
+                    alt={project.title}
+                    className="project-image"
+                    fill
+                  />
                   <a
-                    href="https://www.youtube.com/watch?v=qZEPs3vmYB4"
-                    className="details-btn popup-youtube"
+                    href={project.websiteurl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-details-btn popup-youtube"
                   >
-                    <i className="ri-arrow-right-up-line"></i>
+                    <MdArrowOutward />
                   </a>
                 </div>
                 <div className="project-content">
-                  <span className="sub-title">Design</span>
-                  <h3>Website Development</h3>
+                  <h3 className="project-title">{project.title}</h3>
                 </div>
               </div>
-            </div>
-            {/* / END SINGLE PORTFOLIO DESIGN AREA */}
+            ))}
           </div>
         </div>
       </div>

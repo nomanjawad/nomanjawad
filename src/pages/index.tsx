@@ -1,15 +1,10 @@
-import About from "@/components/About";
-import Contact from "@/components/Contact";
-import Experience from "@/components/Experience";
-import Project from "@/components/Project";
-import Service from "@/components/Service";
-import Skills from "@/components/Skills";
+import { About, Contact, Experience, Project, Skills } from "@/components";
 
 const Home = () => {
   return (
     <>
       <About />
-      <Service />
+      {/* <Service /> */}
       <Experience />
       <Skills />
       <Project />
