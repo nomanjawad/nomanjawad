@@ -1,6 +1,48 @@
+import { fetchExperience } from "@/lib/experienceData";
+import { useState, useEffect } from "react";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Image from "next/image";
+
+// Define the type for the Experience object
+type ExperienceData = {
+  id: number;
+  jobTitle: string;
+  companyName: string;
+  jobDuration: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  jobDiscription: any;
+  companyLogoUrl: string;
+};
+
 const Experience = () => {
+  const [experience, setExperience] = useState<ExperienceData[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getProjects = async () => {
+      try {
+        const rawData = await fetchExperience();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const data: ExperienceData[] = rawData.map((experience: any) => ({
+          id: Number(experience.id),
+          jobTitle: experience.jobTitle || "",
+          companyName: experience.companyName || "",
+          jobDuration: experience.jobDuration || "",
+          jobDiscription: experience.jobDiscription || "",
+          companyLogoUrl: experience.companyLogoUrl || "",
+        }));
+        console.log(data);
+        setExperience(data);
+      } catch (error) {
+        setError("Failed to load projects");
+        console.error(error);
+      }
+    };
+    getProjects();
+  }, []);
+
   return (
-    <section id="resume" className="resume-area">
+    <div id="resume" className="resume-area">
       <div className="container">
         <div className="resume-items">
           <div className="row">
@@ -10,42 +52,32 @@ const Experience = () => {
                 <h2>Experience</h2>
                 <div className="experience-list">
                   {/* START SINGLE RESUME DESIGN AREA */}
-                  <div className="resume-item wow fadeInUp delay-0-3s">
-                    <div className="icon">
-                      <i className="ri-book-line"></i>
+                  {error && <p>{error}</p>}
+                  {experience.map((exp) => (
+                    <div
+                      key={exp.id}
+                      className="resume-item wow fadeInUp delay-0-3s position-relative d-flex align-items-center justify-content-between"
+                    >
+                      <Image
+                        src={exp.companyLogoUrl}
+                        alt={exp.companyName}
+                        fill
+                        className="company-logo d-block position-relative w-15 h-auto"
+                      />
+                      <div className="content w-75">
+                        <span className="years">{exp.jobDuration}</span>
+                        <h4>{exp.jobTitle}</h4>
+                        <a href={exp.companyLogoUrl} className="company">
+                          {exp.companyName}
+                        </a>
+                        <div>
+                          {exp.jobDiscription
+                            ? documentToReactComponents(exp.jobDiscription)
+                            : "No description available"}
+                        </div>
+                      </div>
                     </div>
-                    <div className="content">
-                      <span className="years">2021 - Present</span>
-                      <h4>Themeforest Market</h4>
-                      <span className="company"> Web Designer </span>
-                    </div>
-                  </div>
-                  {/* / END SINGLE RESUME DESIGN AREA */}
-                  {/* START SINGLE RESUME DESIGN AREA */}
-                  <div className="resume-item wow fadeInUp delay-0-3s">
-                    <div className="icon">
-                      <i className="ri-book-line"></i>
-                    </div>
-                    <div className="content">
-                      <span className="years">2021 - 2023</span>
-                      <h4>Envato Theme Developer</h4>
-                      <span className="company">Web Development</span>
-                    </div>
-                  </div>
-                  {/* / END SINGLE RESUME DESIGN AREA */}
-                  {/* START SINGLE RESUME DESIGN AREA */}
-                  <div className="resume-item wow fadeInUp delay-0-3s">
-                    <div className="icon">
-                      <i className="ri-book-line"></i>
-                    </div>
-                    <div className="content">
-                      <span className="years">2021 - 2022</span>
-                      <h4> Marketing Expert GRP</h4>
-                      <span className="company">
-                        Web Developer & Business Partner
-                      </span>
-                    </div>
-                  </div>
+                  ))}
                   {/* / END SINGLE RESUME DESIGN AREA */}
                 </div>
               </div>
@@ -54,7 +86,7 @@ const Experience = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

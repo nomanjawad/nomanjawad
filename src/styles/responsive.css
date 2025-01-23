@@ -156,6 +156,9 @@
   .blog-post-box .blog-post-img {
     margin-bottom: 30px;
   }
+  .extra-copyright ul {
+    justify-content: center;
+  }
 }
 
 /* Mobile Layout: 320px. */
@@ -801,7 +804,7 @@
 
 @media only screen and (max-width: 575px) {
   .main-menu .mobile-logo {
-    max-width: 150px;
+    max-width: 160px;
   }
 }
 
@@ -939,9 +942,9 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: start;
+    -webkit-box-pack: flex-start;
+    -ms-flex-pack: flex-start;
+    justify-content: flex-start;
   }
 }
 

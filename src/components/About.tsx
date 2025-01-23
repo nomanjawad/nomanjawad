@@ -75,7 +75,7 @@ const About = () => {
                 />
               </div>
               <h2>Noman E Jawad</h2>
-              <p>I am a Web Designer based in Bangladesh.</p>
+              <p>I am a Web Developer based in Bangladesh.</p>
               <div className="about-social text-center">
                 <ul>
                   <li>
