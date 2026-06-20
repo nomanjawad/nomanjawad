@@ -16,7 +16,7 @@
     "command": "whoami --verbose",
     "headlineBefore": "Noman ",
     "headlineAfter": "E Jawad",
-    "subtitle": "<span class='hl'>Full-stack engineer</span> building <span class='hl'>fast, production-grade</span> apps out of Dhaka. Five-plus years across React, Next.js, Vue, Laravel — from pixel-perfect Figma builds to headless e-commerce.",
+    "subtitle": "<span class='hl'>Full-stack developer</span> specializing in <span class='hl'>Next.js, React & Laravel</span> — turning Figma designs into pixel-perfect, production-ready web apps. Available for remote full-time roles and freelance projects worldwide.",
     "primaryCta": { "label": "See work", "href": "#work", "arrow": "↓" },
     "secondaryCta": { "label": "Get in touch", "href": "#contact", "arrow": "↗" },
     "sidecard": [
@@ -31,13 +31,14 @@
   "about": {
     "sectionNum": "§01 — About",
     "sectionTitle": "About <em>me.</em>",
-    "sectionMeta": "<b>Dhaka, Bangladesh.</b> Building for clients across three continents. Writing code as if I'll have to read it in five years.",
+    "sectionMeta": "<b>Full-stack · Remote.</b> React, Next.js, Vue, Laravel — from Figma file to live product. Five years, real clients, shipped on time.",
     "body": [
-      "Hi — I'm <em>Noman</em>. Full-stack engineer with 5+ years shipping production apps — Next.js, React, Vue + Laravel, and everything in between. I translate Figma designs into pixel-perfect layouts and lead a small team at SkyTech Solutions owning architecture, code reviews, and delivery."
+      "I'm a full-stack engineer based in Dhaka with 5+ years of production experience. I build across the stack — React and Next.js on the front, Vue + Laravel on the back, WordPress when it's the right tool. Every project starts with a Figma file and ends with a pixel-perfect build.",
+      "At SkyTech Solutions I lead a small team: setting architecture, running code reviews, mentoring juniors, and owning delivery end-to-end. I introduced AI-assisted workflows that cut our turnaround from a month to under two weeks — without cutting corners."
     ],
     "meta": [
-      "// AI-assisted workflows cut our delivery from ~1 month to ~10 days. Open to full-time remote roles.",
-      "// Published on npm · IEEE-published researcher · B.S. Computer Engineering, IUB 2024."
+      "// Open to full-time remote roles. I work async well and keep Dhaka hours (UTC+6).",
+      "// B.S. Computer Engineering · IUB 2024 · IEEE-published · npm author."
     ],
     "stats": [
       { "n": "05", "suffix": "+", "l": "Years shipping" },
@@ -176,8 +177,8 @@
   ],
   "skills": {
     "sectionNum": "§03 — Stack",
-    "sectionTitle": "Tools, <em>opinionated.</em>",
-    "sectionMeta": "Biased toward the web platform. I reach for a framework when it earns its weight.",
+    "sectionTitle": "Tech Stack & <em>Expertise.</em>",
+    "sectionMeta": "Next.js · React · Vue · Laravel · TypeScript · WooCommerce · Supabase · GraphQL — full stack, production-grade.",
     "rows": [
       { "n": "01", "items": ["React","Next.js","TypeScript","JavaScript"], "context": "Core day-to-day. Five+ years, production-scale." },
       { "n": "02", "items": ["Vue","Laravel","PHP","GraphQL"], "context": "Full-stack pairing for CMS-backed client builds." },
@@ -214,6 +215,7 @@
   },
   "social": [
     { "label": "GitHub", "url": "https://github.com/nomanjawad" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/nomanjawad/" },
     { "label": "Read.cv", "url": "#" }
   ],
   "footer": {

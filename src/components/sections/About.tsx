@@ -20,7 +20,8 @@ export function About({ about, identity }: { about: AboutType; identity: Identit
               alt={`Portrait of ${identity.name}`}
               fill
               sizes="(max-width: 1060px) 90vw, 38vw"
-              priority={false}
+              priority={true}
+              loading="eager"
               style={{ objectFit: 'cover' }}
             />
             <div className="caption">
@@ -29,6 +30,7 @@ export function About({ about, identity }: { about: AboutType; identity: Identit
             </div>
           </div>
           <div className="reveal">
+            <h3 className="about-heading">Senior Full Stack Developer.<br />Available for Remote Hire.</h3>
             <div className="about-body">
               {about.body.map((p, i) => (
                 <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
