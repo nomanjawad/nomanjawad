@@ -16,104 +16,162 @@
     "command": "whoami --verbose",
     "headlineBefore": "Noman ",
     "headlineAfter": "E Jawad",
-    "subtitle": "<span class='hl'>Web developer</span> building <span class='hl'>fast, thoughtful</span> sites out of Dhaka. Three-plus years of React, Next.js, and the web platform done properly — typographic, accessible, production-grade.",
+    "subtitle": "<span class='hl'>Full-stack engineer</span> building <span class='hl'>fast, production-grade</span> apps out of Dhaka. Five-plus years across React, Next.js, Vue, Laravel — from pixel-perfect Figma builds to headless e-commerce.",
     "primaryCta": { "label": "See work", "href": "#work", "arrow": "↓" },
     "secondaryCta": { "label": "Get in touch", "href": "#contact", "arrow": "↗" },
     "sidecard": [
-      { "k": "role", "v": "Web Developer" },
+      { "k": "role", "v": "Full-Stack Engineer" },
       { "k": "based", "v": "Dhaka, BD (UTC+6)" },
-      { "k": "stack", "v": "React · Next · TS" },
-      { "k": "status", "v": "Freelance + FT" },
-      { "k": "since", "v": "2023" }
+      { "k": "stack", "v": "Next.js · React · TS" },
+      { "k": "status", "v": "Open to FT · Remote" },
+      { "k": "since", "v": "2020" }
     ]
   },
-  "marquee": ["React","Next.js","TypeScript","Tailwind","Three.js","GSAP","Framer Motion","WordPress","Webflow","Node"],
+  "marquee": ["React","Next.js","TypeScript","Vue","Laravel","GraphQL","MySQL","Supabase","WooCommerce","GitHub Actions","Figma → Code","WordPress","Tailwind","Node.js"],
   "about": {
     "sectionNum": "§01 — About",
-    "sectionTitle": "Who, <em>what,</em> where.",
+    "sectionTitle": "About <em>me.</em>",
     "sectionMeta": "<b>Dhaka, Bangladesh.</b> Building for clients across three continents. Writing code as if I'll have to read it in five years.",
     "body": [
-      "Hi — I'm <em>Noman</em>. I build fast, accessible web products from Dhaka, mostly in React and Next.js.",
-      "I care about the things that survive the quarterly redesign: type hierarchy, focus states, the feel of a page under the thumb at 3G.",
-      "When a spec is thin, I prototype. When the spec is fat, I prune it. Either way the ship date holds."
+      "Hi — I'm <em>Noman</em>. Full-stack engineer with 5+ years shipping production apps — Next.js, React, Vue + Laravel, and everything in between. I translate Figma designs into pixel-perfect layouts and lead a small team at SkyTech Solutions owning architecture, code reviews, and delivery."
     ],
     "meta": [
-      "// Currently booking engagements through Q3 2026. Happy to scope: landing pages, design-led marketing sites, migrations from no-code, and front-end builds against existing design systems.",
-      "// Outside of work: black coffee, long walks through Dhanmondi, and the ongoing project of reading every RFC worth reading."
+      "// AI-assisted workflows cut our delivery from ~1 month to ~10 days. Open to full-time remote roles.",
+      "// Published on npm · IEEE-published researcher · B.S. Computer Engineering, IUB 2024."
     ],
     "stats": [
-      { "n": "03", "suffix": "+", "l": "Years shipping" },
+      { "n": "05", "suffix": "+", "l": "Years shipping" },
       { "n": "20", "suffix": "+", "l": "Projects delivered" },
-      { "n": "12", "suffix": "",  "l": "Happy clients" },
+      { "n": "50", "suffix": "%", "l": "Faster via AI tools" },
       { "n": "100", "suffix": "%", "l": "On-time rate" }
     ]
   },
   "work": {
     "sectionNum": "§02 — Recent Work",
     "sectionTitle": "Selected <em>builds.</em>",
-    "sectionMeta": "A short list, by design. Full case studies open inline.",
+    "sectionMeta": "Real client work across e-commerce, professional services, and corporate sites. Full case studies open inline.",
     "footNote": "More on request — <span style='color:var(--fg)'>email for full portfolio</span> →"
   },
   "projects": [
     {
-      "id": "aurora",
-      "slug": "aurora-commerce",
-      "name": "Aurora Commerce",
-      "label": "01 / Aurora",
-      "description": "A headless storefront for a small batch furniture studio. Custom checkout, mobile-first merchandising, ~94 LCP on 4G.",
-      "role": "Lead front-end",
-      "year": "2025 — 2026",
-      "client": "Independent studio",
-      "stack": ["Next.js","TypeScript","Shopify Hydrogen","Tailwind","Sanity"],
-      "liveUrl": "#",
-      "thumbnail": null,
-      "kicker": "Project 01 / E-commerce",
-      "summary": "A headless storefront that respects the product. <em>Built for a small-batch furniture studio</em> who wanted their site to feel like their showroom — quiet, deliberate, easy to move through.",
-      "duration": "11 weeks",
-      "problem": "The studio had moved off a no-code builder that was costing them conversions and looking nothing like their print catalog. The brand had a voice; the site did not.",
-      "approach": "I started by matching the catalog's typographic discipline — one serif, one mono, generous margins. Then I rebuilt checkout from the card up. Image detail pages were made touchable: swatch swaps, spec drawers, and a cart that slides rather than page-jumps.",
-      "solution": "Headless Shopify on Next.js App Router with a Sanity editorial layer. All media served AVIF with responsive art direction. Edge-cached product pages, incremental revalidation on stock change. ~94 mobile Lighthouse.",
-      "outcome": "Conversion up <em>41%</em> on the first month, mobile LCP halved, returns down because the product pages finally showed dimension and material. The studio now edits copy without calling me — which is the correct outcome."
-    },
-    {
-      "id": "helios",
-      "slug": "helios-dashboard",
-      "name": "Helios Dashboard",
-      "label": "02 / Helios",
-      "description": "An analytics surface for a solar-fleet operator. Dense data, interactive charts, keyboard-first navigation across six operator roles.",
-      "role": "Front-end + UX",
-      "year": "2025",
-      "client": "Energy client (NDA)",
-      "stack": ["React","TypeScript","D3","Tanstack Query","Vite"],
-      "liveUrl": "#",
-      "thumbnail": null,
-      "kicker": "Project 02 / Internal tool",
-      "summary": "An operator dashboard for a solar fleet. <em>Keyboard-first, dense, readable at 3am</em> when it needs to be.",
-      "duration": "16 weeks",
-      "problem": "Operators were bouncing between four vendor portals to triage a single incident. Every click was a tax during outages.",
-      "approach": "I ran a week of ride-alongs with dispatchers. Built the entire nav around their muscle memory — single-key jumps, a command palette for site search, a quiet visual language so alerts could cut through.",
-      "solution": "A React + Vite app backed by a thin BFF. Charts hand-written in D3 — no library. Six role-specific layouts sharing one permission schema. Everything reachable without a mouse.",
-      "outcome": "Triage time down from <em>~8 minutes to under 90 seconds</em> on the most common incident class. A dashboard people actually want to open."
-    },
-    {
-      "id": "meridian",
-      "slug": "meridian-studio",
-      "name": "Meridian Studio",
-      "label": "03 / Meridian",
-      "description": "An editorial-leaning marketing site for a 5-person design studio. MDX-driven, CMS-light, reads like a magazine — loads like a text file.",
-      "role": "Design + Build",
+      "id": "skyfreightsquad",
+      "slug": "sky-freight-squad",
+      "name": "Sky Freight Squad",
+      "label": "01 / Logistics",
+      "description": "Full-stack logistics platform built on Vue 3 + Laravel — quote management, service pages, and a MySQL backend handling freight enquiries.",
+      "role": "Full-Stack Developer",
       "year": "2024",
-      "client": "Meridian",
-      "stack": ["Next.js","MDX","GSAP","Vercel"],
-      "liveUrl": "#",
+      "client": "Sky Freight Squad",
+      "stack": ["Vue 3","Laravel","MySQL","Tailwind","Figma"],
+      "liveUrl": "https://www.skyfreightsquad.com/",
       "thumbnail": null,
-      "kicker": "Project 03 / Marketing",
-      "summary": "A marketing site that reads like a magazine and loads like a text file. <em>For a 5-person design studio</em> who wanted a home for their journal as much as their work.",
+      "kicker": "Project 01 / Vue + Laravel",
+      "summary": "A logistics platform for a freight company. <em>Vue 3 frontend from a Figma handoff</em>, Laravel API, and a MySQL backend built for scale.",
+      "duration": "6 weeks",
+      "problem": "The client had no digital presence for their freight services — all enquiries came through word of mouth with no structured intake process.",
+      "approach": "Designed the database schema, built a RESTful Laravel API, and implemented a pixel-perfect Vue 3 frontend from their Figma designs. Built a quote request flow wired to their ops team.",
+      "solution": "Vue 3 SPA + Laravel REST API + MySQL. Deployed with GitHub Actions CI/CD. Admin panel for managing incoming freight enquiries.",
+      "outcome": "Launched on schedule. Client now receives structured inbound enquiries through the site with full intake data from day one."
+    },
+    {
+      "id": "skylightrcm",
+      "slug": "skylight-rcm",
+      "name": "Skylight RCM",
+      "label": "02 / Healthcare",
+      "description": "Revenue cycle management platform — Vue 3 frontend, Laravel backend, built for a healthcare services company handling sensitive billing workflows.",
+      "role": "Full-Stack Developer",
+      "year": "2024",
+      "client": "Skylight RCM",
+      "stack": ["Vue 3","Laravel","MySQL","Tailwind","Figma"],
+      "liveUrl": "https://skylightrcm.com/",
+      "thumbnail": null,
+      "kicker": "Project 02 / Vue + Laravel",
+      "summary": "A healthcare RCM platform. <em>Pixel-perfect Figma implementation</em>, Laravel API, and a Vue 3 frontend built for a professional services audience.",
+      "duration": "8 weeks",
+      "problem": "The client needed a credible, professional web presence for their RCM services — one that instilled trust with healthcare providers and captured leads effectively.",
+      "approach": "Implemented the Figma design pixel-perfectly in Vue 3. Built a Laravel backend with MySQL, a service enquiry flow, and a secure admin area.",
+      "solution": "Vue 3 + Laravel + MySQL. Clean, fast frontend with trust-first design. GitHub Actions for automated deployments.",
+      "outcome": "Site live and converting. Client reports improved credibility with healthcare provider prospects since launch."
+    },
+    {
+      "id": "mirzaagro",
+      "slug": "mirza-agro-fisheries",
+      "name": "Mirza Agro & Fisheries",
+      "label": "03 / E-commerce",
+      "description": "Mango e-commerce store for a Bangladeshi agro business — product catalogue, order management, and a Vue + Laravel backend handling seasonal sales.",
+      "role": "Full-Stack Developer",
+      "year": "2024",
+      "client": "Mirza Agro & Fisheries",
+      "stack": ["Vue 3","Laravel","MySQL","Tailwind","Figma"],
+      "liveUrl": "https://mango.mirzaagroandfisheries.com/",
+      "thumbnail": null,
+      "kicker": "Project 03 / E-commerce",
+      "summary": "A seasonal e-commerce platform for a mango farm. <em>Vue 3 storefront, Laravel backend</em> — built to handle high-volume orders during the harvest season.",
       "duration": "5 weeks",
-      "problem": "Their old site buried the best thing they had: writing. It was a portfolio grid pretending to be a brand.",
-      "approach": "Reversed the hierarchy. Put the essays up front. Case studies became long-form, scroll-driven pieces. Navigation is a single page index — there are only nine pages, because you don't need more.",
-      "solution": "MDX content collections with a tiny Sanity layer for updates. GSAP for the one scroll sequence that earned it. Everything else is plain CSS. Typography is Instrument Serif and a stencil mono.",
-      "outcome": "Dwell time up <em>3.4×</em>. Two inbound leads in week one from the journal, not the work. The studio started writing more — the site changed their practice."
+      "problem": "The client was taking orders through social media DMs with no inventory tracking, payment flow, or order management system.",
+      "approach": "Built a product catalogue with seasonal inventory, a checkout flow, and a Laravel admin panel for order management. Pixel-perfect from their Figma mockups.",
+      "solution": "Vue 3 storefront + Laravel API + MySQL. Product management, order tracking, and customer notification flow all in one admin panel.",
+      "outcome": "First season live — client processed orders digitally for the first time. Significant reduction in manual order handling overhead."
+    },
+    {
+      "id": "myrtlefordsheetmetal",
+      "slug": "myrtleford-sheet-metal",
+      "name": "Myrtleford Sheet Metal",
+      "label": "04 / Trade Services",
+      "description": "Trade services website for an Australian sheet metal fabrication company — Vue + Laravel, quote request flow, and a mobile-first design.",
+      "role": "Full-Stack Developer",
+      "year": "2024",
+      "client": "Myrtleford Sheet Metal (AU)",
+      "stack": ["Vue 3","Laravel","MySQL","Tailwind","Figma"],
+      "liveUrl": "https://myrtlefordsheetmetal.com/",
+      "thumbnail": null,
+      "kicker": "Project 04 / Vue + Laravel",
+      "summary": "A trade services site for an Australian fabrication company. <em>Pixel-perfect Figma build</em>, Vue 3 frontend, Laravel backend — live quote request flow.",
+      "duration": "4 weeks",
+      "problem": "The business relied entirely on referrals with no web presence. Competitors were capturing leads online while they had nothing.",
+      "approach": "Built from a Figma design into a Vue 3 + Laravel site. Mobile-first — most trade clients browse on phones. Integrated a quote request form direct to their inbox.",
+      "solution": "Vue 3 + Laravel + MySQL. Fast, clean, mobile-optimised. Automated deployment via GitHub Actions.",
+      "outcome": "Delivered in 4 weeks. Client now receives quote requests directly through the site from Australian customers finding them via search."
+    },
+    {
+      "id": "doctorsoflancefield",
+      "slug": "doctors-of-lancefield",
+      "name": "Doctors of Lancefield",
+      "label": "05 / Healthcare",
+      "description": "Medical practice website for an Australian GP clinic — appointment info, service pages, and a WordPress CMS the practice staff manage themselves.",
+      "role": "Developer",
+      "year": "2023",
+      "client": "Doctors of Lancefield (AU)",
+      "stack": ["WordPress","PHP","Custom Theme","Figma"],
+      "liveUrl": "https://doctorsoflancefield.com.au/",
+      "thumbnail": null,
+      "kicker": "Project 05 / WordPress",
+      "summary": "A medical practice site for an Australian GP clinic. <em>Trust-first design, accessible, fast</em> — pixel-perfect from Figma, managed by the practice team.",
+      "duration": "3 weeks",
+      "problem": "The clinic needed patients to find their hours, services, and contact details quickly on mobile — their old site was slow and hard to update.",
+      "approach": "Custom WordPress theme from their Figma design. Accessibility-first — clear type hierarchy, high contrast, large tap targets for older patients.",
+      "solution": "Custom WordPress theme, no page builder — clean semantic HTML, optimised images, mobile-first. Staff update hours and content themselves.",
+      "outcome": "Site live and patient-facing. Loads under 1s. Practice staff manage all content without developer involvement."
+    },
+    {
+      "id": "accountingmonk",
+      "slug": "accounting-monk",
+      "name": "Accounting Monk",
+      "label": "06 / Professional Services",
+      "description": "Marketing site for an Australian accounting firm — WordPress CMS, trust-first design, fast load times optimised for local search and conversion.",
+      "role": "Developer",
+      "year": "2023",
+      "client": "Accounting Monk (AU)",
+      "stack": ["WordPress","PHP","Custom Theme","Figma"],
+      "liveUrl": "https://www.accountingmonk.com/",
+      "thumbnail": null,
+      "kicker": "Project 06 / WordPress",
+      "summary": "Professional services site for an Australian accounting firm. <em>Pixel-perfect Figma implementation</em>, fast Core Web Vitals, self-managed by the client.",
+      "duration": "4 weeks",
+      "problem": "The firm needed a credible web presence ranking locally in Australia and converting visitors to enquiries — without ongoing developer costs.",
+      "approach": "Custom WordPress theme built pixel-perfectly from their Figma file. Tuned for Core Web Vitals and local SEO. No page builder — clean output.",
+      "solution": "Custom WordPress theme with contact form wired to their inbox. Optimised images, semantic HTML, schema markup for local search.",
+      "outcome": "Site live and self-managed. Loads under 1.5s. Consistent inbound enquiry flow from local Australian search."
     }
   ],
   "skills": {
@@ -121,11 +179,12 @@
     "sectionTitle": "Tools, <em>opinionated.</em>",
     "sectionMeta": "Biased toward the web platform. I reach for a framework when it earns its weight.",
     "rows": [
-      { "n": "01", "items": ["React","Next.js","TypeScript","JavaScript"], "context": "Core day-to-day. Three+ years, production-scale." },
-      { "n": "02", "items": ["Tailwind","CSS","Framer Motion","GSAP"], "context": "Styling & motion. I hand-write CSS more often than is fashionable." },
-      { "n": "03", "items": ["Three.js","R3F","WebGL shaders"], "context": "For moments that earn the GPU tax — not for every hero section." },
-      { "n": "04", "items": ["WordPress","Webflow","Sanity","Contentful"], "context": "When content velocity matters more than bleeding-edge." },
-      { "n": "05", "items": ["Node","Vercel","Cloudflare","Postgres"], "context": "Enough backend to keep the front-end honest." }
+      { "n": "01", "items": ["React","Next.js","TypeScript","JavaScript"], "context": "Core day-to-day. Five+ years, production-scale." },
+      { "n": "02", "items": ["Vue","Laravel","PHP","GraphQL"], "context": "Full-stack pairing for CMS-backed client builds." },
+      { "n": "03", "items": ["MySQL","Supabase","Node.js","Express"], "context": "Database design and backend APIs — enough to own the full stack." },
+      { "n": "04", "items": ["WordPress","WooCommerce","Webflow","Figma → Code"], "context": "E-commerce and CMS. Pixel-perfect implementation from Figma files." },
+      { "n": "05", "items": ["GitHub Actions","CI/CD","Git","Vercel"], "context": "Shipping pipelines. Code doesn't count until it's deployed." },
+      { "n": "06", "items": ["Claude Code","Cursor","GitHub Copilot"], "context": "AI-assisted workflows that halved our delivery timeline." }
     ]
   },
   "experience": {
@@ -133,9 +192,8 @@
     "sectionTitle": "Where <em>I've been.</em>",
     "sectionMeta": "A short resume. Full CV available on request.",
     "rows": [
-      { "current": true, "date": "2024 — PRESENT", "role": "Independent Developer", "org": "Freelance · Remote", "desc": "Client work across e-commerce, dashboards, and editorial marketing sites. Booking Q3 2026.", "tag": "CURRENT" },
-      { "current": false, "date": "2023 — 2024", "role": "Front-End Developer", "org": "Digital agency · Dhaka", "desc": "Shipped 8+ client sites on Next.js and WordPress. Owned the frontend from Figma to prod.", "tag": "FULL-TIME" },
-      { "current": false, "date": "2022 — 2023", "role": "Junior Developer", "org": "Agency · Dhaka", "desc": "Started here. Learned the discipline of pixel-matching a comp, then learned when not to.", "tag": "CONTRACT" }
+      { "current": true, "date": "2023 — PRESENT", "role": "Software Engineer", "org": "SkyTech Solutions · Dhaka", "desc": "Built Next.js dashboards and Vue + Laravel client sites. Cut delivery from ~1 month to ~10 days using AI-assisted workflows. Lead code reviews, mentor juniors, own architecture and database decisions. Pixel-perfect Figma-to-code implementation on every project.", "tag": "CURRENT" },
+      { "current": false, "date": "2020 — 2023", "role": "Web Developer", "org": "Marketorr · Dhaka", "desc": "Shipped large WooCommerce stores, a membership platform, and an event management system. Built and customised WordPress themes and plugins. Clients across automotive, hospitality, healthcare, and retail in Bangladesh, Australia, and the US.", "tag": "FULL-TIME" }
     ]
   },
   "testimonials": {
@@ -155,10 +213,8 @@
     "hours": "Sun–Thu · 10:00 — 19:00 BST"
   },
   "social": [
-    { "label": "GitHub", "url": "#" },
-    { "label": "LinkedIn", "url": "#" },
-    { "label": "Read.cv", "url": "#" },
-    { "label": "Dribbble", "url": "#" }
+    { "label": "GitHub", "url": "https://github.com/nomanjawad" },
+    { "label": "Read.cv", "url": "#" }
   ],
   "footer": {
     "copyright": "© 2026 Noman Jawad — All rights reserved",

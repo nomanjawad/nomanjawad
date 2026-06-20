@@ -33,7 +33,6 @@ export function Sidebar({
                   <li className="file" data-jump="work"><div className="row">work<span className="ext">.tsx</span></div></li>
                   <li className="file" data-jump="skills"><div className="row">skills<span className="ext">.tsx</span></div></li>
                   <li className="file" data-jump="experience"><div className="row">experience<span className="ext">.tsx</span></div></li>
-                  <li className="file" data-jump="testimonials"><div className="row">testimonials<span className="ext">.tsx</span></div></li>
                   <li className="file" data-jump="contact"><div className="row">contact<span className="ext">.tsx</span></div></li>
                 </ul>
               </li>

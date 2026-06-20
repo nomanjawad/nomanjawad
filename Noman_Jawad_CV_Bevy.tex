@@ -1,0 +1,104 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.65in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{accent}{HTML}{B23A48}
+
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0em}{}[\vspace{-6pt}\rule{\linewidth}{0.5pt}]
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+
+\setlist[itemize]{leftmargin=*, itemsep=2pt, topsep=2pt, parsep=0pt}
+
+\pagestyle{empty}
+
+\newcommand{\role}[4]{%
+  \noindent\textbf{#1} \hfill \textit{#3}\\
+  \textsc{#2} \hfill \textit{#4}\vspace{2pt}
+}
+
+\begin{document}
+
+%---------- HEADER ----------
+\noindent
+\begin{minipage}[c]{0.18\textwidth}
+  \adjustbox{valign=c}{\includegraphics[width=\linewidth]{DSC_9833-1.jpg}}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.78\textwidth}
+  \raggedright
+  {\Huge\bfseries Noman E Jawad}\\[4pt]
+  Dhaka, Bangladesh \quad|\quad +880 17 1328 9142\\
+  \href{mailto:nomanzawad@gmail.com}{nomanzawad@gmail.com}\\
+  \href{https://github.com/nomanjawad}{\faGithub\ github.com/nomanjawad} \quad|\quad
+  \href{https://nomanjawad.vercel.app}{\faGlobe\ nomanjawad.vercel.app}
+\end{minipage}
+
+%---------- SUMMARY ----------
+\section*{Summary}
+Full-stack engineer with 5+ years building production web apps — from WooCommerce storefronts to modern Next.js / React and Vue~+~Laravel applications. Led a small team at SkyTech Solutions, owning architecture, code reviews, and database decisions. Introduced AI-assisted workflows (Claude Code, Cursor, Copilot) that \textbf{cut delivery from $\sim$1 month to $\sim$10 days}. Published a Next.js starter to npm and maintains internal boilerplates used across client projects.
+
+%---------- EXPERIENCE ----------
+\section*{Experience}
+
+\role{SkyTech Solutions}{Software Engineer}{2023 -- Present}{Dhaka, Bangladesh}
+\begin{itemize}
+  \item \textbf{Cut website delivery from $\sim$1 month to $\sim$10 days} ($\sim$50\% faster) via AI-assisted workflows (Claude Code, Cursor, Copilot) with full code ownership.
+  \item Implemented \textbf{pixel-perfect Figma-to-code} on every project — matching design intent at the type, spacing, and interaction level.
+  \item Built a Next.js + React \textbf{web dashboard for a mobile app}, end-to-end.
+  \item Stacks: \textbf{Next.js / React} for web apps; \textbf{Vue~+~Laravel} for websites with custom CMS backends.
+  \item Connected \textbf{WordPress as a headless CMS} to React via \textbf{GraphQL} (\href{https://github.com/nomanjawad/wordpress-node}{wordpress-node}).
+  \item Published \href{https://www.npmjs.com/package/create-atomictemplate}{\textbf{create-atomictemplate}} (Next.js starter) to npm; designed \href{https://github.com/nomanjawad/vue-laravel-boilerplate}{\textbf{vue-laravel-boilerplate}} for client builds.
+  \item Databases: \textbf{MySQL}, \textbf{Supabase}.
+  \item Lead a small team: mentor juniors, run code reviews, own framework / database decisions.
+\end{itemize}
+
+\vspace{4pt}
+\role{Marketorr}{Web Developer}{2020 -- 2023}{Dhaka, Bangladesh}
+\begin{itemize}
+  \item Delivered WordPress sites for in-house brands and external clients.
+  \item Shipped \textbf{large WooCommerce stores}, a \textbf{membership platform}, and an \textbf{event management system}.
+  \item Handled theme customization, plugin development, third-party integrations, and performance tuning.
+  \item Served clients across automotive, hospitality, healthcare, security, and retail (Bangladesh, Australia, US).
+  \item Ran code reviews and cross-browser / device testing.
+\end{itemize}
+
+%---------- PROJECTS ----------
+\section*{Selected Projects}
+\begin{itemize}
+  \item \textbf{\href{https://www.npmjs.com/package/create-atomictemplate}{create-atomictemplate}} : Next.js + React project starter, published to npm.
+  \item \textbf{\href{https://github.com/nomanjawad/vue-laravel-boilerplate}{vue-laravel-boilerplate}} : Vue~3 + Laravel API architecture for full-stack client builds.
+  \item \textbf{\href{https://github.com/nomanjawad/wordpress-node}{wordpress-node}} : React + WordPress (headless) via GraphQL boilerplate.
+\end{itemize}
+
+%---------- SKILLS ----------
+\section*{Skills}
+\begin{description}[leftmargin=8.5em, style=nextline, itemsep=2pt]
+  \item[\textbf{Languages}] TypeScript, JavaScript, PHP, SQL
+  \item[\textbf{Frontend}] React, Next.js, Vue, Tailwind CSS
+  \item[\textbf{Backend}] Node.js, Express, Laravel, GraphQL
+  \item[\textbf{Databases}] MySQL, Supabase
+  \item[\textbf{DevOps \& Tooling}] Git, GitHub Actions (CI/CD)
+  \item[\textbf{E-commerce / CMS}] WooCommerce, Shopify (store setup), WordPress (headless \& traditional), Webflow
+  \item[\textbf{AI-assisted dev}] Claude Code, Cursor, GitHub Copilot
+\end{description}
+
+%---------- EDUCATION ----------
+\section*{Education}
+\noindent\textbf{Independent University, Bangladesh} \hfill \textit{2019 -- 2024}\\
+B.S. in Computer Engineering
+
+%---------- EXTRA ----------
+\section*{Publications}
+\begin{itemize}
+  \item ``IoT-Based Solar Automated Irrigation System'' : IEEE Xplore [\href{https://doi.org/10.1109/10653615}{DOI: 10.1109/10653615}]
+\end{itemize}
+
+\end{document}

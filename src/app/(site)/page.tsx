@@ -5,7 +5,6 @@ import { About } from '@/components/sections/About';
 import { Work } from '@/components/sections/Work';
 import { Skills } from '@/components/sections/Skills';
 import { Experience } from '@/components/sections/Experience';
-import { Testimonials } from '@/components/sections/Testimonials';
 import { Contact } from '@/components/sections/Contact';
 
 export const revalidate = 3600;
@@ -20,7 +19,6 @@ export default async function HomePage() {
       <Work work={c.work} projects={c.projects} identity={c.identity} />
       <Skills skills={c.skills} />
       <Experience experience={c.experience} />
-      <Testimonials testimonials={c.testimonials} />
       <Contact contact={c.contact} identity={c.identity} social={c.social} />
     </>
   );

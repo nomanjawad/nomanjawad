@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 
-const SECTIONS = ['hero', 'about', 'work', 'skills', 'experience', 'testimonials', 'contact'];
+const SECTIONS = ['hero', 'about', 'work', 'skills', 'experience', 'contact'];
 
 export function ActiveSectionTracker() {
   useEffect(() => {

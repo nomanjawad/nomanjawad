@@ -138,7 +138,7 @@ html[data-theme="light"] .photo-wrap img { filter: grayscale(1) contrast(1.03) b
 html[data-theme="light"] .photo-wrap:hover img { filter: grayscale(0) contrast(1.03); }
 .photo-wrap .caption { position: absolute; left: 0; bottom: -24px; right: 0; font-size: 10px; color: var(--fg-dim); display: flex; justify-content: space-between; letter-spacing: 0.12em; text-transform: uppercase; }
 .photo-wrap .caption span:first-child { color: var(--fg); }
-.about-body { font-family: var(--serif); font-size: clamp(22px, 2.2vw, 30px); line-height: 1.35; color: var(--fg); letter-spacing: -0.01em; max-width: 40ch; }
+.about-body { font-family: var(--serif); font-size: clamp(16px, 1.5vw, 20px); line-height: 1.6; color: var(--fg); letter-spacing: -0.01em; max-width: 52ch; }
 .about-body p { margin: 0 0 0.75em; }
 .about-body em { color: var(--fg-dim); }
 .about-meta { margin-top: 32px; font-family: var(--mono); font-size: 12px; color: var(--fg-dim); max-width: 52ch; line-height: 1.7; }
