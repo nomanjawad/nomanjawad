@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Instrument_Serif, JetBrains_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { ThemeScript } from '@/components/client/ThemeScript';
 import './globals.css';
 
@@ -127,7 +128,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
