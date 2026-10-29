@@ -21,7 +21,13 @@ export function ScrollReveal() {
       { rootMargin: '-40px 0px -40px 0px', threshold: 0 },
     );
     const observeAll = () => {
-      document.querySelectorAll<HTMLElement>('.reveal:not(.in)').forEach((el) => io.observe(el));
+      const vh = window.innerHeight;
+      document.querySelectorAll<HTMLElement>('.reveal:not(.in)').forEach((el) => {
+        // One synchronous check so content already on screen reveals at first paint.
+        const r = el.getBoundingClientRect();
+        if (r.top < vh - 40 && r.bottom > 40) el.classList.add('in');
+        else io.observe(el);
+      });
     };
     observeAll();
     // Elements rendered a moment after navigation (fonts, client components) get picked up too.
