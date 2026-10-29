@@ -1,5 +1,6 @@
 import type { Testimonials as TestimonialsType } from '@/lib/types';
 import { TESTIMONIALS } from '@/lib/homeCopy';
+import { Orb } from '@/components/client/Orb';
 
 export function Testimonials({ testimonials }: { testimonials: TestimonialsType }) {
   const [lead, ...rest] = testimonials.quotes;
@@ -9,7 +10,7 @@ export function Testimonials({ testimonials }: { testimonials: TestimonialsType 
       <div className="sec-inner">
         <div className="tm">
           <div className="tm-vis reveal" aria-hidden="true">
-            <div className="orb-mini"><div className="orb-glow" /><div className="orb-core" /></div>
+            <div className="orb-mini"><Orb /></div>
             {TESTIMONIALS.aside.map((a, i) => <span key={a} className={`tm-note n${i + 1}`}>{a}</span>)}
           </div>
           <div>

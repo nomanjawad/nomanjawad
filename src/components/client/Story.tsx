@@ -183,7 +183,7 @@ function RisingTitle({ text }: { text: string }) {
 
 function BeatText({ beat, k, on, ready = true }: { beat: Beat; k: number; on: boolean; ready?: boolean }) {
   const Title = k === 0 ? 'h1' : 'h2';
-  const side = k === 0 ? 'hero' : k % 2 ? 'r' : 'l';
+  const side = sideOf(k);
   return (
     <div className={`st-beat ${side}${on ? ' on' : ''}`}>
       <p className="st-kicker">
@@ -211,10 +211,14 @@ function BeatText({ beat, k, on, ready = true }: { beat: Beat; k: number; on: bo
   );
 }
 
-const TEXT_W = 400;
+const TEXT_W = 420;   // step text column
+const PAD = 40;       // panel side padding at desktop
+const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+const sideOf = (k: number) => (k === 0 ? 'hero' : k % 2 ? 'r' : 'l');
 
 export function Story() {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const stageColRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [isStatic, setStatic] = useState(false);
@@ -233,14 +237,25 @@ export function Story() {
     return () => { mq.removeEventListener('change', check); mo.disconnect(); };
   }, []);
 
-  // Scale each stage (authored at 620×420) to the room beside the text columns.
+  // Scale each stage (authored at 620×420) to the room beside the text column, and
+  // tell the panel how far to shift the stage away from whichever side the text is on.
   useEffect(() => {
     const fit = () => {
       document.querySelectorAll<HTMLElement>('.st-stagewrap').forEach((el) => {
         const col = el.parentElement as HTMLElement;
-        const overlay = col.classList.contains('st-stagecol') && window.innerWidth > 1100;
-        const room = overlay ? col.clientWidth - 2 * (TEXT_W + 48) : col.clientWidth;
-        el.style.setProperty('--s', Math.max(0.5, Math.min(1.25, room / 620)).toFixed(4));
+        const panel = col.closest<HTMLElement>('.story-panel');
+        let s: number;
+        if (panel && window.innerWidth > 1100) {
+          const W = panel.clientWidth, H = panel.clientHeight;
+          const heroW = Math.min(680, W * 0.46);
+          s = clamp(Math.min((W - heroW - 3 * PAD) / 620, (H - 190) / 420), 0.5, 1.4);
+          panel.style.setProperty('--shift-hero', `${((heroW + PAD) / 2).toFixed(1)}px`);
+          panel.style.setProperty('--shift-l', `${((TEXT_W + PAD) / 2).toFixed(1)}px`);
+          panel.style.setProperty('--shift-r', `${(-(TEXT_W + PAD) / 2).toFixed(1)}px`);
+        } else {
+          s = clamp(col.clientWidth / 620, 0.5, 1.4);
+        }
+        el.style.setProperty('--s', s.toFixed(4));
       });
     };
     fit();
@@ -258,6 +273,8 @@ export function Story() {
     const v = varsAt(p);
     for (const key in v) stage.style.setProperty(`--${key}`, v[key].toFixed(4));
     const k = Math.min(BEATS.length - 1, Math.floor(p * 6));
+    const panel = panelRef.current;
+    if (panel && panel.dataset.side !== sideOf(k)) panel.dataset.side = sideOf(k);
     setActive((cur) => (cur === k ? cur : k));
   });
 
@@ -277,7 +294,7 @@ export function Story() {
   return (
     <section className="story" aria-label="How a project goes from brief to launch">
       <div className="story-wrap" ref={wrapRef}>
-        <div className="story-panel" style={{ '--tw': `${TEXT_W}px` } as React.CSSProperties}>
+        <div className="story-panel" ref={panelRef} data-side="hero" style={{ '--tw': `${TEXT_W}px` } as React.CSSProperties}>
           <div className="hero-aurora" aria-hidden="true" />
           <div ref={stageColRef} className="st-stagecol">
             <Scene />

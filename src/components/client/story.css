@@ -5,8 +5,11 @@
 .story-panel { position: sticky; top: 0; height: 100svh; overflow: clip; isolation: isolate; }
 .story-panel .hero-aurora { height: 100%; }
 
-/* stage sits centred; text columns overlay left and right */
-.st-stagecol { position: absolute; inset: 0; display: grid; place-items: center; padding: 96px var(--pad) 72px; }
+/* stage sits centred, then slides away from whichever side the text is on */
+.st-stagecol { position: absolute; inset: 0; display: grid; place-items: center; padding: 96px var(--pad) 72px; will-change: transform; transition: transform 900ms var(--ease); }
+.story-panel[data-side="hero"] .st-stagecol { transform: translateX(var(--shift-hero, 0px)); }
+.story-panel[data-side="l"] .st-stagecol { transform: translateX(var(--shift-l, 0px)); }
+.story-panel[data-side="r"] .st-stagecol { transform: translateX(var(--shift-r, 0px)); }
 .st-stagewrap { position: relative; width: calc(620px * var(--s, 1)); height: calc(420px * var(--s, 1)); }
 .st-stage {
   --tidy: 0; --pileOp: 1; --winIn: 0; --sep: 0; --tilt: 0; --scan: 0; --callOp: 1; --ship: 0;
@@ -17,12 +20,12 @@
 
 .st-text { position: absolute; inset: 0; pointer-events: none; }
 .st-beat {
-  position: absolute; top: 50%; width: var(--tw, 400px); left: var(--pad);
-  transform: translateY(calc(-50% + 24px)); opacity: 0;
+  position: absolute; top: 50%; width: var(--tw, 420px); left: var(--pad);
+  transform: translateY(calc(-50% + 24px)); opacity: 0; will-change: transform, opacity;
   transition: opacity 450ms var(--ease), transform 600ms var(--ease);
 }
 .st-beat.r { left: auto; right: var(--pad); }
-.st-beat.hero { width: min(720px, 50%); }
+.st-beat.hero { width: min(680px, 46%); }
 .st-beat.on { opacity: 1; transform: translateY(-50%); pointer-events: auto; }
 .st-kicker { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--fg-dim); }
 .st-n { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong); background: rgba(12,12,12,0.6); font-style: normal; font-size: 0.65rem; color: var(--fg); }
@@ -45,7 +48,7 @@
 
 /* beat 0–1: brief pile tidies into a spec */
 .st-spec {
-  position: absolute; left: 50%; top: 50%; width: 540px; height: 250px; margin: -125px 0 0 -270px;
+  position: absolute; left: 50%; top: 50%; width: 540px; height: 250px; margin: -125px 0 0 -270px; will-change: transform, opacity;
   border: 1.5px dashed var(--line-strong); border-radius: 22px;
   opacity: calc(var(--tidy) * var(--pileOp));
   transform: scale(calc(0.96 + 0.04 * var(--tidy)));
@@ -58,7 +61,7 @@
   display: flex; align-items: center; gap: 10px; padding: 12px 14px;
   border: 1px solid var(--line-strong); border-radius: 14px; background: #16161A;
   font-size: 13px; line-height: 1.2; color: var(--fg); white-space: nowrap;
-  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45); will-change: transform, opacity;
   opacity: var(--pileOp);
   transform:
     translate(-50%, -50%)
@@ -78,15 +81,15 @@
 .st-stackwrap { position: absolute; inset: 0; perspective: 1600px; opacity: var(--winIn); }
 .st-stack {
   position: absolute; left: 50%; top: 50%; width: 420px; height: 280px; margin: -140px 0 0 -210px;
-  transform-style: preserve-3d;
+  transform-style: preserve-3d; will-change: transform;
   transform:
     scale(calc(0.86 + 0.14 * var(--winIn) - 0.2 * var(--tilt)))
     rotateX(calc(var(--tilt) * 56deg))
     rotateZ(calc(var(--tilt) * -32deg));
 }
-.st-layer { position: absolute; inset: 0; transform: translateZ(calc((var(--z) - 2.5) * var(--sep) * 52px)); }
+.st-layer { position: absolute; inset: 0; transform: translateZ(calc((var(--z) - 2.5) * var(--sep) * 52px)); will-change: transform; backface-visibility: hidden; }
 .st-plate {
-  position: absolute; inset: 0; border-radius: 18px; opacity: var(--sep);
+  position: absolute; inset: 0; border-radius: 18px; opacity: var(--sep); will-change: opacity;
   border: 1.5px solid hsl(calc(250 + var(--z) * 22) 80% 66% / 0.75);
   background: hsl(calc(250 + var(--z) * 22) 70% 45% / 0.14);
   display: grid; grid-template-columns: repeat(3, 1fr); align-content: start; gap: 10px; padding: 18px;
@@ -121,15 +124,15 @@
 
 /* beat 4: scanner, measurements, readout */
 .st-scan {
-  position: absolute; top: 2%; bottom: 2%; width: 2px; margin-left: -1px;
-  left: calc(var(--scan) * 100%);
+  position: absolute; top: 2%; bottom: 2%; left: -1px; width: 2px;
+  transform: translateX(calc(var(--scan) * 620px)); will-change: transform, opacity;
   background: linear-gradient(180deg, transparent, #FF9B55 15%, #F06AE0 85%, transparent);
   box-shadow: 0 0 18px 2px rgba(240,106,224,0.7);
   opacity: min(1, calc(var(--scan) * 30), calc((1 - var(--scan)) * 30));
 }
 .st-scanfill {
-  position: absolute; top: 2%; bottom: 2%; left: 0;
-  width: calc(var(--scan) * 100%);
+  position: absolute; top: 2%; bottom: 2%; left: 0; width: 100%;
+  clip-path: inset(0 calc((1 - var(--scan)) * 100%) 0 0);
   background-image: linear-gradient(rgba(240,106,224,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(240,106,224,0.10) 1px, transparent 1px);
   background-size: 20px 20px;
   opacity: calc(min(1, calc(var(--scan) * 30)) * var(--callOp) * 0.9);
@@ -137,7 +140,7 @@
 .st-call {
   position: absolute; width: 160px; padding: 10px 14px;
   border: 1px solid var(--line-strong); border-radius: 14px;
-  background: rgba(12,12,12,0.86); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  background: rgba(14,14,16,0.94); will-change: transform, opacity;
   --on: clamp(0, calc((var(--scan) - var(--k)) * 12), 1);
   opacity: calc(var(--on) * var(--callOp));
   transform: translateY(calc((1 - var(--on)) * 10px));
@@ -156,7 +159,7 @@
 
 /* beat 5: shipped */
 .st-ship {
-  position: absolute; left: 50%; bottom: -6px; display: inline-flex; align-items: center; gap: 10px;
+  position: absolute; left: 50%; bottom: -6px; display: inline-flex; align-items: center; gap: 10px; will-change: transform, opacity;
   padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(111,207,107,0.5); background: rgba(12,12,12,0.85);
   font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #CFEFCD; white-space: nowrap;
   opacity: var(--ship);
@@ -173,7 +176,7 @@
 /* stacked layout: stage on top, text below */
 @media (max-width: 1100px) {
   .story-panel { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; gap: 8px; padding: 84px var(--pad) 56px; }
-  .st-stagecol { position: static; inset: auto; padding: 0; max-width: 560px; width: 100%; min-width: 0; margin: 0 auto; overflow: visible; }
+  .st-stagecol, .story-panel[data-side] .st-stagecol { position: static; inset: auto; padding: 0; max-width: 560px; width: 100%; min-width: 0; margin: 0 auto; overflow: visible; transform: none; transition: none; }
   .st-text { position: relative; inset: auto; min-height: 0; }
   .st-beat, .st-beat.r, .st-beat.hero { left: 0; right: 0; width: auto; top: 0; transform: translateY(24px); }
   .st-beat.on { transform: none; }

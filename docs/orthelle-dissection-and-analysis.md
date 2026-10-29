@@ -246,6 +246,8 @@ All new copy lives in `src/lib/homeCopy.ts`, marked as placeholders, until it is
 
 Verified: type check and production build pass; every section renders at 1440×900 and 375×812 with no console errors and no horizontal overflow; drag compare, FAQ toggle and route hover work; the pause toggle still swaps the story to its static version.
 
+Performance pass (same day): the story scene now moves only transforms, opacity and clip-path per frame (no `left`/`width` changes), every animated piece is promoted with `will-change`, the callouts lost their backdrop blur, the testimonial orb is the pausable `Orb` component, the corner readout writes to the DOM without React re-renders, and `ScrollReveal` uses an IntersectionObserver instead of measuring on every scroll frame. The hero stage slides to the side opposite the active text block (`data-side` on the panel, `--shift-*` variables), so text and scene no longer share the same horizontal space.
+
 Known gaps: placeholder copy and numbers; miniatures instead of real screenshots in Screens and Compare; the hero headline reveal depends on client hydration (text is in the HTML, letters rise after mount); not yet measured on a throttled phone.
 
 Related: `docs/redesign-review-and-scroll-story-plan.md` (the earlier review and the original `/story` prototype notes).

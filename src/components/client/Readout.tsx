@@ -1,22 +1,29 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * Corner instrument readout: pointer position on the page, plus the page's own
  * largest contentful paint and cumulative layout shift, measured live.
+ * Writes straight to the DOM so pointer movement never re-renders React.
  */
 export function Readout() {
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [lcp, setLcp] = useState<number | null>(null);
-  const [cls, setCls] = useState(0);
+  const xRef = useRef<HTMLElement>(null);
+  const yRef = useRef<HTMLElement>(null);
+  const lcpRef = useRef<HTMLElement>(null);
+  const clsRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const pad = (n: number) => String(Math.max(0, Math.round(n))).padStart(4, '0');
     let raf = 0;
     let x = 0, y = 0;
     const onMove = (e: PointerEvent) => {
       x = e.clientX; y = e.clientY + window.scrollY;
-      if (!raf) raf = requestAnimationFrame(() => { raf = 0; setPos({ x, y }); });
+      if (!raf) raf = requestAnimationFrame(() => {
+        raf = 0;
+        if (xRef.current) xRef.current.textContent = pad(x);
+        if (yRef.current) yRef.current.textContent = pad(y);
+      });
     };
     window.addEventListener('pointermove', onMove, { passive: true });
     return () => { window.removeEventListener('pointermove', onMove); if (raf) cancelAnimationFrame(raf); };
@@ -28,7 +35,7 @@ export function Readout() {
     try {
       const lcpObs = new PerformanceObserver((list) => {
         const last = list.getEntries().at(-1);
-        if (last) setLcp(last.startTime);
+        if (last && lcpRef.current) lcpRef.current.textContent = (last.startTime / 1000).toFixed(2);
       });
       lcpObs.observe({ type: 'largest-contentful-paint', buffered: true });
       obs.push(lcpObs);
@@ -39,7 +46,7 @@ export function Readout() {
         for (const e of list.getEntries() as (PerformanceEntry & { hadRecentInput?: boolean; value?: number })[]) {
           if (!e.hadRecentInput && e.value) total += e.value;
         }
-        setCls(total);
+        if (clsRef.current) clsRef.current.textContent = total.toFixed(3);
       });
       clsObs.observe({ type: 'layout-shift', buffered: true });
       obs.push(clsObs);
@@ -47,14 +54,12 @@ export function Readout() {
     return () => obs.forEach((o) => o.disconnect());
   }, []);
 
-  const pad = (n: number) => String(Math.max(0, Math.round(n))).padStart(4, '0');
-
   return (
     <div className="readout" aria-hidden="true">
-      <span>X <b>{pad(pos.x)}</b> <span className="u">px</span></span>
-      <span>Y <b>{pad(pos.y)}</b> <span className="u">px</span></span>
-      <span className="live">LCP <b>{lcp === null ? '—' : (lcp / 1000).toFixed(2)}</b> <span className="u">s</span></span>
-      <span className="live">CLS <b>{cls.toFixed(3)}</b></span>
+      <span>X <b ref={xRef}>0000</b> <span className="u">px</span></span>
+      <span>Y <b ref={yRef}>0000</b> <span className="u">px</span></span>
+      <span className="live">LCP <b ref={lcpRef}>—</b> <span className="u">s</span></span>
+      <span className="live">CLS <b ref={clsRef}>0.000</b></span>
     </div>
   );
 }

@@ -2,33 +2,31 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
+/**
+ * Adds `.in` to `.reveal` elements as they enter the viewport.
+ * Uses an IntersectionObserver so scrolling never triggers layout reads.
+ */
 export function ScrollReveal() {
   const pathname = usePathname();
   useEffect(() => {
-    const check = () => {
-      const iH = window.innerHeight;
-      const pad = 40;
-      document.querySelectorAll<HTMLElement>('.reveal:not(.in)').forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.top < iH - pad && r.bottom > pad) el.classList.add('in');
-      });
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { rootMargin: '-40px 0px -40px 0px', threshold: 0 },
+    );
+    const observeAll = () => {
+      document.querySelectorAll<HTMLElement>('.reveal:not(.in)').forEach((el) => io.observe(el));
     };
-    let raf: number | null = null;
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(() => { raf = null; check(); });
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    check();
-    requestAnimationFrame(check);
-    const t1 = setTimeout(check, 100);
-    const t2 = setTimeout(check, 400);
-    const t3 = setTimeout(check, 900);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
-    };
+    observeAll();
+    // Elements rendered a moment after navigation (fonts, client components) get picked up too.
+    const t = setTimeout(observeAll, 400);
+    return () => { clearTimeout(t); io.disconnect(); };
   }, [pathname]);
   return null;
 }
