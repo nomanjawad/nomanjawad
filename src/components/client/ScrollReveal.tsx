@@ -32,7 +32,9 @@ export function ScrollReveal() {
     observeAll();
     // Elements rendered a moment after navigation (fonts, client components) get picked up too.
     const t = setTimeout(observeAll, 400);
-    return () => { clearTimeout(t); io.disconnect(); };
+    // Safety net: once scrolling settles, reveal anything on screen the observer has not reported yet.
+    window.addEventListener('scrollend', observeAll);
+    return () => { clearTimeout(t); window.removeEventListener('scrollend', observeAll); io.disconnect(); };
   }, [pathname]);
   return null;
 }
