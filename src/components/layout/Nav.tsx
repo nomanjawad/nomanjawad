@@ -4,8 +4,8 @@ import { MotionToggle } from '@/components/client/MotionToggle';
 
 const LINKS = [
   { label: 'Work', href: '/work' },
+  { label: 'Process', href: '/#process' },
   { label: 'About', href: '/#about' },
-  { label: 'Stack', href: '/#skills' },
   { label: 'Contact', href: '/#contact' },
 ];
 
@@ -33,6 +33,7 @@ export function Nav({ identity }: { identity: Identity }) {
             <span className="hint">Search</span>
             <span className="kbd">⌘K</span>
           </button>
+          <Link href="/#contact" className="btn-hot btn-sm nav-book">Book a call</Link>
         </nav>
       </header>
     </>

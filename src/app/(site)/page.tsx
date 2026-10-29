@@ -1,12 +1,18 @@
 import type { Metadata } from 'next';
 import { getContent } from '@/lib/content';
 import { SITE_NAME, SITE_URL, jsonLd, liveLinks } from '@/lib/site';
-import { Hero } from '@/components/sections/Hero';
-import { ScrollMarquee } from '@/components/client/ScrollMarquee';
+import { Story } from '@/components/client/Story';
+import { Proof } from '@/components/sections/Proof';
+import { Screens } from '@/components/sections/Screens';
+import { CompareSection } from '@/components/sections/CompareSection';
+import { Steps } from '@/components/sections/Steps';
 import { Work } from '@/components/sections/Work';
+import { Stack } from '@/components/sections/Stack';
+import { Testimonials } from '@/components/sections/Testimonials';
 import { About } from '@/components/sections/About';
-import { Skills } from '@/components/sections/Skills';
 import { Experience } from '@/components/sections/Experience';
+import { Ways } from '@/components/sections/Ways';
+import { Faq } from '@/components/client/Faq';
 import { Contact } from '@/components/sections/Contact';
 
 export const revalidate = 3600;
@@ -49,12 +55,18 @@ export default async function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
-      <Hero hero={c.hero} identity={c.identity} />
-      <ScrollMarquee items={c.marquee} />
+      <Story />
+      <Proof about={c.about} projects={c.projects} />
+      <Screens />
+      <CompareSection />
+      <Steps />
       <Work work={c.work} projects={c.projects} />
+      <Stack />
+      <Testimonials testimonials={c.testimonials} />
       <About about={c.about} identity={c.identity} />
-      <Skills skills={c.skills} />
       <Experience experience={c.experience} identity={c.identity} />
+      <Ways />
+      <Faq email={c.identity.email} />
       <Contact contact={c.contact} identity={c.identity} social={liveLinks(c.social)} />
     </>
   );

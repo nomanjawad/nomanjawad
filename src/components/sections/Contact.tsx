@@ -1,6 +1,9 @@
 import type { Contact as ContactType, Identity, Social } from '@/lib/types';
+import { CTA } from '@/lib/homeCopy';
 import { ContactForm } from '@/components/client/ContactForm';
+import { Orb } from '@/components/client/Orb';
 
+/** Final call to action, then the contact form and details. */
 export function Contact({
   contact,
   identity,
@@ -12,11 +15,21 @@ export function Contact({
 }) {
   const phoneHref = identity.phone.replace(/[^+\d]/g, '');
   return (
-    <section id="contact" className="contact">
-      <div className="contact-inner">
-        <h2 className="giant contact-title reveal" dangerouslySetInnerHTML={{ __html: contact.headline }} />
-        <a href={`mailto:${identity.email}`} className="contact-email reveal">{identity.email} ↗</a>
-        <p className="contact-lede reveal">{contact.leadCopy}</p>
+    <section id="contact" className="sec contact">
+      <div className="sec-inner">
+        <div className="cta">
+          <p className="kick reveal">{CTA.kicker}</p>
+          <h2 className="giant contact-title reveal" dangerouslySetInnerHTML={{ __html: contact.headline }} />
+          <p className="lead reveal">{CTA.lead}</p>
+          <div className="about-ctas reveal">
+            <a href={`mailto:${identity.email}`} className="btn-hot">Email the brief</a>
+            <a href={identity.cv} target="_blank" rel="noopener noreferrer" className="btn-ghost">Download CV</a>
+          </div>
+          <ul className="chips reveal" aria-label="Coming next">
+            {CTA.chips.map((c, i) => <li key={c} style={{ '--i': i } as React.CSSProperties}>{c}</li>)}
+          </ul>
+        </div>
+        <div className="cta-orb reveal" aria-hidden="true"><Orb /></div>
         <div className="contact-grid">
           <ContactForm email={identity.email} />
           <dl className="cmeta reveal">

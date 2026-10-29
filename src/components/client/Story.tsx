@@ -8,8 +8,7 @@ import './story.css';
  * Scroll-pinned story: a client brief becomes a site, the site is exploded into
  * layers, cut open to show its measurements, then shipped.
  *
- * PROTOTYPE. Copy and numbers below are placeholders; move them to
- * content.json (a `story` block) once the direction is approved.
+ * Copy and the step-4 numbers are PLACEHOLDERS; move them to content.json once settled.
  */
 
 type Beat = { kicker: string; title: string; body: string; note?: string };
@@ -21,29 +20,29 @@ const BEATS: Beat[] = [
     body: 'You send what you have: a Figma file, a Loom, a Slack thread, a deadline. Scroll to see what happens to it.',
   },
   {
-    kicker: '01 · Brief, understood',
-    title: 'Requirements become a spec',
+    kicker: 'brief, understood',
+    title: 'Read it',
     body: 'Pages, integrations, launch date and a performance budget, written down before the first line of code.',
   },
   {
-    kicker: '02 · Design, built',
-    title: 'The Figma file becomes the real thing',
-    body: 'Pixel-perfect from the handoff, responsive by default, built on Next.js or Laravel depending on the job.',
+    kicker: 'design, built',
+    title: 'Get a real site',
+    body: 'Pixel-perfect from the Figma handoff, responsive by default, on Next.js or Laravel depending on the job.',
   },
   {
-    kicker: '03 · Layers, exploded',
-    title: 'What sits under the UI',
+    kicker: 'layers, sorted',
+    title: 'See every layer',
     body: 'Components, API, database, pipeline and edge. Every layer is deliberate, and every one is yours.',
   },
   {
-    kicker: '04 · Cut open, checked',
-    title: 'Measured, not promised',
-    body: 'Performance, accessibility, security headers and SEO are audited against the budget before launch.',
+    kicker: 'inside, checked',
+    title: 'Cut it open',
+    body: 'Performance, accessibility, security headers and SEO are measured against the budget before launch.',
     note: 'Prototype numbers. Replace with one named case study.',
   },
   {
-    kicker: '05 · Shipped',
-    title: 'Live, monitored, handed over',
+    kicker: 'keys, handed over',
+    title: 'Ship it',
     body: 'Deployed through CI, documented, and ready for your team to run without me.',
   },
 ];
@@ -149,6 +148,11 @@ function Scene({ vars }: { vars?: Vars }) {
             <b>{c.v}</b><span>{c.k}</span>
           </div>
         ))}
+        <div className="st-read">
+          <b>Section A–A</b>
+          <span>LCP 1.1 s · INP 48 ms · CLS 0.00</span>
+          <span>headers A+ · WCAG AA · scroll to move the cut</span>
+        </div>
 
         <div className="st-ship"><i /> Deployed to production · all checks green</div>
       </div>
@@ -156,14 +160,47 @@ function Scene({ vars }: { vars?: Vars }) {
   );
 }
 
-function BeatText({ beat, k, on }: { beat: Beat; k: number; on: boolean }) {
-  const Title = k === 0 ? 'h1' : 'h2';
+/** Headline whose letters rise in one by one. Full text stays available to screen readers. */
+function RisingTitle({ text }: { text: string }) {
+  let i = 0;
   return (
-    <div className={`st-beat${on ? ' on' : ''}`}>
-      <p className="st-kicker">{beat.kicker}</p>
-      <Title className={`giant st-title${k === 0 ? ' st-title-hero' : ''}`}>{beat.title}</Title>
+    <>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">
+        {text.split(' ').map((w, wi) => (
+          <span key={wi}>
+            <span className="st-w">
+              {Array.from(w).map((ch, ci) => (
+                <span key={ci} className="st-ch" style={{ '--i': i++ } as React.CSSProperties}>{ch}</span>
+              ))}
+            </span>{' '}
+          </span>
+        ))}
+      </span>
+    </>
+  );
+}
+
+function BeatText({ beat, k, on, ready = true }: { beat: Beat; k: number; on: boolean; ready?: boolean }) {
+  const Title = k === 0 ? 'h1' : 'h2';
+  const side = k === 0 ? 'hero' : k % 2 ? 'r' : 'l';
+  return (
+    <div className={`st-beat ${side}${on ? ' on' : ''}`}>
+      <p className="st-kicker">
+        {k > 0 && <i className="st-n">{k}</i>}
+        <span>{beat.kicker}</span>
+      </p>
+      <Title className={`giant st-title${k === 0 ? ' st-title-hero' : ''}${ready ? ' st-ready' : ''}`}>
+        {k === 0 ? <RisingTitle text={beat.title} /> : beat.title}
+      </Title>
       <p className="st-body">{beat.body}</p>
       {beat.note && <p className="st-note">{beat.note}</p>}
+      {k === 0 && (
+        <div className="st-ctas" inert={!on || undefined}>
+          <a href="#work" className="btn-hot">See work</a>
+          <a href="#contact" className="btn-ghost">Get in touch</a>
+        </div>
+      )}
       {k === BEATS.length - 1 && (
         <div className="st-ctas" inert={!on || undefined}>
           <Link href="/work" className="btn-hot">See case studies</Link>
@@ -174,11 +211,16 @@ function BeatText({ beat, k, on }: { beat: Beat; k: number; on: boolean }) {
   );
 }
 
+const TEXT_W = 400;
+
 export function Story() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const stageColRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [isStatic, setStatic] = useState(false);
+  // Letters of the hero headline rise once the client has mounted (a class-toggled transition, not a load animation).
+  const [ready, setReady] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setReady(true), 80); return () => clearTimeout(t); }, []);
 
   // Stacked, non-animated version for reduced motion or the site's pause toggle.
   useEffect(() => {
@@ -191,11 +233,14 @@ export function Story() {
     return () => { mq.removeEventListener('change', check); mo.disconnect(); };
   }, []);
 
-  // Scale each stage (authored at 620×420) to fit its column.
+  // Scale each stage (authored at 620×420) to the room beside the text columns.
   useEffect(() => {
     const fit = () => {
       document.querySelectorAll<HTMLElement>('.st-stagewrap').forEach((el) => {
-        el.style.setProperty('--s', Math.min(1.3, el.clientWidth / 620).toFixed(4));
+        const col = el.parentElement as HTMLElement;
+        const overlay = col.classList.contains('st-stagecol') && window.innerWidth > 1100;
+        const room = overlay ? col.clientWidth - 2 * (TEXT_W + 48) : col.clientWidth;
+        el.style.setProperty('--s', Math.max(0.5, Math.min(1.25, room / 620)).toFixed(4));
       });
     };
     fit();
@@ -232,12 +277,13 @@ export function Story() {
   return (
     <section className="story" aria-label="How a project goes from brief to launch">
       <div className="story-wrap" ref={wrapRef}>
-        <div className="story-panel">
-          <div className="st-text">
-            {BEATS.map((b, k) => <BeatText key={k} beat={b} k={k} on={k === active} />)}
-          </div>
+        <div className="story-panel" style={{ '--tw': `${TEXT_W}px` } as React.CSSProperties}>
+          <div className="hero-aurora" aria-hidden="true" />
           <div ref={stageColRef} className="st-stagecol">
             <Scene />
+          </div>
+          <div className="st-text">
+            {BEATS.map((b, k) => <BeatText key={k} beat={b} k={k} on={k === active} ready={ready} />)}
           </div>
           <ol className="st-rail" aria-hidden="true">
             {BEATS.map((_, k) => (

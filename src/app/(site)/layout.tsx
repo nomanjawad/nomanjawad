@@ -5,6 +5,7 @@ import { Nav } from '@/components/layout/Nav';
 import { Footer } from '@/components/layout/Footer';
 import { BackToTop } from '@/components/client/BackToTop';
 import { CommandPalette } from '@/components/client/CommandPalette';
+import { Readout } from '@/components/client/Readout';
 import { ScrollReveal } from '@/components/client/ScrollReveal';
 import { SmoothScroll } from '@/components/client/SmoothScroll';
 import './site.css';
@@ -23,9 +24,10 @@ export default async function SiteLayout({
   return (
     <div className={`site ${kanit.variable}`}>
       <noscript>
-        <style>{'.site .reveal{opacity:1;transform:none}'}</style>
+        <style>{'.site .reveal,.site .st-ch{opacity:1;transform:none}'}</style>
       </noscript>
       <Nav identity={content.identity} />
+      <Readout />
       <main id="main">{children}</main>
       <Footer
         footer={content.footer}

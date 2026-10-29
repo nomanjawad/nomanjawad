@@ -31,10 +31,12 @@ export function CommandPalette({
   const allCmds: Cmd[] = useMemo(() => {
     const base: Cmd[] = [
       { g: 'Navigate', t: 'Go to Top',        sub: 'home',       ic: '#', act: () => jumpTo('hero') },
+      { g: 'Navigate', t: 'Go to Process',    sub: 'how I work', ic: '#', act: () => jumpTo('process') },
       { g: 'Navigate', t: 'Go to Work',       sub: 'projects',   ic: '#', act: () => jumpTo('work') },
       { g: 'Navigate', t: 'Go to About',      sub: 'bio',        ic: '#', act: () => jumpTo('about') },
       { g: 'Navigate', t: 'Go to Stack',      sub: 'skills',     ic: '#', act: () => jumpTo('skills') },
       { g: 'Navigate', t: 'Go to Experience', sub: 'resume',     ic: '#', act: () => jumpTo('experience') },
+      { g: 'Navigate', t: 'Go to Questions',  sub: 'faq',        ic: '#', act: () => jumpTo('faq') },
       { g: 'Navigate', t: 'Go to Contact',    sub: 'email',      ic: '#', act: () => jumpTo('contact') },
     ];
     base.push({ g: 'Navigate', t: 'All case studies', sub: '/work', ic: '#', act: () => router.push('/work') });

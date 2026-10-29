@@ -157,6 +157,8 @@ Conclusion: **follow the landing page fully means changing the visual system, no
 
 ## Part 3. The page Noman should build
 
+> **Decision (2026-10-29):** Noman keeps his own colours and fonts. Only the reference's page layout, section structure and animations are merged. Section 3.1 (visual system) and the "retire" list in 3.3 are therefore **not applied**; the dark palette, Kanit, pill nav, orb and radii stay. Built on branch `redesign/story-merge`, see Part 4.
+
 Same twelve moves, same proof mechanisms, mapped to "brief in, properly built site out".
 
 | # | Section | Headline direction | Handwritten kicker | Proof mechanism |
@@ -214,4 +216,36 @@ Same twelve moves, same proof mechanisms, mapped to "brief in, properly built si
 7. Corner readout with live web vitals; colophon.
 8. Restyle OG images; re-run build, Lighthouse on a throttled phone, Search Console check.
 
-Related: `docs/redesign-review-and-scroll-story-plan.md` (the earlier review and the `/story` prototype status).
+---
+
+## Part 4. What was built (branch `redesign/story-merge`, 2026-10-29)
+
+Home page order, mirroring the reference's twelve moves in the house style:
+
+| # | Section | Component | Status |
+|---|---|---|---|
+| 0–1 | Pinned story hero, six beats, text alternating left/right, numbered kickers, letter-rise headline, scan readout | `client/Story.tsx`, `client/story.css` | Built. Copy and beat-4 numbers are placeholders. |
+| 2 | Sector row + four stats | `sections/Proof.tsx` | Built from `about.stats` and project sectors. |
+| 3 | One build, every screen (four miniatures + title block) | `sections/Screens.tsx`, `ui/SiteMock.tsx` | Built with CSS miniatures; swap in real screenshots later. |
+| 4 | Figma vs build drag compare (pointer + keyboard) | `client/Compare.tsx`, `sections/CompareSection.tsx` | Built with miniatures; needs a real Figma frame + screenshot. |
+| 5 | Three steps | `sections/Steps.tsx` | Built. Copy placeholder. |
+| 6 | Case-study grid, 3 columns | `sections/Work.tsx`, `ui/WorkCard.tsx` | Built. Replaces the sticky stack on the home page. |
+| 7 | Inputs → one codebase → outputs, hover traces the route | `client/Routes.tsx`, `sections/Stack.tsx` | Built (SVG connectors measured from the DOM; stacked list under 900px). |
+| 8 | Testimonials: one lead quote beside a mini orb, two small | `sections/Testimonials.tsx` | Built from `content.testimonials`. |
+| 9 | Open letter | `sections/About.tsx` | Built from `about.body`; the AI paragraph is a placeholder Noman must write. |
+| — | Experience | unchanged | Kept after the letter. |
+| 10 | Ways to work (Project / Retainer / Audit, no prices) | `sections/Ways.tsx` | Built. Copy placeholder. |
+| 11 | FAQ accordion with sticky left column | `client/Faq.tsx` | Built. Six placeholder questions. |
+| 12 | Final CTA with roadmap chips, the orb, then the contact form | `sections/Contact.tsx` | Built. Form is still mailto-only. |
+| 13 | Footer: tagline, columns, giant wordmark, colophon | `layout/Footer.tsx` | Built. |
+| — | Corner readout: pointer X/Y plus live LCP and CLS | `client/Readout.tsx` | Built (hidden under 900px). |
+
+Other changes: nav gains "Process" and a "Book a call" button; the command palette gains Process and Questions; `/story` prototype route removed (the story is the hero now); old `Hero.tsx`, `ScrollMarquee`, `StackScale`, `ScrollText` and the About shapes are no longer rendered on the home page but remain in the repo.
+
+All new copy lives in `src/lib/homeCopy.ts`, marked as placeholders, until it is moved into `content.json` and the admin.
+
+Verified: type check and production build pass; every section renders at 1440×900 and 375×812 with no console errors and no horizontal overflow; drag compare, FAQ toggle and route hover work; the pause toggle still swaps the story to its static version.
+
+Known gaps: placeholder copy and numbers; miniatures instead of real screenshots in Screens and Compare; the hero headline reveal depends on client hydration (text is in the HTML, letters rise after mount); not yet measured on a throttled phone.
+
+Related: `docs/redesign-review-and-scroll-story-plan.md` (the earlier review and the original `/story` prototype notes).
