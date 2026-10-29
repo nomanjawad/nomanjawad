@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { SCREENS } from '@/lib/homeCopy';
 import { SiteMock } from '@/components/ui/SiteMock';
 
-/** "One build, every screen": the same page at four sizes, with a drawing-sheet title block. */
+/** "One build, every screen": the same page at four sizes. The same card pulses in every frame at once. */
 export function Screens() {
   const cols: (1 | 2 | 3)[] = [1, 2, 3, 2];
   return (
@@ -19,18 +19,20 @@ export function Screens() {
         <div className="sheet reveal">
           <div className="views">
             {SCREENS.views.map((v, i) => (
-              <figure key={v.n} className={`view v${i + 1}`}>
+              <figure key={v.n} className={`view v${i + 1}`} style={{ '--rd': `${i * 120}ms` } as React.CSSProperties}>
                 <div className="view-frame"><SiteMock cols={cols[i]} /></div>
                 <figcaption><b>{v.n} {v.name}</b><span>{v.note}</span></figcaption>
               </figure>
             ))}
           </div>
-          <dl className="tblock" aria-label="Sheet details">
-            {SCREENS.block.map(([k, v]) => (
-              <div key={k}><dt>{k}</dt><dd>{v}</dd></div>
-            ))}
-          </dl>
-          <p className="sheet-note">Phone · tablet · desktop · print · same components, no redraw</p>
+          <div className="sheet-foot">
+            <p className="sheet-note">Phone · tablet · desktop · print · same components, no redraw</p>
+            <dl className="tblock" aria-label="Sheet details">
+              {SCREENS.block.map(([k, v]) => (
+                <div key={k}><dt>{k}</dt><dd>{v}</dd></div>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
     </section>

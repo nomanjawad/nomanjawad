@@ -1,7 +1,7 @@
 import type { Contact as ContactType, Identity, Social } from '@/lib/types';
 import { CTA } from '@/lib/homeCopy';
 import { ContactForm } from '@/components/client/ContactForm';
-import { Orb } from '@/components/client/Orb';
+import { DeployLog } from '@/components/client/DeployLog';
 
 /** Final call to action, then the contact form and details. */
 export function Contact({
@@ -29,7 +29,7 @@ export function Contact({
             {CTA.chips.map((c, i) => <li key={c} style={{ '--i': i } as React.CSSProperties}>{c}</li>)}
           </ul>
         </div>
-        <div className="cta-orb reveal" aria-hidden="true"><Orb /></div>
+        <div className="cta-log reveal"><DeployLog /></div>
         <div className="contact-grid">
           <ContactForm email={identity.email} />
           <dl className="cmeta reveal">

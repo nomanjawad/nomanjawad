@@ -1,10 +1,11 @@
 import type { Testimonials as TestimonialsType } from '@/lib/types';
 import { TESTIMONIALS } from '@/lib/homeCopy';
 import { Orb } from '@/components/client/Orb';
+import { QuoteRotator } from '@/components/client/QuoteRotator';
 
 export function Testimonials({ testimonials }: { testimonials: TestimonialsType }) {
-  const [lead, ...rest] = testimonials.quotes;
-  if (!lead) return null;
+  const { quotes } = testimonials;
+  if (!quotes.length) return null;
   return (
     <section id="testimonials" className="sec">
       <div className="sec-inner">
@@ -15,12 +16,9 @@ export function Testimonials({ testimonials }: { testimonials: TestimonialsType 
           </div>
           <div>
             <p className="kick reveal">{TESTIMONIALS.kicker}</p>
-            <blockquote className="tm-lead reveal">
-              <p>“{lead.quote}”</p>
-              <footer><b>{lead.name}</b><span className="lbl">{lead.title} · {lead.meta}</span></footer>
-            </blockquote>
+            <div className="reveal"><QuoteRotator quotes={quotes} /></div>
             <div className="tm-small">
-              {rest.slice(0, 2).map((q, i) => (
+              {quotes.slice(1, 3).map((q, i) => (
                 <blockquote key={q.name} className="reveal" style={{ '--rd': `${(i + 1) * 100}ms` } as React.CSSProperties}>
                   <p>“{q.quote}”</p>
                   <footer className="lbl">{q.name} · {q.title}</footer>

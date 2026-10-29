@@ -144,7 +144,7 @@ function Scene({ vars }: { vars?: Vars }) {
         <div className="st-scanfill" />
         <div className="st-scan" />
         {CALLOUTS.map((c, i) => (
-          <div key={c.k} className={`st-call ${c.side}`} style={{ '--k': c.t, top: `${40 + (i % 3) * 118}px` } as React.CSSProperties}>
+          <div key={c.k} className={`st-call ${c.side}`} style={{ '--k': c.t, top: `${28 + (i % 3) * 112}px` } as React.CSSProperties}>
             <b>{c.v}</b><span>{c.k}</span>
           </div>
         ))}
@@ -244,9 +244,10 @@ export function Story() {
       document.querySelectorAll<HTMLElement>('.st-stagewrap').forEach((el) => {
         const col = el.parentElement as HTMLElement;
         const panel = col.closest<HTMLElement>('.story-panel');
+        const inner = col.closest<HTMLElement>('.story-inner');
         let s: number;
-        if (panel && window.innerWidth > 1100) {
-          const W = panel.clientWidth, H = panel.clientHeight;
+        if (panel && inner && window.innerWidth > 1100) {
+          const W = inner.clientWidth, H = inner.clientHeight;
           const heroW = Math.min(680, W * 0.46);
           s = clamp(Math.min((W - heroW - 3 * PAD) / 620, (H - 190) / 420), 0.5, 1.4);
           panel.style.setProperty('--shift-hero', `${((heroW + PAD) / 2).toFixed(1)}px`);
@@ -296,18 +297,20 @@ export function Story() {
       <div className="story-wrap" ref={wrapRef}>
         <div className="story-panel" ref={panelRef} data-side="hero" style={{ '--tw': `${TEXT_W}px` } as React.CSSProperties}>
           <div className="hero-aurora" aria-hidden="true" />
-          <div ref={stageColRef} className="st-stagecol">
-            <Scene />
+          <div className="story-inner">
+            <div ref={stageColRef} className="st-stagecol">
+              <Scene />
+            </div>
+            <div className="st-text">
+              {BEATS.map((b, k) => <BeatText key={k} beat={b} k={k} on={k === active} ready={ready} />)}
+            </div>
+            <ol className="st-rail" aria-hidden="true">
+              {BEATS.map((_, k) => (
+                <li key={k} className={k === active ? 'on' : undefined}>{String(k).padStart(2, '0')}</li>
+              ))}
+            </ol>
+            <p className={`st-hint${active === 0 ? ' on' : ''}`} aria-hidden="true">Scroll ↓</p>
           </div>
-          <div className="st-text">
-            {BEATS.map((b, k) => <BeatText key={k} beat={b} k={k} on={k === active} ready={ready} />)}
-          </div>
-          <ol className="st-rail" aria-hidden="true">
-            {BEATS.map((_, k) => (
-              <li key={k} className={k === active ? 'on' : undefined}>{String(k).padStart(2, '0')}</li>
-            ))}
-          </ol>
-          <p className={`st-hint${active === 0 ? ' on' : ''}`} aria-hidden="true">Scroll ↓</p>
         </div>
       </div>
     </section>
