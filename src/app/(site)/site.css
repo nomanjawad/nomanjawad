@@ -182,7 +182,7 @@ body:has(.site) { background: #0C0C0C; }
 .contact-email { display: inline-block; margin-top: clamp(28px, 4vw, 48px); font-weight: 500; font-size: clamp(1.2rem, 3.2vw, 2.8rem); border-bottom: 2px solid var(--line-strong); transition: border-color 200ms; overflow-wrap: anywhere; }
 .contact-email:hover { border-color: #B600A8; }
 .contact-lede { margin-top: 14px !important; max-width: 52ch; color: var(--fg-dim); font-weight: 300; }
-.contact-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 5vw, 72px); margin-top: clamp(40px, 5vw, 72px); }
+.contact-grid { display: grid; grid-template-columns: 1fr; gap: clamp(32px, 5vw, 72px); margin-top: clamp(40px, 5vw, 72px); }
 .cform { display: flex; flex-direction: column; gap: 18px; padding: clamp(20px, 2.6vw, 36px); border: 1px solid var(--line-strong); border-radius: var(--radius-card); background: var(--bg-1); }
 .cform label { display: block; margin-bottom: 8px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--fg-dim); }
 .cform input, .cform textarea { width: 100%; padding: 14px 18px; border: 1.5px solid var(--line-strong); border-radius: 18px; background: rgba(215,226,234,0.04); font-family: var(--sans); font-size: 1rem; color: var(--fg); transition: border-color 200ms; }
@@ -390,7 +390,7 @@ html[data-motion="off"] .site *, html[data-motion="off"] .site *::before, html[d
 
 /* figma vs build compare */
 @property --pos { syntax: '<percentage>'; inherits: true; initial-value: 42%; }
-.cmp { --pos: 42%; position: relative; aspect-ratio: 16 / 9; max-height: 640px; overflow: hidden; border: 2px solid #D7E2EA; border-radius: var(--radius-card); background: #0E0E12; cursor: ew-resize; user-select: none; touch-action: pan-y; }
+.cmp { --pos: 42%; position: relative; aspect-ratio: 16 / 9; max-height: 640px; margin: 0 auto; overflow: hidden; border: 2px solid #D7E2EA; border-radius: var(--radius-card); background: #0E0E12; cursor: ew-resize; user-select: none; touch-action: pan-y; }
 .cmp.idle { animation: cmp-sweep 9s ease-in-out infinite alternate; }
 @keyframes cmp-sweep { from { --pos: 30%; } to { --pos: 68%; } }
 .cmp-layer { position: absolute; inset: 0; }
@@ -433,9 +433,9 @@ html[data-motion="off"] .site *, html[data-motion="off"] .site *::before, html[d
 .wk-grid.cols3 .mesh-name { font-size: clamp(1.3rem, 2.3vw, 2.1rem); }
 
 /* routes: inputs → one codebase → outputs */
-.rt { position: relative; display: grid; grid-template-columns: auto auto auto; justify-content: center; align-items: center; gap: clamp(40px, 7vw, 120px); max-width: 1100px; margin: 0 auto; min-height: 440px; }
+.rt { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: clamp(40px, 7vw, 140px); min-height: 440px; }
 .rt-svg { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
-.rt-svg path { fill: none; stroke: var(--line-strong); stroke-width: 1.5; stroke-dasharray: 5 9; stroke-linecap: round; animation: rt-flow 1.4s linear infinite; animation-play-state: paused; transition: stroke 200ms, stroke-width 200ms; }
+.rt-svg path { fill: none; stroke: rgba(215,226,234,0.38); stroke-width: 1.8; stroke-dasharray: 6 10; stroke-linecap: round; animation: rt-flow 1.4s linear infinite; animation-play-state: paused; transition: stroke 200ms, stroke-width 200ms; }
 .rt[data-live] .rt-svg path { animation-play-state: running; }
 .rt-svg path.on { stroke: #FF9B55; stroke-width: 2.5; stroke-dasharray: 10 6; animation-duration: 0.6s; filter: drop-shadow(0 0 6px rgba(255,155,85,0.8)); }
 @keyframes rt-flow { to { stroke-dashoffset: -14; } }
@@ -572,3 +572,26 @@ html[data-motion="off"] .site *, html[data-motion="off"] .site *::before, html[d
   .foot-bot span { max-width: 100%; overflow-wrap: anywhere; }
   .nav-book { display: none; }
 }
+
+/* brief builder (contact form) */
+.bf { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start; }
+.bf-fill { display: grid; gap: 14px; padding: clamp(18px, 2.4vw, 32px); background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius-card); }
+.bf-line { font-weight: 500; font-size: clamp(1.05rem, 1.5vw, 1.35rem); line-height: 1.6; }
+.bf-in { display: inline-block; min-width: 9ch; margin: 0 2px; padding: 2px 6px; border: 0; border-bottom: 2px solid var(--line-strong); border-radius: 0; background: transparent; font: inherit; color: #fff; transition: border-color 160ms; }
+.bf-in::placeholder { color: var(--fg-fade); font-weight: 300; }
+.bf-in:focus { border-color: #F06AE0; outline: 0; }
+.bf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.bf-chips button { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line-strong); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--fg-dim); transition: background 160ms, color 160ms, border-color 160ms; }
+.bf-chips button:hover { color: var(--fg); border-color: var(--fg); }
+.bf-chips button.on { background: var(--grad-hot); border-color: transparent; color: #fff; }
+.bf-area { width: 100%; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: rgba(215,226,234,0.04); font: inherit; font-weight: 300; font-size: 1rem; color: var(--fg); resize: vertical; min-height: 110px; }
+.bf-area:focus { border-color: #D7E2EA; outline: 0; }
+.bf-preview { position: sticky; top: 90px; overflow: hidden; border: 1px solid var(--line-strong); border-radius: var(--radius-card); background: #0E0E12; }
+.bf-mail { padding: 18px 18px 6px; }
+.bf-subj { display: grid; gap: 4px; padding-bottom: 12px; margin-bottom: 12px !important; border-bottom: 1px solid var(--line); font-weight: 500; }
+.bf-mail pre { margin: 0; font-family: var(--mono); font-size: 0.78rem; line-height: 1.6; color: var(--fg-dim); white-space: pre-wrap; overflow-wrap: anywhere; min-height: 150px; }
+.bf-actions { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 18px 0; }
+.bf-preview .cform-note { padding: 12px 18px 16px; }
+@media (max-width: 900px) { .bf { grid-template-columns: 1fr; } .bf-preview { position: static; } }
+.cmeta-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; margin-top: 28px; }
+@media (max-width: 900px) { .cmeta-row { grid-template-columns: 1fr; } }

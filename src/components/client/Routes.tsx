@@ -25,11 +25,11 @@ export function Routes() {
         const b = item.getBoundingClientRect();
         const y = b.top + b.height / 2 - r.top;
         const side = item.dataset.side as 'in' | 'out';
-        // Always draw in the direction the data moves: inputs → centre, centre → outputs.
-        const ax = side === 'in' ? b.right - r.left : c.right - r.left;
-        const ay = side === 'in' ? y : cy;
-        const bx = side === 'in' ? c.left - r.left : b.left - r.left;
-        const by = side === 'in' ? cy : y;
+        // Every route is drawn from the tool toward the core, so both sides flow into the middle.
+        const ax = side === 'in' ? b.right - r.left : b.left - r.left;
+        const ay = y;
+        const bx = side === 'in' ? c.left - r.left : c.right - r.left;
+        const by = cy;
         const mx = (ax + bx) / 2;
         next.push({ id: item.dataset.id!, side, d: `M ${ax} ${ay} C ${mx} ${ay}, ${mx} ${by}, ${bx} ${by}` });
       });

@@ -1,7 +1,7 @@
 /* Scroll story hero. Stage is authored at 620×420 and scaled by --s; GSAP drives every scene element. */
 
 .story { position: relative; }
-.story-wrap { position: relative; height: 600vh; }
+.story-wrap { position: relative; }
 .story-panel { position: sticky; top: 0; height: 100svh; overflow: clip; isolation: isolate; --pad: 48px; }
 .story-panel .hero-aurora { height: 100%; }
 /* everything in the panel lives in a centred column with equal side room */
@@ -43,8 +43,24 @@
 .st-hint { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.24em; color: var(--fg-dim); opacity: 0; transition: opacity 300ms; }
 .st-hint.on { opacity: 1; }
 
-/* beat 0–1: brief pile and the spec frame */
-.st-spec { position: absolute; left: 50%; top: 50%; width: 540px; height: 250px; margin: -125px 0 0 -270px; will-change: transform, opacity; }
+/* beat 1: discovery call */
+.st-callui { position: absolute; left: 50%; top: 50%; width: 260px; margin: -92px 0 0 -300px; padding: 18px 18px 14px; border: 1px solid var(--line-strong); border-radius: 16px; background: #16161A; box-shadow: 0 14px 40px rgba(0,0,0,0.45); will-change: transform, opacity; }
+.st-avatars { display: flex; gap: 8px; }
+.st-avatars i { width: 30px; height: 30px; border-radius: 50%; background: var(--grad-hot); border: 2px solid #16161A; }
+.st-avatars i + i { margin-left: -14px; background: linear-gradient(135deg, #2A6CFF, #22C58B); }
+.st-wave { display: flex; align-items: center; gap: 4px; height: 44px; margin-top: 14px; }
+.st-wave i { flex: 1; height: 100%; border-radius: 2px; background: linear-gradient(180deg, #F06AE0, #B98CFF); transform-origin: 50% 50%; transform: scaleY(0.4); will-change: transform; }
+.st-callmeta { display: block; margin-top: 10px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-dim); }
+.st-chips { position: absolute; left: 50%; top: 50%; display: flex; gap: 8px; margin-top: 140px; transform: translateX(-50%); white-space: nowrap; }
+.st-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line-strong); background: rgba(12,12,12,0.8); font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg); will-change: transform, opacity; }
+.st-chip i { width: 6px; height: 6px; border-radius: 50%; background: #6FCF6B; }
+.st-url { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 2px 14px; border-radius: 6px; background: #0E0E12; font-family: var(--mono); font-size: 10px; color: var(--fg-dim); white-space: nowrap; }
+.st-pinwrap { position: absolute; z-index: 3; display: flex; align-items: center; gap: 8px; }
+.st-pin { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50% 50% 50% 0; background: #FF9B55; color: #0C0C0C; font-style: normal; font-family: var(--mono); font-size: 11px; font-weight: 600; box-shadow: 0 6px 16px rgba(0,0,0,0.5); will-change: transform, opacity; }
+.st-bubble { padding: 5px 9px; border-radius: 8px; background: #F4F5F0; color: #1B211E; font-size: 11px; font-weight: 500; white-space: nowrap; box-shadow: 0 6px 16px rgba(0,0,0,0.5); will-change: transform, opacity; }
+
+/* beat 0–2: brief pile and the spec frame */
+.st-spec { position: absolute; left: 50%; top: 50%; width: 540px; height: 250px; margin: -135px 0 0 -270px; will-change: transform, opacity; }
 .st-spec-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .st-spec-rect { fill: none; stroke: var(--line-strong); stroke-width: 1.5; }
 .st-spec span { position: absolute; left: 18px; top: -11px; padding: 2px 10px; background: var(--bg); font-family: var(--mono); font-size: 11px; color: var(--fg-dim); letter-spacing: 0.04em; }
@@ -68,6 +84,10 @@
 .st-rings { position: absolute; left: 50%; top: 50%; width: 420px; height: 280px; margin: -140px 0 0 -210px; pointer-events: none; }
 .st-ring { position: absolute; inset: 0; border-radius: 18px; border: 2px solid rgba(111,207,107,0.8); will-change: transform, opacity; }
 .st-stack { position: absolute; left: 50%; top: 50%; width: 420px; height: 280px; margin: -140px 0 0 -210px; transform-style: preserve-3d; will-change: transform; }
+.st-stack-in { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
+.st-sparks { position: absolute; left: 50%; top: 50%; pointer-events: none; }
+.st-spark { position: absolute; left: -4px; top: -4px; width: 8px; height: 8px; border-radius: 50%; background: #6FCF6B; box-shadow: 0 0 10px #6FCF6B; will-change: transform, opacity; }
+.st-spark:nth-child(odd) { background: #F06AE0; box-shadow: 0 0 10px #F06AE0; }
 .st-layer { position: absolute; inset: 0; will-change: transform; backface-visibility: hidden; }
 .st-plate {
   position: absolute; inset: 0; border-radius: 16px; will-change: opacity;
@@ -87,7 +107,7 @@
 }
 .st-site-bar { display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 12px; border-bottom: 1px solid var(--line); background: #15151A; }
 .st-site-bar i { width: 8px; height: 8px; border-radius: 50%; background: #3A3A42; }
-.st-site-bar span { margin: 0 auto; padding: 2px 14px; border-radius: 6px; background: #0E0E12; font-family: var(--mono); font-size: 10px; color: var(--fg-dim); }
+.st-site-bar { position: relative; }
 .st-site-nav { display: flex; align-items: center; gap: 10px; padding: 12px 16px; will-change: transform, opacity; }
 .st-site-nav b { width: 54px; height: 10px; border-radius: 4px; background: #D7E2EA; }
 .st-site-nav span { width: 28px; height: 6px; border-radius: 3px; background: #3A3A42; }
@@ -105,11 +125,11 @@
 /* beat 4: scanner, measurements, readout */
 .st-scan { position: absolute; top: 2%; bottom: 2%; left: -1px; width: 2px; will-change: transform, opacity; background: linear-gradient(180deg, transparent, #FF9B55 15%, #F06AE0 85%, transparent); box-shadow: 0 0 18px 2px rgba(240,106,224,0.7); }
 .st-scanfill { position: absolute; top: 2%; bottom: 2%; left: 0; width: 100%; background-image: linear-gradient(rgba(240,106,224,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(240,106,224,0.10) 1px, transparent 1px); background-size: 20px 20px; }
-.st-call { position: absolute; width: 160px; padding: 10px 14px; border: 1px solid var(--line-strong); border-radius: 12px; background: rgba(14,14,16,0.94); will-change: transform, opacity; }
-.st-call.l { left: -120px; }
-.st-call.r { right: -120px; }
-.st-call b { display: block; font-weight: 900; font-size: 30px; line-height: 1; background-image: linear-gradient(110deg, #F06AE0, #B98CFF 55%, #FF9B55); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #F06AE0; }
-.st-call span { display: block; margin-top: 6px; font-size: 11px; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-dim); }
+.st-metric { position: absolute; width: 160px; padding: 10px 14px; border: 1px solid var(--line-strong); border-radius: 12px; background: rgba(14,14,16,0.94); will-change: transform, opacity; }
+.st-metric.l { left: -120px; }
+.st-metric.r { right: -120px; }
+.st-metric b { display: block; font-weight: 900; font-size: 30px; line-height: 1; background-image: linear-gradient(110deg, #F06AE0, #B98CFF 55%, #FF9B55); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #F06AE0; }
+.st-metric span { display: block; margin-top: 6px; font-size: 11px; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-dim); }
 .st-read { position: absolute; left: 50%; bottom: -48px; transform: translateX(-50%); display: grid; gap: 2px; padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: 10px; background: rgba(12,12,12,0.86); font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; color: var(--fg-dim); white-space: nowrap; will-change: transform, opacity; }
 .st-read b { font-weight: 600; text-transform: uppercase; color: var(--fg); }
 
@@ -128,8 +148,8 @@
   .story-panel { --pad: clamp(20px, 3vw, 40px); padding: 84px var(--pad) 56px; }
   .story-inner { position: relative; inset: auto; height: 100%; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; gap: 8px; }
   .st-stagecol, .story-panel[data-side] .st-stagecol { position: static; inset: auto; padding: 0; max-width: 560px; width: 100%; min-width: 0; margin: 0 auto; overflow: visible; transform: none; transition: none; }
-  .st-call.l { left: -8px; }
-  .st-call.r { right: -8px; }
+  .st-metric.l { left: -8px; }
+  .st-metric.r { right: -8px; }
   .st-read { bottom: -4px; }
   .st-text { position: relative; inset: auto; min-height: 0; }
   .st-beat, .st-beat.s-r, .st-beat.s-hero { left: 0; right: 0; width: auto; top: 0; transform: translateY(24px); }

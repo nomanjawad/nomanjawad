@@ -32,7 +32,7 @@ export function Contact({
         <div className="cta-log reveal"><DeployLog /></div>
         <div className="contact-grid">
           <ContactForm email={identity.email} />
-          <dl className="cmeta reveal">
+          <dl className="cmeta cmeta-row reveal">
             <div><dt>Email</dt><dd><a href={`mailto:${identity.email}`}>{identity.email}</a></dd></div>
             <div><dt>Phone</dt><dd><a href={`tel:${phoneHref}`}>{identity.phone}</a></dd></div>
             <div><dt>Location</dt><dd>{identity.location} ({identity.timezone})</dd></div>
