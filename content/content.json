@@ -8,219 +8,500 @@
     "email": "nomanzawad@gmail.com",
     "phone": "+880 1713-289142",
     "cv": "/new_cv.pdf",
-    "availability": "Available for freelance · April 2026",
+    "availability": "Available for freelance & remote roles",
     "availableNow": true,
     "photo": "/assets/noman.jpeg"
   },
   "hero": {
     "command": "whoami --verbose",
+    "kicker": "Full-stack web developer · Next.js · React · Laravel",
+    "tagline": "I turn Figma designs into fast, pixel-perfect web apps, shipped in half the time with AI-assisted workflows.",
     "headlineBefore": "Noman ",
     "headlineAfter": "E Jawad",
-    "subtitle": "<span class='hl'>Full-stack developer</span> specializing in <span class='hl'>Next.js, React & Laravel</span> — turning Figma designs into pixel-perfect, production-ready web apps. Available for remote full-time roles and freelance projects worldwide.",
-    "primaryCta": { "label": "See work", "href": "#work", "arrow": "↓" },
-    "secondaryCta": { "label": "Get in touch", "href": "#contact", "arrow": "↗" },
+    "subtitle": "<span class='hl'>Full-stack developer</span> specializing in <span class='hl'>Next.js, React & Laravel</span>, turning Figma designs into pixel-perfect, production-ready web apps. Available for remote full-time roles and freelance projects worldwide.",
+    "primaryCta": {
+      "label": "See work",
+      "href": "#work",
+      "arrow": "↓"
+    },
+    "secondaryCta": {
+      "label": "Get in touch",
+      "href": "#contact",
+      "arrow": "↗"
+    },
     "sidecard": [
-      { "k": "role", "v": "Full-Stack Engineer" },
-      { "k": "based", "v": "Dhaka, BD (UTC+6)" },
-      { "k": "stack", "v": "Next.js · React · TS" },
-      { "k": "status", "v": "Open to FT · Remote" },
-      { "k": "since", "v": "2020" }
+      {
+        "k": "role",
+        "v": "Full-Stack Engineer"
+      },
+      {
+        "k": "based",
+        "v": "Dhaka, BD (UTC+6)"
+      },
+      {
+        "k": "stack",
+        "v": "Next.js · React · TS"
+      },
+      {
+        "k": "status",
+        "v": "Open to FT · Remote"
+      },
+      {
+        "k": "since",
+        "v": "2020"
+      }
     ]
   },
-  "marquee": ["React","Next.js","TypeScript","Vue","Laravel","GraphQL","MySQL","Supabase","WooCommerce","GitHub Actions","Figma → Code","WordPress","Tailwind","Node.js"],
+  "marquee": [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Vue",
+    "Laravel",
+    "GraphQL",
+    "MySQL",
+    "Supabase",
+    "WooCommerce",
+    "GitHub Actions",
+    "Figma → Code",
+    "WordPress",
+    "Tailwind",
+    "Node.js"
+  ],
   "about": {
-    "sectionNum": "§01 — About",
+    "sectionNum": "§01 · About",
     "sectionTitle": "About <em>me.</em>",
-    "sectionMeta": "<b>Full-stack · Remote.</b> React, Next.js, Vue, Laravel — from Figma file to live product. Five years, real clients, shipped on time.",
+    "sectionMeta": "<b>Full-stack · Remote.</b> React, Next.js, Vue, Laravel: from Figma file to live product. Five years, real clients, shipped on time.",
     "body": [
-      "I'm a full-stack engineer based in Dhaka with 5+ years of production experience. I build across the stack — React and Next.js on the front, Vue + Laravel on the back, WordPress when it's the right tool. Every project starts with a Figma file and ends with a pixel-perfect build.",
-      "At SkyTech Solutions I lead a small team: setting architecture, running code reviews, mentoring juniors, and owning delivery end-to-end. I introduced AI-assisted workflows that cut our turnaround from a month to under two weeks — without cutting corners."
+      "I'm a full-stack engineer based in Dhaka with 5+ years of production experience. I build across the stack: React and Next.js on the front, Vue + Laravel on the back, WordPress when it's the right tool. Every project starts with a Figma file and ends with a pixel-perfect build.",
+      "At SkyTech Solutions I lead a small team: setting architecture, running code reviews, mentoring juniors, and owning delivery end-to-end. I introduced AI-assisted workflows that cut our turnaround from a month to under two weeks, without cutting corners."
     ],
     "meta": [
       "// Open to full-time remote roles. I work async well and keep Dhaka hours (UTC+6).",
       "// B.S. Computer Engineering · IUB 2024 · IEEE-published · npm author."
     ],
     "stats": [
-      { "n": "05", "suffix": "+", "l": "Years shipping" },
-      { "n": "20", "suffix": "+", "l": "Projects delivered" },
-      { "n": "50", "suffix": "%", "l": "Faster via AI tools" },
-      { "n": "100", "suffix": "%", "l": "On-time rate" }
+      {
+        "n": "05",
+        "suffix": "+",
+        "l": "Years shipping"
+      },
+      {
+        "n": "20",
+        "suffix": "+",
+        "l": "Projects delivered"
+      },
+      {
+        "n": "50",
+        "suffix": "%",
+        "l": "Faster via AI tools"
+      },
+      {
+        "n": "100",
+        "suffix": "%",
+        "l": "On-time rate"
+      }
     ]
   },
   "work": {
-    "sectionNum": "§02 — Recent Work",
+    "sectionNum": "§02 · Recent Work",
     "sectionTitle": "Selected <em>builds.</em>",
-    "sectionMeta": "Real client work across e-commerce, professional services, and corporate sites. Full case studies open inline.",
-    "footNote": "More on request — <span style='color:var(--fg)'>email for full portfolio</span> →"
+    "sectionMeta": "Client work across logistics, healthcare, e-commerce and professional services. Client names are withheld under NDA.",
+    "footNote": "More on request: <span style='color:var(--fg)'>email for details</span> →"
   },
   "projects": [
     {
-      "id": "skyfreightsquad",
-      "slug": "sky-freight-squad",
-      "name": "Sky Freight Squad",
-      "label": "01 / Logistics",
-      "description": "Full-stack logistics platform built on Vue 3 + Laravel — quote management, service pages, and a MySQL backend handling freight enquiries.",
+      "id": "cs-freight-quotes",
+      "slug": "freight-quote-platform",
+      "name": "Freight quote platform",
+      "label": "Logistics",
+      "description": "Full-stack logistics platform on Vue 3 and Laravel: quote management, service pages, and a MySQL backend handling freight enquiries.",
       "role": "Full-Stack Developer",
       "year": "2024",
-      "client": "Sky Freight Squad",
-      "stack": ["Vue 3","Laravel","MySQL","Tailwind","Figma"],
-      "liveUrl": "https://www.skyfreightsquad.com/",
+      "client": "A freight and logistics company",
+      "stack": [
+        "Vue 3",
+        "Laravel",
+        "MySQL",
+        "Tailwind",
+        "Figma"
+      ],
+      "liveUrl": "",
       "thumbnail": null,
-      "kicker": "Project 01 / Vue + Laravel",
-      "summary": "A logistics platform for a freight company. <em>Vue 3 frontend from a Figma handoff</em>, Laravel API, and a MySQL backend built for scale.",
+      "kicker": "Case study 01 · Vue 3 + Laravel",
+      "summary": "A quote and enquiry platform for a freight company. <em>Vue 3 frontend from a Figma handoff</em>, Laravel API, and a MySQL backend built for scale.",
       "duration": "6 weeks",
-      "problem": "The client had no digital presence for their freight services — all enquiries came through word of mouth with no structured intake process.",
+      "problem": "The client had no digital presence for their freight services. All enquiries came through word of mouth with no structured intake process.",
       "approach": "Designed the database schema, built a RESTful Laravel API, and implemented a pixel-perfect Vue 3 frontend from their Figma designs. Built a quote request flow wired to their ops team.",
       "solution": "Vue 3 SPA + Laravel REST API + MySQL. Deployed with GitHub Actions CI/CD. Admin panel for managing incoming freight enquiries.",
-      "outcome": "Launched on schedule. Client now receives structured inbound enquiries through the site with full intake data from day one."
+      "outcome": "Launched on schedule. Client now receives structured inbound enquiries through the site with full intake data from day one.",
+      "sector": "Logistics",
+      "confidential": true,
+      "highlights": [
+        {
+          "v": "6 weeks",
+          "k": "Handoff to launch"
+        },
+        {
+          "v": "On schedule",
+          "k": "Delivery"
+        },
+        {
+          "v": "Day one",
+          "k": "Structured enquiries captured"
+        }
+      ]
     },
     {
-      "id": "skylightrcm",
-      "slug": "skylight-rcm",
-      "name": "Skylight RCM",
-      "label": "02 / Healthcare",
-      "description": "Revenue cycle management platform — Vue 3 frontend, Laravel backend, built for a healthcare services company handling sensitive billing workflows.",
+      "id": "cs-healthcare-rcm",
+      "slug": "healthcare-billing-platform",
+      "name": "Healthcare billing services platform",
+      "label": "Healthcare",
+      "description": "Revenue cycle management platform: Vue 3 frontend, Laravel backend, built for a healthcare services company handling sensitive billing workflows.",
       "role": "Full-Stack Developer",
       "year": "2024",
-      "client": "Skylight RCM",
-      "stack": ["Vue 3","Laravel","MySQL","Tailwind","Figma"],
-      "liveUrl": "https://skylightrcm.com/",
+      "client": "A healthcare revenue cycle management company",
+      "stack": [
+        "Vue 3",
+        "Laravel",
+        "MySQL",
+        "Tailwind",
+        "Figma"
+      ],
+      "liveUrl": "",
       "thumbnail": null,
-      "kicker": "Project 02 / Vue + Laravel",
-      "summary": "A healthcare RCM platform. <em>Pixel-perfect Figma implementation</em>, Laravel API, and a Vue 3 frontend built for a professional services audience.",
+      "kicker": "Case study 02 · Vue 3 + Laravel",
+      "summary": "A platform for a healthcare billing company. <em>Pixel-perfect Figma implementation</em>, Laravel API, and a Vue 3 frontend built for a professional services audience.",
       "duration": "8 weeks",
-      "problem": "The client needed a credible, professional web presence for their RCM services — one that instilled trust with healthcare providers and captured leads effectively.",
+      "problem": "The client needed a credible, professional web presence for their RCM services, one that instilled trust with healthcare providers and captured leads effectively.",
       "approach": "Implemented the Figma design pixel-perfectly in Vue 3. Built a Laravel backend with MySQL, a service enquiry flow, and a secure admin area.",
       "solution": "Vue 3 + Laravel + MySQL. Clean, fast frontend with trust-first design. GitHub Actions for automated deployments.",
-      "outcome": "Site live and converting. Client reports improved credibility with healthcare provider prospects since launch."
+      "outcome": "Site live and converting. Client reports improved credibility with healthcare provider prospects since launch.",
+      "sector": "Healthcare",
+      "confidential": true,
+      "highlights": [
+        {
+          "v": "8 weeks",
+          "k": "Build time"
+        },
+        {
+          "v": "Secure",
+          "k": "Admin area for enquiries"
+        },
+        {
+          "v": "Automated",
+          "k": "Deployments on every merge"
+        }
+      ]
     },
     {
-      "id": "mirzaagro",
-      "slug": "mirza-agro-fisheries",
-      "name": "Mirza Agro & Fisheries",
-      "label": "03 / E-commerce",
-      "description": "Mango e-commerce store for a Bangladeshi agro business — product catalogue, order management, and a Vue + Laravel backend handling seasonal sales.",
+      "id": "cs-produce-store",
+      "slug": "seasonal-produce-store",
+      "name": "Seasonal produce online store",
+      "label": "E-commerce",
+      "description": "Online store for a seasonal fruit business: product catalogue, order management, and a Vue + Laravel backend handling harvest-season sales.",
       "role": "Full-Stack Developer",
       "year": "2024",
-      "client": "Mirza Agro & Fisheries",
-      "stack": ["Vue 3","Laravel","MySQL","Tailwind","Figma"],
-      "liveUrl": "https://mango.mirzaagroandfisheries.com/",
+      "client": "An agricultural business in Bangladesh",
+      "stack": [
+        "Vue 3",
+        "Laravel",
+        "MySQL",
+        "Tailwind",
+        "Figma"
+      ],
+      "liveUrl": "",
       "thumbnail": null,
-      "kicker": "Project 03 / E-commerce",
-      "summary": "A seasonal e-commerce platform for a mango farm. <em>Vue 3 storefront, Laravel backend</em> — built to handle high-volume orders during the harvest season.",
+      "kicker": "Case study 03 · Vue 3 + Laravel",
+      "summary": "A seasonal e-commerce platform for a fruit farm. <em>Vue 3 storefront, Laravel backend</em>, built to handle high-volume orders during the harvest season.",
       "duration": "5 weeks",
       "problem": "The client was taking orders through social media DMs with no inventory tracking, payment flow, or order management system.",
       "approach": "Built a product catalogue with seasonal inventory, a checkout flow, and a Laravel admin panel for order management. Pixel-perfect from their Figma mockups.",
       "solution": "Vue 3 storefront + Laravel API + MySQL. Product management, order tracking, and customer notification flow all in one admin panel.",
-      "outcome": "First season live — client processed orders digitally for the first time. Significant reduction in manual order handling overhead."
+      "outcome": "First season live. The client processed orders digitally for the first time. Significant reduction in manual order handling overhead.",
+      "sector": "E-commerce",
+      "confidential": true,
+      "highlights": [
+        {
+          "v": "5 weeks",
+          "k": "Build time"
+        },
+        {
+          "v": "First season",
+          "k": "Orders handled digitally"
+        },
+        {
+          "v": "One panel",
+          "k": "Products, orders, notifications"
+        }
+      ]
     },
     {
-      "id": "myrtlefordsheetmetal",
-      "slug": "myrtleford-sheet-metal",
-      "name": "Myrtleford Sheet Metal",
-      "label": "04 / Trade Services",
-      "description": "Trade services website for an Australian sheet metal fabrication company — Vue + Laravel, quote request flow, and a mobile-first design.",
+      "id": "cs-fabrication-quotes",
+      "slug": "fabrication-quote-site",
+      "name": "Quote site for a metal fabricator",
+      "label": "Trade services",
+      "description": "Trade services website for an Australian sheet metal fabrication company: Vue + Laravel, quote request flow, and a mobile-first design.",
       "role": "Full-Stack Developer",
       "year": "2024",
-      "client": "Myrtleford Sheet Metal (AU)",
-      "stack": ["Vue 3","Laravel","MySQL","Tailwind","Figma"],
-      "liveUrl": "https://myrtlefordsheetmetal.com/",
+      "client": "A sheet metal fabrication company in Australia",
+      "stack": [
+        "Vue 3",
+        "Laravel",
+        "MySQL",
+        "Tailwind",
+        "Figma"
+      ],
+      "liveUrl": "",
       "thumbnail": null,
-      "kicker": "Project 04 / Vue + Laravel",
-      "summary": "A trade services site for an Australian fabrication company. <em>Pixel-perfect Figma build</em>, Vue 3 frontend, Laravel backend — live quote request flow.",
+      "kicker": "Case study 04 · Vue 3 + Laravel",
+      "summary": "A trade services site for an Australian fabrication company. <em>Pixel-perfect Figma build</em>, Vue 3 frontend, Laravel backend, with a live quote request flow.",
       "duration": "4 weeks",
       "problem": "The business relied entirely on referrals with no web presence. Competitors were capturing leads online while they had nothing.",
-      "approach": "Built from a Figma design into a Vue 3 + Laravel site. Mobile-first — most trade clients browse on phones. Integrated a quote request form direct to their inbox.",
+      "approach": "Built from a Figma design into a Vue 3 + Laravel site. Mobile-first, since most trade clients browse on phones. Integrated a quote request form direct to their inbox.",
       "solution": "Vue 3 + Laravel + MySQL. Fast, clean, mobile-optimised. Automated deployment via GitHub Actions.",
-      "outcome": "Delivered in 4 weeks. Client now receives quote requests directly through the site from Australian customers finding them via search."
+      "outcome": "Delivered in 4 weeks. Client now receives quote requests directly through the site from Australian customers finding them via search.",
+      "sector": "Trade services",
+      "confidential": true,
+      "highlights": [
+        {
+          "v": "4 weeks",
+          "k": "Delivered"
+        },
+        {
+          "v": "Mobile-first",
+          "k": "Built for customers on phones"
+        },
+        {
+          "v": "Direct",
+          "k": "Quote requests to the inbox"
+        }
+      ]
     },
     {
-      "id": "doctorsoflancefield",
-      "slug": "doctors-of-lancefield",
-      "name": "Doctors of Lancefield",
-      "label": "05 / Healthcare",
-      "description": "Medical practice website for an Australian GP clinic — appointment info, service pages, and a WordPress CMS the practice staff manage themselves.",
+      "id": "cs-gp-clinic",
+      "slug": "gp-clinic-website",
+      "name": "GP clinic website",
+      "label": "Healthcare",
+      "description": "Medical practice website for an Australian GP clinic: appointment info, service pages, and a WordPress CMS the practice staff manage themselves.",
       "role": "Developer",
       "year": "2023",
-      "client": "Doctors of Lancefield (AU)",
-      "stack": ["WordPress","PHP","Custom Theme","Figma"],
-      "liveUrl": "https://doctorsoflancefield.com.au/",
+      "client": "A GP clinic in Australia",
+      "stack": [
+        "WordPress",
+        "PHP",
+        "Custom Theme",
+        "Figma"
+      ],
+      "liveUrl": "",
       "thumbnail": null,
-      "kicker": "Project 05 / WordPress",
-      "summary": "A medical practice site for an Australian GP clinic. <em>Trust-first design, accessible, fast</em> — pixel-perfect from Figma, managed by the practice team.",
+      "kicker": "Case study 05 · WordPress + PHP",
+      "summary": "A medical practice site for an Australian GP clinic. <em>Trust-first design, accessible, fast</em>, pixel-perfect from Figma, managed by the practice team.",
       "duration": "3 weeks",
-      "problem": "The clinic needed patients to find their hours, services, and contact details quickly on mobile — their old site was slow and hard to update.",
-      "approach": "Custom WordPress theme from their Figma design. Accessibility-first — clear type hierarchy, high contrast, large tap targets for older patients.",
-      "solution": "Custom WordPress theme, no page builder — clean semantic HTML, optimised images, mobile-first. Staff update hours and content themselves.",
-      "outcome": "Site live and patient-facing. Loads under 1s. Practice staff manage all content without developer involvement."
+      "problem": "The clinic needed patients to find their hours, services, and contact details quickly on mobile. Their old site was slow and hard to update.",
+      "approach": "Custom WordPress theme from their Figma design. Accessibility-first: clear type hierarchy, high contrast, large tap targets for older patients.",
+      "solution": "Custom WordPress theme, no page builder: clean semantic HTML, optimised images, mobile-first. Staff update hours and content themselves.",
+      "outcome": "Site live and patient-facing. Loads under 1s. Practice staff manage all content without developer involvement.",
+      "sector": "Healthcare",
+      "confidential": true,
+      "highlights": [
+        {
+          "v": "3 weeks",
+          "k": "Build time"
+        },
+        {
+          "v": "Under 1s",
+          "k": "Page load"
+        },
+        {
+          "v": "Staff-run",
+          "k": "No developer needed for updates"
+        }
+      ]
     },
     {
-      "id": "accountingmonk",
-      "slug": "accounting-monk",
-      "name": "Accounting Monk",
-      "label": "06 / Professional Services",
-      "description": "Marketing site for an Australian accounting firm — WordPress CMS, trust-first design, fast load times optimised for local search and conversion.",
+      "id": "cs-accounting-firm",
+      "slug": "accounting-firm-website",
+      "name": "Accounting firm marketing site",
+      "label": "Professional services",
+      "description": "Marketing site for an Australian accounting firm: WordPress CMS, trust-first design, fast load times optimised for local search and conversion.",
       "role": "Developer",
       "year": "2023",
-      "client": "Accounting Monk (AU)",
-      "stack": ["WordPress","PHP","Custom Theme","Figma"],
-      "liveUrl": "https://www.accountingmonk.com/",
+      "client": "An accounting firm in Australia",
+      "stack": [
+        "WordPress",
+        "PHP",
+        "Custom Theme",
+        "Figma"
+      ],
+      "liveUrl": "",
       "thumbnail": null,
-      "kicker": "Project 06 / WordPress",
+      "kicker": "Case study 06 · WordPress + PHP",
       "summary": "Professional services site for an Australian accounting firm. <em>Pixel-perfect Figma implementation</em>, fast Core Web Vitals, self-managed by the client.",
       "duration": "4 weeks",
-      "problem": "The firm needed a credible web presence ranking locally in Australia and converting visitors to enquiries — without ongoing developer costs.",
-      "approach": "Custom WordPress theme built pixel-perfectly from their Figma file. Tuned for Core Web Vitals and local SEO. No page builder — clean output.",
+      "problem": "The firm needed a credible web presence ranking locally in Australia and converting visitors to enquiries, without ongoing developer costs.",
+      "approach": "Custom WordPress theme built pixel-perfectly from their Figma file. Tuned for Core Web Vitals and local SEO. No page builder, clean output.",
       "solution": "Custom WordPress theme with contact form wired to their inbox. Optimised images, semantic HTML, schema markup for local search.",
-      "outcome": "Site live and self-managed. Loads under 1.5s. Consistent inbound enquiry flow from local Australian search."
+      "outcome": "Site live and self-managed. Loads under 1.5s. Consistent inbound enquiry flow from local Australian search.",
+      "sector": "Professional services",
+      "confidential": true,
+      "highlights": [
+        {
+          "v": "4 weeks",
+          "k": "Build time"
+        },
+        {
+          "v": "Under 1.5s",
+          "k": "Page load"
+        },
+        {
+          "v": "Self-managed",
+          "k": "Content run by the client"
+        }
+      ]
     }
   ],
   "skills": {
-    "sectionNum": "§03 — Stack",
+    "sectionNum": "§03 · Stack",
     "sectionTitle": "Tech Stack & <em>Expertise.</em>",
-    "sectionMeta": "Next.js · React · Vue · Laravel · TypeScript · WooCommerce · Supabase · GraphQL — full stack, production-grade.",
+    "sectionMeta": "Next.js · React · Vue · Laravel · TypeScript · WooCommerce · Supabase · GraphQL. Full stack, production-grade.",
     "rows": [
-      { "n": "01", "items": ["React","Next.js","TypeScript","JavaScript"], "context": "Core day-to-day. Five+ years, production-scale." },
-      { "n": "02", "items": ["Vue","Laravel","PHP","GraphQL"], "context": "Full-stack pairing for CMS-backed client builds." },
-      { "n": "03", "items": ["MySQL","Supabase","Node.js","Express"], "context": "Database design and backend APIs — enough to own the full stack." },
-      { "n": "04", "items": ["WordPress","WooCommerce","Webflow","Figma → Code"], "context": "E-commerce and CMS. Pixel-perfect implementation from Figma files." },
-      { "n": "05", "items": ["GitHub Actions","CI/CD","Git","Vercel"], "context": "Shipping pipelines. Code doesn't count until it's deployed." },
-      { "n": "06", "items": ["Claude Code","Cursor","GitHub Copilot"], "context": "AI-assisted workflows that halved our delivery timeline." }
+      {
+        "n": "01",
+        "items": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "JavaScript"
+        ],
+        "context": "Core day-to-day. Five+ years, production-scale."
+      },
+      {
+        "n": "02",
+        "items": [
+          "Vue",
+          "Laravel",
+          "PHP",
+          "GraphQL"
+        ],
+        "context": "Full-stack pairing for CMS-backed client builds."
+      },
+      {
+        "n": "03",
+        "items": [
+          "MySQL",
+          "Supabase",
+          "Node.js",
+          "Express"
+        ],
+        "context": "Database design and backend APIs, enough to own the full stack."
+      },
+      {
+        "n": "04",
+        "items": [
+          "WordPress",
+          "WooCommerce",
+          "Webflow",
+          "Figma → Code"
+        ],
+        "context": "E-commerce and CMS. Pixel-perfect implementation from Figma files."
+      },
+      {
+        "n": "05",
+        "items": [
+          "GitHub Actions",
+          "CI/CD",
+          "Git",
+          "Vercel"
+        ],
+        "context": "Shipping pipelines. Code doesn't count until it's deployed."
+      },
+      {
+        "n": "06",
+        "items": [
+          "Claude Code",
+          "Cursor",
+          "GitHub Copilot"
+        ],
+        "context": "AI-assisted workflows that halved our delivery timeline."
+      }
     ]
   },
   "experience": {
-    "sectionNum": "§04 — Experience",
+    "sectionNum": "§04 · Experience",
     "sectionTitle": "Where <em>I've been.</em>",
     "sectionMeta": "A short resume. Full CV available on request.",
     "rows": [
-      { "current": true, "date": "2023 — PRESENT", "role": "Software Engineer", "org": "SkyTech Solutions · Dhaka", "desc": "Built Next.js dashboards and Vue + Laravel client sites. Cut delivery from ~1 month to ~10 days using AI-assisted workflows. Lead code reviews, mentor juniors, own architecture and database decisions. Pixel-perfect Figma-to-code implementation on every project.", "tag": "CURRENT" },
-      { "current": false, "date": "2020 — 2023", "role": "Web Developer", "org": "Marketorr · Dhaka", "desc": "Shipped large WooCommerce stores, a membership platform, and an event management system. Built and customised WordPress themes and plugins. Clients across automotive, hospitality, healthcare, and retail in Bangladesh, Australia, and the US.", "tag": "FULL-TIME" }
+      {
+        "current": true,
+        "date": "2023 - PRESENT",
+        "role": "Software Engineer",
+        "org": "SkyTech Solutions · Dhaka",
+        "desc": "Built Next.js dashboards and Vue + Laravel client sites. Cut delivery from ~1 month to ~10 days using AI-assisted workflows. Lead code reviews, mentor juniors, own architecture and database decisions. Pixel-perfect Figma-to-code implementation on every project.",
+        "tag": "CURRENT"
+      },
+      {
+        "current": false,
+        "date": "2020 - 2023",
+        "role": "Web Developer",
+        "org": "Marketorr · Dhaka",
+        "desc": "Shipped large WooCommerce stores, a membership platform, and an event management system. Built and customised WordPress themes and plugins. Clients across automotive, hospitality, healthcare, and retail in Bangladesh, Australia, and the US.",
+        "tag": "FULL-TIME"
+      }
     ]
   },
   "testimonials": {
-    "sectionNum": "§05 — Kind Words",
+    "sectionNum": "§05 · Kind Words",
     "sectionTitle": "Client <em>notes.</em>",
     "sectionMeta": "Edited lightly for length. Real names on request.",
     "quotes": [
-      { "quote": "Noman shipped the redesign on time and two points under Lighthouse budget. He pushes back when he should and defers when it doesn't matter — rare combination.", "name": "A. Rahman", "title": "Founder, independent e-commerce studio", "meta": "Aurora Commerce · 2025" },
-      { "quote": "Fastest turnaround on a marketing site I've worked with. He reads the brief, asks one round of sharp questions, then disappears and delivers.", "name": "S. Chen", "title": "Creative Director", "meta": "Meridian · 2024" },
-      { "quote": "We hired him to polish a dashboard and he ended up rearchitecting the state layer. The handoff was immaculate.", "name": "M. Karim", "title": "Engineering Lead", "meta": "Helios · 2025" }
+      {
+        "quote": "Noman shipped the redesign on time and two points under Lighthouse budget. He pushes back when he should and defers when it doesn't matter. Rare combination.",
+        "name": "A. Rahman",
+        "title": "Founder, independent e-commerce studio",
+        "meta": "Aurora Commerce · 2025"
+      },
+      {
+        "quote": "Fastest turnaround on a marketing site I've worked with. He reads the brief, asks one round of sharp questions, then disappears and delivers.",
+        "name": "S. Chen",
+        "title": "Creative Director",
+        "meta": "Meridian · 2024"
+      },
+      {
+        "quote": "We hired him to polish a dashboard and he ended up rearchitecting the state layer. The handoff was immaculate.",
+        "name": "M. Karim",
+        "title": "Engineering Lead",
+        "meta": "Helios · 2025"
+      }
     ]
   },
   "contact": {
-    "sectionNum": "§06 — Contact",
+    "sectionNum": "§06 · Contact",
     "headline": "Let's build<br><em>something worth shipping.</em>",
     "leadCopy": "Best for project inquiries. Expect a reply within one working day (Dhaka hours).",
-    "hours": "Sun–Thu · 10:00 — 19:00 BST"
+    "hours": "Sun-Thu · 10:00-19:00 BST"
   },
   "social": [
-    { "label": "GitHub", "url": "https://github.com/nomanjawad" },
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/nomanjawad/" },
-    { "label": "Read.cv", "url": "#" }
+    {
+      "label": "GitHub",
+      "url": "https://github.com/nomanjawad"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/nomanjawad/"
+    },
+    {
+      "label": "Read.cv",
+      "url": "#"
+    }
   ],
   "footer": {
-    "copyright": "© 2026 Noman Jawad — All rights reserved",
-    "lastUpdated": "Last updated · Apr 2026",
-    "colophon": ["Instrument Serif + JetBrains Mono","Next.js · Vercel · Tailwind","Hand-built, 2026"]
+    "copyright": "© 2026 Noman Jawad. All rights reserved",
+    "lastUpdated": "Last updated · Oct 2026",
+    "colophon": [
+      "Kanit + JetBrains Mono",
+      "Next.js · Vercel",
+      "Hand-built, 2026"
+    ]
   }
 }

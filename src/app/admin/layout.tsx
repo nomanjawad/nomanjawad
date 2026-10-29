@@ -1,4 +1,13 @@
 import type { Metadata } from 'next';
+import { Instrument_Serif } from 'next/font/google';
+
+const serif = Instrument_Serif({
+  weight: '400',
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Admin · Noman Portfolio',
@@ -6,5 +15,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <div className={`admin-root ${serif.variable}`}>{children}</div>;
 }

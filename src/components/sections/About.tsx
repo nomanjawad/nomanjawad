@@ -1,59 +1,21 @@
-import Image from 'next/image';
 import type { About as AboutType, Identity } from '@/lib/types';
+import { ScrollText } from '@/components/client/ScrollText';
+
+const stripTags = (html: string) => html.replace(/<[^>]+>/g, '');
+const from = (x: number, ms: number) => ({ '--rx': `${x}px`, '--ry': '0px', '--rd': `${ms}ms` }) as React.CSSProperties;
 
 export function About({ about, identity }: { about: AboutType; identity: Identity }) {
-  const photo = identity.photo || '/assets/noman.jpeg';
   return (
-    <section id="about">
-      <div className="wrap">
-        <header className="sec-head reveal">
-          <div>
-            <div className="sec-num">{about.sectionNum}</div>
-            <h2 className="sec-title" dangerouslySetInnerHTML={{ __html: about.sectionTitle }} />
-          </div>
-          <div className="sec-meta" dangerouslySetInnerHTML={{ __html: about.sectionMeta }} />
-        </header>
-        <div className="cols">
-          <div className="photo-wrap reveal">
-            <Image
-              src={photo}
-              alt={`Portrait of ${identity.name}`}
-              fill
-              sizes="(max-width: 1060px) 90vw, 38vw"
-              priority={true}
-              loading="eager"
-              style={{ objectFit: 'cover' }}
-            />
-            <div className="caption">
-              <span>NEJ · 2026</span>
-              <span>DHK · BD</span>
-            </div>
-          </div>
-          <div className="reveal">
-            <h3 className="about-heading">Senior Full Stack Developer.<br />Available for Remote Hire.</h3>
-            <div className="about-body">
-              {about.body.map((p, i) => (
-                <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
-              ))}
-            </div>
-            <div className="about-meta">
-              {about.meta.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
-          </div>
-        </div>
-        <dl className="stats reveal">
-          {about.stats.map((s, i) => (
-            <div key={i} className="stat">
-              <div className="n">
-                {s.n}
-                {s.suffix && <em>{s.suffix}</em>}
-              </div>
-              <div className="l">{s.l}</div>
-            </div>
-          ))}
-        </dl>
+    <section id="about" className="about">
+      <div className="shape shape-sphere reveal" style={from(-80, 100)} aria-hidden="true"><i /></div>
+      <div className="shape shape-torus" aria-hidden="true"><i /></div>
+      <div className="shape shape-cube reveal" style={from(80, 150)} aria-hidden="true"><i /></div>
+      <div className="shape shape-pill reveal" style={from(80, 300)} aria-hidden="true"><i /></div>
+      <h2 className="giant sec-giant reveal" style={{ '--ry': '40px' } as React.CSSProperties}>About me</h2>
+      <ScrollText className="about-text" text={stripTags(about.body[0] ?? '')} />
+      <div className="about-ctas reveal">
+        <a href="#contact" className="btn-hot">Contact me</a>
+        <a href={identity.cv} target="_blank" rel="noopener noreferrer" className="btn-ghost">Download CV</a>
       </div>
     </section>
   );

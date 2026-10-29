@@ -1,7 +1,9 @@
 'use client';
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function ScrollReveal() {
+  const pathname = usePathname();
   useEffect(() => {
     const check = () => {
       const iH = window.innerHeight;
@@ -27,6 +29,6 @@ export function ScrollReveal() {
       window.removeEventListener('resize', onScroll);
       clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
     };
-  }, []);
+  }, [pathname]);
   return null;
 }

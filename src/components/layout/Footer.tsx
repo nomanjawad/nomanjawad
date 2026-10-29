@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Footer as FooterType, Identity, Social } from '@/lib/types';
 
 export function Footer({
@@ -9,45 +10,39 @@ export function Footer({
   identity: Identity;
   social: Social[];
 }) {
-  const parts = identity.shortName.split(' ');
-  const phoneHref = identity.phone.replace(/[^+\d]/g, '');
   return (
-    <footer>
-      <div className="wrap">
-        <h3 className="footer-name reveal">
-          {parts[0]} <em>{parts.slice(1).join(' ')}.</em>
-        </h3>
-        <div className="footer-cols reveal">
+    <footer className="foot">
+      <div className="foot-inner">
+        <div className="foot-top">
           <div>
-            <h5>Sitemap</h5>
-            <a href="/#hero">Index</a>
-            <a href="/#about">About</a>
-            <a href="/#work">Work</a>
-            <a href="/#skills">Stack</a>
-            <a href="/#contact">Contact</a>
+            <p className="giant foot-name">{identity.shortName}</p>
+            <p style={{ marginTop: 10, color: 'var(--fg-dim)', fontWeight: 300 }}>
+              {identity.location} · {identity.timezone}
+            </p>
           </div>
-          <div>
-            <h5>Elsewhere</h5>
-            {social.map((s) => (
-              <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer">
-                {s.label} ↗
-              </a>
-            ))}
-          </div>
-          <div>
-            <h5>Reach out</h5>
-            <a href={`mailto:${identity.email}`}>{identity.email}</a>
-            <a href={`tel:${phoneHref}`}>{identity.phone}</a>
-            <a>{identity.location}</a>
-          </div>
-          <div>
-            <h5>Colophon</h5>
-            {footer.colophon.map((x) => (
-              <a key={x}>{x}</a>
-            ))}
+          <div className="foot-links">
+            <div>
+              <h3>Site</h3>
+              <Link href="/work">Case studies</Link>
+              <Link href="/#about">About</Link>
+              <Link href="/#skills">Stack</Link>
+              <Link href="/#experience">Experience</Link>
+              <Link href="/#contact">Contact</Link>
+            </div>
+            <div>
+              <h3>Elsewhere</h3>
+              {social.map((s) => (
+                <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer">{s.label} ↗</a>
+              ))}
+            </div>
+            <div>
+              <h3>Reach out</h3>
+              <a href={`mailto:${identity.email}`}>{identity.email}</a>
+              <a href={identity.cv} target="_blank" rel="noopener noreferrer">Download CV</a>
+            </div>
           </div>
         </div>
-        <div className="footer-bot">
+        <div className="foot-bot">
           <span>{footer.copyright}</span>
           <span>{footer.lastUpdated}</span>
         </div>

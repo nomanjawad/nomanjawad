@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Identity, Project } from '@/lib/types';
+import { scrollToTarget } from '@/lib/smoothScroll';
 
 type Cmd = { g: string; t: string; sub: string; ic: string; act: () => void };
 
@@ -24,25 +25,19 @@ export function CommandPalette({
       return;
     }
     const el = document.getElementById(id);
-    if (el) window.scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' });
+    if (el) scrollToTarget(el);
   }, [router]);
-
-  const setTheme = useCallback(() => {
-    const cur = document.documentElement.dataset.theme || 'dark';
-    const next = cur === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem('noman.theme', next);
-  }, []);
 
   const allCmds: Cmd[] = useMemo(() => {
     const base: Cmd[] = [
-      { g: 'Navigate', t: 'Go to Hero',       sub: 'hero.tsx',       ic: '#', act: () => jumpTo('hero') },
-      { g: 'Navigate', t: 'Go to About',      sub: 'about.tsx',      ic: '#', act: () => jumpTo('about') },
-      { g: 'Navigate', t: 'Go to Work',       sub: 'work.tsx',       ic: '#', act: () => jumpTo('work') },
-      { g: 'Navigate', t: 'Go to Skills',     sub: 'skills.tsx',     ic: '#', act: () => jumpTo('skills') },
-      { g: 'Navigate', t: 'Go to Experience', sub: 'experience.tsx', ic: '#', act: () => jumpTo('experience') },
-      { g: 'Navigate', t: 'Go to Contact',    sub: 'contact.tsx',    ic: '#', act: () => jumpTo('contact') },
+      { g: 'Navigate', t: 'Go to Top',        sub: 'home',       ic: '#', act: () => jumpTo('hero') },
+      { g: 'Navigate', t: 'Go to Work',       sub: 'projects',   ic: '#', act: () => jumpTo('work') },
+      { g: 'Navigate', t: 'Go to About',      sub: 'bio',        ic: '#', act: () => jumpTo('about') },
+      { g: 'Navigate', t: 'Go to Stack',      sub: 'skills',     ic: '#', act: () => jumpTo('skills') },
+      { g: 'Navigate', t: 'Go to Experience', sub: 'resume',     ic: '#', act: () => jumpTo('experience') },
+      { g: 'Navigate', t: 'Go to Contact',    sub: 'email',      ic: '#', act: () => jumpTo('contact') },
     ];
+    base.push({ g: 'Navigate', t: 'All case studies', sub: '/work', ic: '#', act: () => router.push('/work') });
     projects.forEach((p) =>
       base.push({ g: 'Projects', t: p.name, sub: 'open case study', ic: '▸', act: () => router.push(`/work/${p.slug}`) }),
     );
@@ -50,10 +45,9 @@ export function CommandPalette({
       { g: 'Actions', t: 'Email Noman',      sub: identity.email,      ic: '@', act: () => { window.location.href = 'mailto:' + identity.email; } },
       { g: 'Actions', t: 'Download CV',      sub: 'opens in new tab',  ic: '⤓', act: () => window.open(identity.cv, '_blank') },
       { g: 'Actions', t: 'Copy Email',       sub: 'to clipboard',      ic: '⎘', act: () => navigator.clipboard.writeText(identity.email) },
-      { g: 'Theme',   t: 'Toggle Theme',     sub: 'dark ⇄ light',      ic: '◐', act: setTheme },
     );
     return base;
-  }, [projects, identity, jumpTo, setTheme, router]);
+  }, [projects, identity, jumpTo, router]);
 
   const filtered = useMemo(() => {
     const t = q.trim().toLowerCase();
@@ -117,7 +111,7 @@ export function CommandPalette({
           />
           <span className="kbd">esc</span>
         </div>
-        <div className="cmd-list">
+        <div className="cmd-list" data-lenis-prevent>
           {Object.entries(groups).map(([g, items]) => (
             <div key={g}>
               <div className="cmd-group-label">{g}</div>

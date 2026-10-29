@@ -149,7 +149,7 @@ export function AdminClient({ initial }: { initial: Content }) {
         <pre className="pre">{JSON.stringify(currentSlice(content, section), null, 2)}</pre>
         <p style={{ fontSize: 11, color: 'var(--fg-fade)', marginTop: 14 }}>
           Saving writes <code>content/content.json</code> via <code>PUT /api/content</code> and revalidates routes.
-          When the database is wired in, swap the file-write in <code>src/lib/content.ts</code> for a DB call —
+          When the database is wired in, swap the file-write in <code>src/lib/content.ts</code> for a DB call;
           this UI stays the same.
         </p>
       </aside>

@@ -1,110 +1,76 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { Identity, Project, Work as WorkType } from '@/lib/types';
+import type { Project, Work as WorkType } from '@/lib/types';
+import { StackScale } from '@/components/client/StackScale';
+import { Mesh } from '@/components/ui/Mesh';
 
-function MockSvg({ title }: { title: string }) {
+const FEATURED = 3;
+
+function Card({ p, i }: { p: Project; i: number }) {
   return (
-    <div className="mock-ph">
-      <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
-        <rect x="8" y="8" width="184" height="104" fill="none" stroke="rgba(237,234,228,0.14)" />
-        <line x1="8" y1="28" x2="192" y2="28" stroke="rgba(237,234,228,0.1)" />
-        <circle cx="18" cy="18" r="2" fill="rgba(237,234,228,0.3)" />
-        <circle cx="26" cy="18" r="2" fill="rgba(237,234,228,0.2)" />
-        <circle cx="34" cy="18" r="2" fill="rgba(237,234,228,0.15)" />
-        <text x="100" y="76" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8" fill="rgba(237,234,228,0.4)" letterSpacing="2">
-          {title.toUpperCase()}
-        </text>
-      </svg>
+    <div className="stack-item" style={{ '--i': i } as React.CSSProperties}>
+      <article className="pcard">
+        <div className="pcard-top">
+          <span className="giant pcard-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <span className="pcard-label">{p.sector ?? p.label} · {p.year}</span>
+            <h3 className="pcard-name">{p.name}</h3>
+          </div>
+          <div className="pcard-actions">
+            <Link href={`/work/${p.slug}`} className="btn-ghost btn-sm">Read case study</Link>
+            {p.liveUrl && (
+              <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost btn-sm">Live site ↗</a>
+            )}
+          </div>
+        </div>
+        <div className="pcard-grid">
+          <div className="pcard-info">
+            <p className="pcard-desc">{p.description}</p>
+            <dl className="pcard-meta">
+              <dt>Role</dt><dd>{p.role}</dd>
+              <dt>Client</dt><dd>{p.client}</dd>
+            </dl>
+            <div className="tags">
+              {p.stack.map((s) => <span key={s} className="tag">{s}</span>)}
+            </div>
+          </div>
+          <Link href={`/work/${p.slug}`} className="pcard-visual" aria-label={`Read the ${p.name} case study`}>
+            {p.thumbnail ? (
+              <Image src={p.thumbnail} alt="" fill sizes="(max-width: 900px) 90vw, 55vw" />
+            ) : (
+              <Mesh project={p} index={i} />
+            )}
+          </Link>
+        </div>
+      </article>
     </div>
   );
 }
 
-export function Work({
-  work,
-  projects,
-  identity,
-}: {
-  work: WorkType;
-  projects: Project[];
-  identity: Identity;
-}) {
+export function Work({ work, projects }: { work: WorkType; projects: Project[] }) {
+  const featured = projects.slice(0, FEATURED);
+  const rest = projects.slice(FEATURED);
   return (
-    <section id="work">
-      <div className="wrap">
-        <header className="sec-head reveal">
-          <div>
-            <div className="sec-num">{work.sectionNum}</div>
-            <h2 className="sec-title" dangerouslySetInnerHTML={{ __html: work.sectionTitle }} />
-          </div>
-          <div className="sec-meta">{work.sectionMeta}</div>
-        </header>
-        {projects.map((p, i) => {
-          const flip = i % 2 === 1;
-          const visual = (
-            <Link href={`/work/${p.slug}`} className="p-visual" aria-label={`View ${p.name} case study`}>
-              <div className="mock">
-                {p.thumbnail ? (
-                  <Image src={p.thumbnail} alt={`${p.name} thumbnail`} fill sizes="(max-width: 1060px) 90vw, 50vw" style={{ objectFit: 'cover' }} />
-                ) : (
-                  <MockSvg title={p.name} />
-                )}
-              </div>
-              <div className="overlay" />
-              <span className="label">{p.label}</span>
-              <span className="view-badge">View case →</span>
+    <section id="work" className="work">
+      <h2 className="giant sec-giant reveal" style={{ '--ry': '40px' } as React.CSSProperties}>Case studies</h2>
+      <p className="sec-lede reveal">{work.sectionMeta}</p>
+      <StackScale>
+        {featured.map((p, i) => <Card key={p.id} p={p} i={i} />)}
+      </StackScale>
+      {rest.length > 0 && (
+        <div className="more">
+          <h3 className="more-title">More case studies</h3>
+          {rest.map((p) => (
+            <Link key={p.id} href={`/work/${p.slug}`} className="more-row reveal">
+              <b>{p.name}</b>
+              <span>{p.stack.slice(0, 3).join(' · ')}</span>
+              <span>{p.year} →</span>
             </Link>
-          );
-          const body = (
-            <div className="p-body">
-              <div className="p-index">
-                PROJECT {String(i + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
-              </div>
-              <h3>{p.name}</h3>
-              <p className="p-desc">{p.description}</p>
-              <dl className="p-meta">
-                <dt>role</dt><dd>{p.role}</dd>
-                <dt>year</dt><dd>{p.year}</dd>
-                <dt>for</dt><dd>{p.client}</dd>
-              </dl>
-              <div className="pills">
-                {p.stack.map((s) => (
-                  <span key={s} className="pill">{s}</span>
-                ))}
-              </div>
-              <div className="p-links">
-                <a href={p.liveUrl || '#'} target="_blank" rel="noopener noreferrer">Live site ↗</a>
-                <Link href={`/work/${p.slug}`} className="secondary">Case study →</Link>
-              </div>
-            </div>
-          );
-          return (
-            <article key={p.id} className={`project${flip ? ' flip' : ''} reveal`}>
-              {flip ? body : visual}
-              {flip ? visual : body}
-            </article>
-          );
-        })}
-        <div
-          className="reveal"
-          style={{
-            padding: '40px 0 80px',
-            textAlign: 'center',
-            borderBottom: '1px solid var(--line)',
-          }}
-        >
-          <a
-            href={`mailto:${identity.email}`}
-            style={{
-              color: 'var(--fg-dim)',
-              fontSize: 12,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              borderBottom: '1px solid var(--line-strong)',
-              paddingBottom: 4,
-            }}
-            dangerouslySetInnerHTML={{ __html: work.footNote }}
-          />
+          ))}
         </div>
+      )}
+      <div className="work-all reveal">
+        <Link href="/work" className="btn-hot">All case studies</Link>
       </div>
     </section>
   );

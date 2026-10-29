@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getContent } from '@/lib/content';
+import { SITE_NAME, SITE_URL, jsonLd } from '@/lib/site';
+import { Mesh, NDA_NOTE } from '@/components/ui/Mesh';
 
 export const revalidate = 3600;
 export const dynamicParams = false;
@@ -21,9 +23,19 @@ export async function generateMetadata({
   const { projects } = await getContent();
   const p = projects.find((x) => x.slug === slug);
   if (!p) return { title: 'Case study not found' };
+  const title = `${p.name} case study`;
   return {
-    title: `${p.name} — Case study`,
+    title,
     description: p.description,
+    alternates: { canonical: `/work/${p.slug}` },
+    openGraph: {
+      title,
+      description: p.description,
+      type: 'article',
+      url: `/work/${p.slug}`,
+      siteName: SITE_NAME,
+    },
+    twitter: { card: 'summary_large_image', title, description: p.description },
   };
 }
 
@@ -39,80 +51,113 @@ export default async function CaseStudyPage({
   const p = projects[idx];
   const next = projects[(idx + 1) % projects.length];
   const specs: [string, string][] = [
-    ['Role', p.role],
+    ['My role', p.role],
+    ['Client', p.client],
+    ['Timeline', `${p.duration ?? 'n/a'} · ${p.year}`],
     ['Stack', p.stack.join(' · ')],
-    ['Duration', p.duration ?? '—'],
-    ['Year', p.year],
   ];
+  const story: [string, string][] = [
+    ['The problem', p.problem],
+    ['My approach', p.approach],
+    ['What I built', p.solution],
+    ['The outcome', p.outcome],
+  ];
+  const url = `${SITE_URL}/work/${p.slug}`;
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CreativeWork',
+        '@id': `${url}#case-study`,
+        name: p.name,
+        headline: `${p.name} case study`,
+        description: p.description,
+        url,
+        keywords: p.stack.join(', '),
+        author: { '@id': `${SITE_URL}/#person` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Case studies', item: `${SITE_URL}/work` },
+          { '@type': 'ListItem', position: 3, name: p.name, item: url },
+        ],
+      },
+    ],
+  };
   return (
     <>
-      <div className="case-topbar">
-        <span className="crumbs">
-          ~ / case-studies / <b>{p.slug}.mdx</b>
-        </span>
-        <Link className="close-case" href="/#work">
-          Close · <span className="kbd">esc</span>
-        </Link>
-      </div>
-      <div className="case-body">
-        <div className="case-kicker">{p.kicker || 'Project'}</div>
-        <h1 className="case-title">{p.name}</h1>
-        <p
-          className="case-summary"
-          dangerouslySetInnerHTML={{ __html: p.summary || '' }}
-        />
-        <div className="case-hero-img">
-          {p.thumbnail ? (
-            <Image src={p.thumbnail} alt={p.name} fill sizes="(max-width: 1100px) 100vw, 1100px" priority style={{ objectFit: 'cover' }} />
-          ) : (
-            <div className="mock-ph">
-              <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
-                <rect x="8" y="8" width="184" height="104" fill="none" stroke="rgba(237,234,228,0.14)" />
-                <line x1="8" y1="28" x2="192" y2="28" stroke="rgba(237,234,228,0.1)" />
-                <text x="100" y="76" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8" fill="rgba(237,234,228,0.4)" letterSpacing="2">
-                  {p.name.toUpperCase()}
-                </text>
-              </svg>
-            </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
+      <section className="page-hero cs-hero">
+        <div className="hero-aurora" aria-hidden="true" />
+        <div className="page-inner">
+          <Link href="/work" className="cs-back reveal">← All case studies</Link>
+          <p className="cs-kicker reveal">{p.sector ?? p.label} · {p.year}</p>
+          <h1 className="giant cs-title reveal" style={{ '--ry': '40px', '--rd': '100ms' } as React.CSSProperties}>{p.name}</h1>
+          <p className="cs-summary reveal" style={{ '--rd': '200ms' } as React.CSSProperties} dangerouslySetInnerHTML={{ __html: p.summary || p.description }} />
+          {p.confidential && (
+            <span className="avail reveal" style={{ '--rd': '260ms' } as React.CSSProperties}><i aria-hidden="true" />{NDA_NOTE}</span>
           )}
-        </div>
-        <dl className="case-specs">
-          {specs.map(([k, v]) => (
-            <div key={k} className="s">
-              <dt>{k}</dt>
-              <dd>{v}</dd>
-            </div>
-          ))}
-        </dl>
-        <div className="case-section">
-          <h3>Problem</h3>
-          <div className="body"><p>{p.problem}</p></div>
-        </div>
-        <div className="case-section">
-          <h3>Approach</h3>
-          <div className="body"><p>{p.approach}</p></div>
-        </div>
-        <div className="case-section">
-          <h3>Solution</h3>
-          <div className="body"><p>{p.solution}</p></div>
-        </div>
-        <div className="case-section">
-          <h3>Outcome</h3>
-          <div className="body"><p dangerouslySetInnerHTML={{ __html: p.outcome }} /></div>
-        </div>
-        <div className="case-next">
-          <div>
-            <div className="label">Next project</div>
-            <Link href={`/work/${next.slug}`}>
-              {next.name}{' '}
-              <span style={{ fontFamily: 'var(--mono)', fontSize: '0.6em', color: 'var(--fg-dim)' }}>→</span>
-            </Link>
+          {p.highlights && p.highlights.length > 0 && (
+            <dl className="cs-results">
+              {p.highlights.map((h, i) => (
+                <div key={h.k} className="cs-result reveal" style={{ '--rd': `${300 + i * 90}ms` } as React.CSSProperties}>
+                  <dd>{h.v}</dd>
+                  <dt>{h.k}</dt>
+                </div>
+              ))}
+            </dl>
+          )}
+          <div className="cs-visual reveal">
+            {p.thumbnail ? (
+              <Image src={p.thumbnail} alt={p.name} fill sizes="(max-width: 1320px) 100vw, 1280px" priority style={{ objectFit: 'cover' }} />
+            ) : (
+              <Mesh project={p} index={idx} />
+            )}
           </div>
-          <Link href="/#work" style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--fg-dim)' }}>
-            Back to work index ↩
+          <dl className="cs-specs reveal">
+            {specs.map(([k, v]) => (
+              <div key={k}>
+                <dt>{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+      <section className="caps cs-story">
+        <ol className="caps-list">
+          {story.map(([title, body], i) => (
+            <li key={title} className="cap reveal">
+              <span className="cap-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h2 className="cap-name">{title}</h2>
+                <p className="cap-desc" dangerouslySetInnerHTML={{ __html: body }} />
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+      <section className="cs-end">
+        <div className="page-inner">
+          <div className="cs-cta">
+            <h2 className="giant reveal">Planning something similar?</h2>
+            <p className="reveal">Tell me what you are building and when you need it. I reply within one working day.</p>
+            <div className="about-ctas reveal">
+              <Link href="/#contact" className="btn-hot">Contact me</Link>
+              <Link href="/work" className="btn-ghost">All case studies</Link>
+            </div>
+          </div>
+          <Link href={`/work/${next.slug}`} className="cs-next reveal">
+            <span>
+              <small>Next case study · {next.sector ?? next.label}</small>
+              <b>{next.name}</b>
+            </span>
+            <i aria-hidden="true">→</i>
           </Link>
         </div>
-      </div>
+      </section>
     </>
   );
 }
