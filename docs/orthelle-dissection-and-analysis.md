@@ -157,6 +157,8 @@ Conclusion: **follow the landing page fully means changing the visual system, no
 
 ## Part 3. The page Noman should build
 
+> **Decision (2026-10-29):** Noman keeps his own colours and fonts. Only the reference's page layout, section structure and animations are merged. Section 3.1 (visual system) and the "retire" list in 3.3 are therefore **not applied**; the dark palette, Kanit, pill nav, orb and radii stay. Built on branch `redesign/story-merge`, see Part 4.
+
 Same twelve moves, same proof mechanisms, mapped to "brief in, properly built site out".
 
 | # | Section | Headline direction | Handwritten kicker | Proof mechanism |
@@ -214,4 +216,44 @@ Same twelve moves, same proof mechanisms, mapped to "brief in, properly built si
 7. Corner readout with live web vitals; colophon.
 8. Restyle OG images; re-run build, Lighthouse on a throttled phone, Search Console check.
 
-Related: `docs/redesign-review-and-scroll-story-plan.md` (the earlier review and the `/story` prototype status).
+---
+
+## Part 4. What was built (branch `redesign/story-merge`, 2026-10-29)
+
+Home page order, mirroring the reference's twelve moves in the house style:
+
+| # | Section | Component | Status |
+|---|---|---|---|
+| 0–1 | Pinned story hero, six beats, text alternating left/right, numbered kickers, letter-rise headline, scan readout | `client/Story.tsx`, `client/story.css` | Built. Copy and beat-4 numbers are placeholders. |
+| 2 | Sector row + four stats | `sections/Proof.tsx` | Built from `about.stats` and project sectors. |
+| 3 | One build, every screen (four miniatures + title block) | `sections/Screens.tsx`, `ui/SiteMock.tsx` | Built with CSS miniatures; swap in real screenshots later. |
+| 4 | Figma vs build drag compare (pointer + keyboard) | `client/Compare.tsx`, `sections/CompareSection.tsx` | Built with miniatures; needs a real Figma frame + screenshot. |
+| 5 | Three steps | `sections/Steps.tsx` | Built. Copy placeholder. |
+| 6 | Case-study grid, 3 columns | `sections/Work.tsx`, `ui/WorkCard.tsx` | Built. Replaces the sticky stack on the home page. |
+| 7 | Inputs → one codebase → outputs, hover traces the route | `client/Routes.tsx`, `sections/Stack.tsx` | Built (SVG connectors measured from the DOM; stacked list under 900px). |
+| 8 | Testimonials: one lead quote beside a mini orb, two small | `sections/Testimonials.tsx` | Built from `content.testimonials`. |
+| 9 | Open letter | `sections/About.tsx` | Built from `about.body`; the AI paragraph is a placeholder Noman must write. |
+| — | Experience | unchanged | Kept after the letter. |
+| 10 | Ways to work (Project / Retainer / Audit, no prices) | `sections/Ways.tsx` | Built. Copy placeholder. |
+| 11 | FAQ accordion with sticky left column | `client/Faq.tsx` | Built. Six placeholder questions. |
+| 12 | Final CTA with roadmap chips, the orb, then the contact form | `sections/Contact.tsx` | Built. Form is still mailto-only. |
+| 13 | Footer: tagline, columns, giant wordmark, colophon | `layout/Footer.tsx` | Built. |
+| — | Corner readout: pointer X/Y plus live LCP and CLS | `client/Readout.tsx` | Built (hidden under 900px). |
+
+Other changes: nav gains "Process" and a "Book a call" button; the command palette gains Process and Questions; `/story` prototype route removed (the story is the hero now); old `Hero.tsx`, `ScrollMarquee`, `StackScale`, `ScrollText` and the About shapes are no longer rendered on the home page but remain in the repo.
+
+All new copy lives in `src/lib/homeCopy.ts`, marked as placeholders, until it is moved into `content.json` and the admin.
+
+Verified: type check and production build pass; every section renders at 1440×900 and 375×812 with no console errors and no horizontal overflow; drag compare, FAQ toggle and route hover work; the pause toggle still swaps the story to its static version.
+
+Performance pass (same day): the story scene now moves only transforms, opacity and clip-path per frame (no `left`/`width` changes), every animated piece is promoted with `will-change`, the callouts lost their backdrop blur, the testimonial orb is the pausable `Orb` component, the corner readout writes to the DOM without React re-renders, and `ScrollReveal` uses an IntersectionObserver instead of measuring on every scroll frame. The hero stage slides to the side opposite the active text block (`data-side` on the panel, `--shift-*` variables), so text and scene no longer share the same horizontal space.
+
+Layout and liveliness pass (same day): the story lives in a centred 1400px column with equal side margins; the nav lost the search button (⌘K still opens the palette) and the corner readout was removed; callouts sit outside the layer stack and the section readout moved below it. The Screens sheet is a clean four-column grid with the title block in a footer row, a shared card pulse across all four frames and a slow sheen. The compare slider writes its position straight to a CSS variable (no React re-render while dragging), sweeps on its own until touched, and keeps a keyboard range. Route connectors flow toward and away from the core while on screen and the core breathes. The lead testimonial rotates every seven seconds with dots, and the side notes float. The final call to action shows a looping deploy log (`client/DeployLog.tsx`, placeholder lines) instead of the orb.
+
+GSAP pass (same day): the story scene is now a single GSAP timeline (six beats, one unit each) scrubbed by ScrollTrigger over the 600vh wrapper, with Lenis driven from GSAP's ticker so both share one clock. Each beat is staged (cards snap into the spec grid with `back.out` and a random stagger, the spec frame draws itself via stroke-dashoffset, the window assembles nav → bars → cards, layers fan out with a stagger from the bottom, callouts pop behind the scanner, the deploy badge lands with two pulse rings). Brief cards float idly. The static version freezes the same timeline per panel. Layout: story column up to 1720px with the stage scaled to the viewport, sections in a 1440px column with 104px vertical padding, titles full width, lighter heading gradient, 22px/16px radii, route diagram centred at 1100px. `useScrollFrame`, `ScrollMarquee`, `ScrollText` and `StackScale` were deleted. New dependency: `gsap` 3.13.
+
+Process pass (same day): the story now follows Noman's six steps after the hero (seven beats, 700vh): discovery call (call panel with a live waveform; inputs line up as notes beside it) → organise and analyse (notes snap into the scope grid, the frame draws itself, analysis chips land) → prototype (cards fold into the window, which assembles piece by piece under a `prototype-v1` URL) → client feedback (numbered pins pop onto the prototype with comment bubbles, then resolve to green ticks) → optimise (layers fan out, scanner sweeps, metrics pop, section readout) → hand over (everything folds back, URL flips to the client domain, deploy badge, pulse rings, sparks). The layer tilt uses an outer rotateX and an inner rotateZ wrapper so the stack reads as isometric. The compare panel is centred; the route diagram spans the full container with every connector flowing into the core. The contact form is a brief builder: fill-in-the-sentence fields and chips on the left, the email composing itself live on the right, with open-in-mail and copy actions (still mailto, nothing sent from the page).
+
+Known gaps: placeholder copy and numbers; miniatures instead of real screenshots in Screens and Compare; the hero headline reveal depends on client hydration (text is in the HTML, letters rise after mount); not yet measured on a throttled phone.
+
+Related: `docs/redesign-review-and-scroll-story-plan.md` (the earlier review and the original `/story` prototype notes).

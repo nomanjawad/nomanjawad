@@ -15,7 +15,7 @@
   "hero": {
     "command": "whoami --verbose",
     "kicker": "Full-stack web developer · Next.js · React · Laravel",
-    "tagline": "I turn Figma designs into fast, pixel-perfect web apps, shipped in half the time with AI-assisted workflows.",
+    "tagline": "Freelance full-stack web developer turning briefs and design files into fast, pixel-perfect Next.js, React and Laravel web apps, shipped in half the time with AI-assisted workflows.",
     "headlineBefore": "Noman ",
     "headlineAfter": "E Jawad",
     "subtitle": "<span class='hl'>Full-stack developer</span> specializing in <span class='hl'>Next.js, React & Laravel</span>, turning Figma designs into pixel-perfect, production-ready web apps. Available for remote full-time roles and freelance projects worldwide.",
@@ -73,7 +73,7 @@
     "sectionTitle": "About <em>me.</em>",
     "sectionMeta": "<b>Full-stack · Remote.</b> React, Next.js, Vue, Laravel: from Figma file to live product. Five years, real clients, shipped on time.",
     "body": [
-      "I'm a full-stack engineer based in Dhaka with 5+ years of production experience. I build across the stack: React and Next.js on the front, Vue + Laravel on the back, WordPress when it's the right tool. Every project starts with a Figma file and ends with a pixel-perfect build.",
+      "I'm a full-stack engineer based in Dhaka with 5+ years of production experience. I build across the stack: React and Next.js on the front, Vue + Laravel on the back, WordPress when it's the right tool. Every project starts with your brief or design file and ends with a pixel-perfect build.",
       "At SkyTech Solutions I lead a small team: setting architecture, running code reviews, mentoring juniors, and owning delivery end-to-end. I introduced AI-assisted workflows that cut our turnaround from a month to under two weeks, without cutting corners."
     ],
     "meta": [
@@ -499,9 +499,9 @@
     "copyright": "© 2026 Noman Jawad. All rights reserved",
     "lastUpdated": "Last updated · Oct 2026",
     "colophon": [
+      "Built with Next.js 16, TypeScript, GSAP and Lenis",
       "Kanit + JetBrains Mono",
-      "Next.js · Vercel",
-      "Hand-built, 2026"
+      "Deployed on Vercel"
     ]
   }
 }

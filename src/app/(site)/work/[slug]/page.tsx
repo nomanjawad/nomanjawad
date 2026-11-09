@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getContent } from '@/lib/content';
-import { SITE_NAME, SITE_URL, jsonLd } from '@/lib/site';
+import { getContent, getContentModified } from '@/lib/content';
+import { OG_BASE, SHOW_WORK, SITE_NAME, SITE_URL, jsonLd } from '@/lib/site';
 import { Mesh, NDA_NOTE } from '@/components/ui/Mesh';
 
 export const revalidate = 3600;
@@ -28,12 +28,14 @@ export async function generateMetadata({
     title,
     description: p.description,
     alternates: { canonical: `/work/${p.slug}` },
+    robots: SHOW_WORK ? undefined : { index: false, follow: false },
     openGraph: {
+      ...OG_BASE,
       title,
       description: p.description,
       type: 'article',
       url: `/work/${p.slug}`,
-      siteName: SITE_NAME,
+      authors: [SITE_URL],
     },
     twitter: { card: 'summary_large_image', title, description: p.description },
   };
@@ -45,7 +47,7 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { projects } = await getContent();
+  const [{ projects, identity }, modified] = await Promise.all([getContent(), getContentModified()]);
   const idx = projects.findIndex((p) => p.slug === slug);
   if (idx === -1) notFound();
   const p = projects[idx];
@@ -67,14 +69,18 @@ export default async function CaseStudyPage({
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'CreativeWork',
+        // Article is the type Google still surfaces; CreativeWork has no search feature.
+        '@type': 'Article',
         '@id': `${url}#case-study`,
-        name: p.name,
         headline: `${p.name} case study`,
+        name: p.name,
         description: p.description,
         url,
+        mainEntityOfPage: url,
+        dateModified: modified.toISOString(),
         keywords: p.stack.join(', '),
-        author: { '@id': `${SITE_URL}/#person` },
+        about: p.sector ?? p.label,
+        author: { '@type': 'Person', '@id': `${SITE_URL}/#person`, name: SITE_NAME, url: SITE_URL },
       },
       {
         '@type': 'BreadcrumbList',
@@ -100,14 +106,17 @@ export default async function CaseStudyPage({
             <span className="avail reveal" style={{ '--rd': '260ms' } as React.CSSProperties}><i aria-hidden="true" />{NDA_NOTE}</span>
           )}
           {p.highlights && p.highlights.length > 0 && (
-            <dl className="cs-results">
-              {p.highlights.map((h, i) => (
-                <div key={h.k} className="cs-result reveal" style={{ '--rd': `${300 + i * 90}ms` } as React.CSSProperties}>
-                  <dd>{h.v}</dd>
-                  <dt>{h.k}</dt>
-                </div>
-              ))}
-            </dl>
+            <>
+              <dl className="cs-results">
+                {p.highlights.map((h, i) => (
+                  <div key={h.k} className="cs-result reveal" style={{ '--rd': `${300 + i * 90}ms` } as React.CSSProperties}>
+                    <dd>{h.v}</dd>
+                    <dt>{h.k}</dt>
+                  </div>
+                ))}
+              </dl>
+              <p className="cs-foot reveal">Figures describe this build as recorded at handover in {p.year}. They are the client's results, not a promise for yours.</p>
+            </>
           )}
           <div className="cs-visual reveal">
             {p.thumbnail ? (

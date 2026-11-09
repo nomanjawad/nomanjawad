@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { ThemeScript } from '@/components/client/ThemeScript';
-import { SITE_NAME, SITE_URL } from '@/lib/site';
+import { BRAND, IS_PRODUCTION, OG_BASE, SITE_NAME, SITE_URL } from '@/lib/site';
 import './globals.css';
 
 const mono = JetBrains_Mono({
@@ -12,33 +12,37 @@ const mono = JetBrains_Mono({
   display: 'swap',
 });
 
-const TITLE = 'Noman E Jawad | Full-Stack Web Developer, Next.js & React';
+// Keyword phrase first, brand last, 54 characters; mirrors the hero kicker and h1 so Google keeps it as the title link.
+const TITLE = `Freelance Next.js & Full-Stack Developer | ${BRAND}`;
 const DESCRIPTION =
-  'Full-stack web developer in Dhaka with 5+ years building fast Next.js, React, Vue and Laravel web apps, using AI-assisted workflows. Available for remote work.';
+  'Freelance full-stack developer for hire. Next.js, React and Laravel sites built from your brief or design file, fast and pixel-perfect. Dhaka-based, remote worldwide.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: TITLE,
-    template: `%s | ${SITE_NAME}`,
+    template: `%s | ${BRAND}`,
   },
   description: DESCRIPTION,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   openGraph: {
+    ...OG_BASE,
     title: TITLE,
     description: DESCRIPTION,
     type: 'website',
-    locale: 'en_US',
     url: '/',
-    siteName: SITE_NAME,
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: IS_PRODUCTION,
+    follow: IS_PRODUCTION,
+    googleBot: { index: IS_PRODUCTION, follow: IS_PRODUCTION, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
 };
 
 export const viewport: Viewport = {

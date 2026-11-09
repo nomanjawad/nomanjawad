@@ -23,7 +23,7 @@ export default async function SiteLayout({
   return (
     <div className={`site ${kanit.variable}`}>
       <noscript>
-        <style>{'.site .reveal{opacity:1;transform:none}'}</style>
+        <style>{'.site .reveal,.site .st-ch{opacity:1;transform:none}'}</style>
       </noscript>
       <Nav identity={content.identity} />
       <main id="main">{children}</main>
