@@ -32,14 +32,16 @@ Currently leading a small team at SkyTech Solutions: architecture decisions, cod
 
 ## Selected Work
 
-| Project | Stack | Live |
-|---------|-------|------|
-| Sky Freight Squad | Vue 3 + Laravel + MySQL | [skyfreightsquad.com](https://www.skyfreightsquad.com) |
-| Skylight RCM | Vue 3 + Laravel + MySQL | [skylightrcm.com](https://skylightrcm.com) |
-| Mirza Agro & Fisheries | Vue 3 + Laravel + MySQL | [mango.mirzaagroandfisheries.com](https://mango.mirzaagroandfisheries.com) |
-| Myrtleford Sheet Metal | Vue 3 + Laravel | [myrtlefordsheetmetal.com](https://myrtlefordsheetmetal.com) |
-| Doctors of Lancefield | WordPress | [doctorsoflancefield.com.au](https://doctorsoflancefield.com.au) |
-| Accounting Monk | WordPress | [accountingmonk.com](https://www.accountingmonk.com) |
+| Case study | Sector | Stack |
+|------------|--------|-------|
+| Freight quote platform | Logistics | Vue 3 + Laravel + MySQL |
+| Healthcare billing services platform | Healthcare | Vue 3 + Laravel + MySQL |
+| Seasonal produce online store | E-commerce | Vue 3 + Laravel + MySQL |
+| Quote site for a metal fabricator | Trade services | Vue 3 + Laravel |
+| GP clinic website | Healthcare | WordPress |
+| Accounting firm marketing site | Professional services | WordPress |
+
+Client names are withheld under NDA.
 
 ---
 

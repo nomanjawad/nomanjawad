@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { scrollToTarget } from '@/lib/smoothScroll';
 
 export function BackToTop() {
   const [show, setShow] = useState(false);
@@ -14,7 +15,7 @@ export function BackToTop() {
       type="button"
       className={`to-top${show ? ' show' : ''}`}
       aria-label="Back to top"
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      onClick={() => scrollToTarget(0)}
     >
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
         <path d="M12 19V5M5 12l7-7 7 7" />

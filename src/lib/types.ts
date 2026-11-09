@@ -14,6 +14,8 @@ export type Identity = {
 
 export type Hero = {
   command: string;
+  kicker?: string;
+  tagline?: string;
   headlineBefore: string;
   headlineAfter: string;
   subtitle: string;
@@ -53,6 +55,9 @@ export type Project = {
   kicker: string;
   summary: string;
   duration?: string;
+  sector?: string;
+  confidential?: boolean;
+  highlights?: { v: string; k: string }[];
   problem: string;
   approach: string;
   solution: string;
