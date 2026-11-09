@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { FAQ } from '@/lib/homeCopy';
+import { CopyEmail } from './CopyEmail';
 
 export function Faq({ email }: { email: string }) {
   const [open, setOpen] = useState(0);
@@ -10,7 +11,10 @@ export function Faq({ email }: { email: string }) {
         <div className="faq-side">
           <p className="kick reveal">{FAQ.kicker}</p>
           <h2 className="h2 reveal">{FAQ.title}</h2>
-          <a href={`mailto:${email}`} className="btn-ghost reveal" style={{ marginTop: 24 }}>{email}</a>
+          <div className="faq-mail reveal">
+            <a href={`mailto:${email}`}>{email}</a>
+            <CopyEmail email={email} />
+          </div>
         </div>
         <div className="faq-list">
           {FAQ.items.map((it, i) => {

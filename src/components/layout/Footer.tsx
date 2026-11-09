@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Footer as FooterType, Identity, Social } from '@/lib/types';
+import { SHOW_WORK } from '@/lib/site';
 
 export function Footer({
   footer,
@@ -21,7 +22,7 @@ export function Footer({
           <div className="foot-links">
             <div>
               <h3>Site</h3>
-              <Link href="/work">Case studies</Link>
+              {SHOW_WORK && <Link href="/work">Case studies</Link>}
               <Link href="/#process">Process</Link>
               <Link href="/#about">About</Link>
               <Link href="/#faq">Questions</Link>
@@ -43,7 +44,7 @@ export function Footer({
         <p className="giant foot-name" aria-hidden="true">{identity.shortName}</p>
         <div className="foot-bot">
           <span>{footer.copyright}</span>
-          <span>Built on a 12px grid · {footer.lastUpdated}</span>
+          <span className="foot-colophon">{footer.colophon.join(' · ')} · {footer.lastUpdated}</span>
         </div>
       </div>
     </footer>

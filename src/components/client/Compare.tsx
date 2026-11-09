@@ -4,7 +4,7 @@ import { COMPARE } from '@/lib/homeCopy';
 import { SiteMock } from '@/components/ui/SiteMock';
 
 /**
- * Drag comparison: the Figma frame on the left, the shipped build on the right.
+ * Drag comparison: the client's idea as a wireframe on the left, the shipped build on the right.
  * The handle position is written straight to a CSS variable, so dragging never
  * re-renders React. Until someone touches it, it sweeps slowly on its own.
  */
@@ -56,7 +56,7 @@ export function Compare() {
   return (
     <div ref={ref} className="cmp idle">
       <div className="cmp-layer cmp-build"><SiteMock cols={3} /></div>
-      <div className="cmp-layer cmp-figma"><SiteMock cols={3} wire /></div>
+      <div className="cmp-layer cmp-idea"><SiteMock cols={3} wire /></div>
       <div className="cmp-line" aria-hidden="true" />
       <span className="cmp-handle" aria-hidden="true"><i /></span>
       <span className="cmp-tag l">{COMPARE.left}</span>
@@ -70,7 +70,7 @@ export function Compare() {
         defaultValue={42}
         onChange={(e) => apply(Number(e.target.value))}
         onFocus={() => ref.current?.classList.remove('idle')}
-        aria-label="Compare the Figma frame with the shipped build"
+        aria-label="Compare the idea with the shipped build"
       />
     </div>
   );

@@ -24,10 +24,10 @@ export const SCREENS = {
 };
 
 export const COMPARE = {
-  kicker: 'pixels, kept',
-  title: 'Your Figma stays your Figma.',
-  lead: 'The build keeps the design: the spacing, the type scale, the radius you argued about. Drag across to compare the frame with the page it became.',
-  left: 'Your Figma',
+  kicker: 'your idea, kept',
+  title: 'Your idea stays your idea.',
+  lead: 'Whether you bring a design file, a sketch or a few sentences, the build keeps what you meant: the layout, the type, the details you cared about. Drag across to compare the idea with the page it became.',
+  left: 'Your idea',
   right: 'Shipped build',
   notes: ['Drag or use arrow keys', 'Same viewport, same page'],
 };

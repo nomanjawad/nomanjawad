@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { getContent } from '@/lib/content';
-import { SITE_NAME, SITE_URL, jsonLd, liveLinks } from '@/lib/site';
+import { getContent, getContentModified } from '@/lib/content';
+import { BRAND, SHOW_WORK, SITE_NAME, SITE_URL, jsonLd, liveLinks } from '@/lib/site';
 import { Story } from '@/components/client/Story';
 import { Proof } from '@/components/sections/Proof';
 import { Screens } from '@/components/sections/Screens';
@@ -20,7 +20,8 @@ export const revalidate = 3600;
 export const metadata: Metadata = { alternates: { canonical: '/' } };
 
 export default async function HomePage() {
-  const c = await getContent();
+  const [c, modified] = await Promise.all([getContent(), getContentModified()]);
+  const current = c.experience.rows.find((r) => r.current);
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -28,12 +29,15 @@ export default async function HomePage() {
         '@type': 'WebSite',
         '@id': `${SITE_URL}/#website`,
         name: SITE_NAME,
+        alternateName: BRAND,
         url: SITE_URL,
+        publisher: { '@id': `${SITE_URL}/#person` },
       },
       {
         '@type': 'ProfilePage',
         '@id': `${SITE_URL}/#profile`,
         url: SITE_URL,
+        dateModified: modified.toISOString(),
         isPartOf: { '@id': `${SITE_URL}/#website` },
         mainEntity: { '@id': `${SITE_URL}/#person` },
       },
@@ -42,28 +46,30 @@ export default async function HomePage() {
         '@id': `${SITE_URL}/#person`,
         name: c.identity.name,
         alternateName: c.identity.shortName,
-        jobTitle: 'Full-Stack Web Developer',
+        jobTitle: 'Freelance Full-Stack Web Developer',
         description: c.hero.tagline,
         url: SITE_URL,
         image: `${SITE_URL}${c.identity.photo}`,
+        email: `mailto:${c.identity.email}`,
         address: { '@type': 'PostalAddress', addressLocality: 'Dhaka', addressCountry: 'BD' },
         knowsAbout: c.skills.rows.flatMap((r) => r.items),
         sameAs: liveLinks(c.social).map((s) => s.url),
+        ...(current && { worksFor: { '@type': 'Organization', name: current.org.split(' · ')[0] } }),
       },
     ],
   };
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
-      <Story />
+      <Story identity={c.identity} />
       <Proof about={c.about} projects={c.projects} />
       <Screens />
       <CompareSection />
       <Steps />
-      <Work work={c.work} projects={c.projects} />
+      {SHOW_WORK && <Work work={c.work} projects={c.projects} />}
       <Stack />
       <Testimonials testimonials={c.testimonials} />
-      <About about={c.about} identity={c.identity} />
+      <About about={c.about} identity={c.identity} experience={c.experience} skills={c.skills} contact={c.contact} />
       <Experience experience={c.experience} identity={c.identity} />
       <Ways />
       <Faq email={c.identity.email} />

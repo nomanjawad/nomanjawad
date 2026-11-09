@@ -1,4 +1,5 @@
 'use client';
+import { SHOW_WORK } from '@/lib/site';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Identity, Project } from '@/lib/types';
@@ -39,10 +40,12 @@ export function CommandPalette({
       { g: 'Navigate', t: 'Go to Questions',  sub: 'faq',        ic: '#', act: () => jumpTo('faq') },
       { g: 'Navigate', t: 'Go to Contact',    sub: 'email',      ic: '#', act: () => jumpTo('contact') },
     ];
-    base.push({ g: 'Navigate', t: 'All case studies', sub: '/work', ic: '#', act: () => router.push('/work') });
-    projects.forEach((p) =>
-      base.push({ g: 'Projects', t: p.name, sub: 'open case study', ic: '▸', act: () => router.push(`/work/${p.slug}`) }),
-    );
+    if (SHOW_WORK) {
+      base.push({ g: 'Navigate', t: 'All case studies', sub: '/work', ic: '#', act: () => router.push('/work') });
+      projects.forEach((p) =>
+        base.push({ g: 'Projects', t: p.name, sub: 'open case study', ic: '▸', act: () => router.push(`/work/${p.slug}`) }),
+      );
+    }
     base.push(
       { g: 'Actions', t: 'Email Noman',      sub: identity.email,      ic: '@', act: () => { window.location.href = 'mailto:' + identity.email; } },
       { g: 'Actions', t: 'Download CV',      sub: 'opens in new tab',  ic: '⤓', act: () => window.open(identity.cv, '_blank') },

@@ -2,6 +2,7 @@ import type { Contact as ContactType, Identity, Social } from '@/lib/types';
 import { CTA } from '@/lib/homeCopy';
 import { ContactForm } from '@/components/client/ContactForm';
 import { DeployLog } from '@/components/client/DeployLog';
+import { CopyEmail } from '@/components/client/CopyEmail';
 
 /** Final call to action, then the contact form and details. */
 export function Contact({
@@ -33,7 +34,7 @@ export function Contact({
         <div className="contact-grid">
           <ContactForm email={identity.email} />
           <dl className="cmeta cmeta-row reveal">
-            <div><dt>Email</dt><dd><a href={`mailto:${identity.email}`}>{identity.email}</a></dd></div>
+            <div><dt>Email</dt><dd><a href={`mailto:${identity.email}`}>{identity.email}</a> <CopyEmail email={identity.email} className="copy-inline" /></dd></div>
             <div><dt>Phone</dt><dd><a href={`tel:${phoneHref}`}>{identity.phone}</a></dd></div>
             <div><dt>Location</dt><dd>{identity.location} ({identity.timezone})</dd></div>
             <div><dt>Hours</dt><dd>{contact.hours}</dd></div>

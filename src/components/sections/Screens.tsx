@@ -14,7 +14,7 @@ export function Screens() {
             <h2 className="h2 reveal">{SCREENS.title}</h2>
             <p className="lead reveal">{SCREENS.lead}</p>
           </div>
-          <Link href="/work" className="btn-ghost reveal">See the work</Link>
+          <Link href="/#process" className="btn-ghost reveal">How I work</Link>
         </div>
         <div className="sheet reveal">
           <div className="views">

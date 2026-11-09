@@ -11,6 +11,11 @@ export const getContent = cache(async (): Promise<Content> => {
   return JSON.parse(raw) as Content;
 });
 
+/** When the content last changed: the only thing that changes page content, so it is the honest lastmod. */
+export const getContentModified = cache(async (): Promise<Date> => {
+  try { return (await fs.stat(CONTENT_PATH)).mtime; } catch { return new Date(); }
+});
+
 export async function writeContent(next: Content): Promise<void> {
   const json = JSON.stringify(next, null, 2);
   await fs.writeFile(CONTENT_PATH, json + '\n', 'utf8');

@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import type { Identity } from '@/lib/types';
+import { scrollToTarget } from '@/lib/smoothScroll';
 import './story.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,20 +17,24 @@ gsap.registerPlugin(ScrollTrigger);
  * the 700vh wrapper. Copy and the metrics are PLACEHOLDERS; move them to content.json once settled.
  */
 
-type Beat = { kicker: string; title: string; body: string; note?: string };
+type Beat = { label: string; kicker: string; title: string; body: string; note?: string };
+
+/** The hero's role line: the h1 reads "<name> <role>", which is what the page title says too. */
+const ROLE = 'Freelance full-stack developer';
 
 const BEATS: Beat[] = [
   {
-    kicker: 'Full-stack web developer · Next.js · React · Laravel',
-    title: 'From client brief to production site',
-    body: 'You send what you have: a Figma file, a Loom, a Slack thread, a deadline. Scroll to see what happens to it.',
+    label: 'Brief',
+    kicker: 'Next.js · React · Laravel · WordPress',
+    title: '', // the name, from identity
+    body: 'Five years shipping Next.js, React and Laravel sites for logistics, healthcare and e-commerce clients, as lead or sole developer. Based in Dhaka, working remotely. Scroll to see how a project runs.',
   },
-  { kicker: 'discovery call', title: 'We talk first', body: 'A thirty-minute call to hear what you need, who it is for and when it has to be live. No forms, no pitch.' },
-  { kicker: 'requirements, organised', title: 'I organise and analyse', body: 'Everything from the call becomes a written scope: pages, integrations, risks and a performance budget.' },
-  { kicker: 'prototype, built', title: 'You get a prototype', body: 'A clickable build on a live URL, made to your requirements, so you react to something real instead of a mock-up.' },
-  { kicker: 'feedback, in', title: 'You review, I revise', body: 'Comment anywhere on the prototype. Every round of feedback goes in before we move on.' },
-  { kicker: 'optimised', title: 'Then it gets fast', body: 'Performance, accessibility, security headers and SEO are measured against the budget before launch.', note: 'Prototype numbers. Replace with one named case study.' },
-  { kicker: 'handed over', title: 'Your shiny new site', body: 'Deployed through CI, documented, and yours to run. Keys handed over.' },
+  { label: 'Call', kicker: 'discovery call', title: 'We talk first', body: 'A thirty-minute call to hear what you need, who it is for and when it has to be live. No forms, no pitch.' },
+  { label: 'Scope', kicker: 'requirements, organised', title: 'I organise and analyse', body: 'Everything from the call becomes a written scope: pages, integrations, risks and a performance budget.' },
+  { label: 'Prototype', kicker: 'prototype, built', title: 'You get a prototype', body: 'A clickable build on a live URL, made to your requirements, so you react to something real instead of a mock-up.' },
+  { label: 'Feedback', kicker: 'feedback, in', title: 'You review, I revise', body: 'Comment anywhere on the prototype. Every round of feedback goes in before we move on.' },
+  { label: 'Optimise', kicker: 'optimised', title: 'Then it gets fast', body: 'Performance, accessibility, security headers and SEO are measured against the budget before launch.', note: 'Prototype numbers. Replace with one named case study.' },
+  { label: 'Launch', kicker: 'handed over', title: 'Your shiny new site', body: 'Deployed through CI, documented, and yours to run. Keys handed over.' },
 ];
 const N = BEATS.length;
 
@@ -66,11 +72,18 @@ const PINS = [
 
 const ANALYSIS = ['6 pages', '2 integrations', '1 risk flagged', 'LCP budget 1.5 s'];
 
-const TEXT_W = 460;   // step text column
+const TEXT_MAX = 720; // text column cap; the column is 42% of the panel below that, same for every beat
 const PAD = 48;       // panel side padding at desktop
+const textW = (W: number) => Math.min(TEXT_MAX, Math.round(W * 0.42));
+/**
+ * Stage is authored at 620×420 and right-aligned to the panel padding. The metric cards hang
+ * 70px past each side (the right one into the gutter) and the readout 48px below, so the fit
+ * reserves the left overhang between text and stage, and the full height.
+ */
+const STAGE_FIT_W = 620 + 70;
+const STAGE_H = 420 + 48;
+const MAX_S = 1.45;
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
-const sideOf = (k: number) => (k === 0 ? 'hero' : k % 2 ? 'r' : 'l');
-const sideClass = (k: number) => `s-${sideOf(k)}`;
 
 /** Builds the seven-beat timeline for one scene root. Paused; the caller scrubs or freezes it. */
 function buildTimeline(root: HTMLElement) {
@@ -278,57 +291,63 @@ function Scene() {
   );
 }
 
-/** Headline whose letters rise in one by one. Full text stays available to screen readers. */
+/**
+ * Headline whose letters rise in one by one. The letter spans concatenate to the plain
+ * text, so the h1 carries the sentence exactly once; the aria-label on the heading gives
+ * screen readers the unsplit string.
+ */
 function RisingTitle({ text }: { text: string }) {
   let i = 0;
   return (
     <>
-      <span className="sr-only">{text}</span>
-      <span aria-hidden="true">
-        {text.split(' ').map((w, wi) => (
-          <span key={wi}>
-            <span className="st-w">
-              {Array.from(w).map((ch, ci) => (
-                <span key={ci} className="st-ch" style={{ '--i': i++ } as React.CSSProperties}>{ch}</span>
-              ))}
-            </span>{' '}
-          </span>
-        ))}
-      </span>
+      {text.split(' ').map((w, wi) => (
+        <span key={wi}>
+          <span className="st-w">
+            {Array.from(w).map((ch, ci) => (
+              <span key={ci} className="st-ch" style={{ '--i': i++ } as React.CSSProperties}>{ch}</span>
+            ))}
+          </span>{' '}
+        </span>
+      ))}
     </>
   );
 }
 
-function BeatText({ beat, k, on, ready = true }: { beat: Beat; k: number; on: boolean; ready?: boolean }) {
-  const Title = k === 0 ? 'h1' : 'h2';
+function BeatText({ beat, k, on, name, ready = true }: { beat: Beat; k: number; on: boolean; name: string; ready?: boolean }) {
   return (
-    <div className={`st-beat ${sideClass(k)}${on ? ' on' : ''}`}>
+    <div className={`st-beat${on ? ' on' : ''}`}>
       <p className="st-kicker">
         {k > 0 && <i className="st-n">{k}</i>}
         <span>{beat.kicker}</span>
       </p>
-      <Title className={`giant st-title${k === 0 ? ' st-title-hero' : ''}${ready ? ' st-ready' : ''}`}>
-        {k === 0 ? <RisingTitle text={beat.title} /> : beat.title}
-      </Title>
+      {k === 0 ? (
+        <h1 className={`giant st-title st-title-hero${ready ? ' st-ready' : ''}`} aria-label={`${name}, ${ROLE.toLowerCase()}`}>
+          <RisingTitle text={name} />
+          <span className="st-role">{ROLE}</span>
+        </h1>
+      ) : (
+        <h2 className="giant st-title">{beat.title}</h2>
+      )}
       <p className="st-body">{beat.body}</p>
       {beat.note && <p className="st-note">{beat.note}</p>}
       {k === 0 && (
         <div className="st-ctas" inert={!on || undefined}>
-          <a href="#work" className="btn-hot">See work</a>
+          <a href="#process" className="btn-hot">How I work</a>
           <a href="#contact" className="btn-ghost">Get in touch</a>
         </div>
       )}
       {k === N - 1 && (
         <div className="st-ctas" inert={!on || undefined}>
-          <Link href="/work" className="btn-hot">See case studies</Link>
-          <Link href="/#contact" className="btn-ghost">Get in touch</Link>
+          <Link href="/#contact" className="btn-hot">Start a project</Link>
+          <Link href="/#faq" className="btn-ghost">Questions</Link>
         </div>
       )}
     </div>
   );
 }
 
-export function Story() {
+export function Story({ identity }: { identity: Identity }) {
+  const name = identity.shortName;
   const wrapRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const stageColRef = useRef<HTMLDivElement>(null);
@@ -359,13 +378,11 @@ export function Story() {
         let s: number;
         if (panel && inner && window.innerWidth > 1100) {
           const W = inner.clientWidth, H = inner.clientHeight;
-          const heroW = Math.min(720, W * 0.42);
-          s = clamp(Math.min((W - heroW - 3 * PAD) / 620, (H - 200) / 420), 0.5, 1.8);
-          panel.style.setProperty('--shift-hero', `${((heroW + PAD) / 2).toFixed(1)}px`);
-          panel.style.setProperty('--shift-l', `${((TEXT_W + PAD) / 2).toFixed(1)}px`);
-          panel.style.setProperty('--shift-r', `${(-(TEXT_W + PAD) / 2).toFixed(1)}px`);
+          const tw = textW(W);
+          panel.style.setProperty('--tw', `${tw}px`);
+          s = clamp(Math.min((W - tw - 3 * PAD) / STAGE_FIT_W, (H - 200) / STAGE_H), 0.5, MAX_S);
         } else {
-          s = clamp(col.clientWidth / 620, 0.5, 1.8);
+          s = clamp(col.clientWidth / 620, 0.5, MAX_S);
         }
         el.style.setProperty('--s', s.toFixed(4));
       });
@@ -392,8 +409,6 @@ export function Story() {
         animation: tl,
         onUpdate: (self) => {
           const k = Math.min(N - 1, Math.floor(self.progress * N));
-          const panel = panelRef.current;
-          if (panel && panel.dataset.side !== sideOf(k)) panel.dataset.side = sideOf(k);
           setActive((cur) => (cur === k ? cur : k));
         },
       });
@@ -408,6 +423,14 @@ export function Story() {
     }, stage);
     return () => ctx.revert();
   }, [isStatic]);
+
+  const goTo = (k: number) => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const top = wrap.getBoundingClientRect().top + window.scrollY;
+    const span = wrap.offsetHeight - window.innerHeight;
+    scrollToTarget(Math.round(top + ((k + 0.5) / N) * span));
+  };
 
   // Frozen frames for the static version.
   useEffect(() => {
@@ -425,7 +448,7 @@ export function Story() {
       <section className="story story-static" aria-label="How a project goes from brief to launch">
         {BEATS.map((b, k) => (
           <div key={k} className="st-static-row">
-            <BeatText beat={b} k={k} on />
+            <BeatText beat={b} k={k} on name={name} />
             <Scene />
           </div>
         ))}
@@ -436,18 +459,23 @@ export function Story() {
   return (
     <section className="story" aria-label="How a project goes from brief to launch">
       <div className="story-wrap" ref={wrapRef} style={{ height: `${N * 100}vh` }}>
-        <div className="story-panel" ref={panelRef} data-side="hero" style={{ '--tw': `${TEXT_W}px` } as React.CSSProperties}>
+        <div className="story-panel" ref={panelRef}>
           <div className="hero-aurora" aria-hidden="true" />
           <div className="story-inner">
             <div ref={stageColRef} className="st-stagecol">
               <Scene />
             </div>
             <div className="st-text">
-              {BEATS.map((b, k) => <BeatText key={k} beat={b} k={k} on={k === active} ready={ready} />)}
+              {BEATS.map((b, k) => <BeatText key={k} beat={b} k={k} on={k === active} name={name} ready={ready} />)}
             </div>
-            <ol className="st-rail" aria-hidden="true">
-              {BEATS.map((_, k) => (
-                <li key={k} className={k === active ? 'on' : undefined}>{String(k).padStart(2, '0')}</li>
+            <ol className="st-rail" aria-label="Steps">
+              {BEATS.map((b, k) => (
+                <li key={k} className={k === active ? 'on' : undefined}>
+                  <button type="button" onClick={() => goTo(k)} aria-current={k === active ? 'step' : undefined} aria-label={`Step ${k}: ${b.label}`}>
+                    <span className="st-rail-n">{String(k).padStart(2, '0')}</span>
+                    <span className="st-rail-l">{b.label}</span>
+                  </button>
+                </li>
               ))}
             </ol>
             <p className={`st-hint${active === 0 ? ' on' : ''}`} aria-hidden="true">Scroll ↓</p>
