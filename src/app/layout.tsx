@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
+import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
 import { ThemeScript } from '@/components/client/ThemeScript';
 import { BRAND, IS_PRODUCTION, OG_BASE, SITE_NAME, SITE_URL } from '@/lib/site';
@@ -65,6 +66,16 @@ export default function RootLayout({
       <body>
         {children}
         <Analytics />
+        {IS_PRODUCTION && (
+          <>
+            <Script src="https://www.googletagmanager.com/gtm.js?id=GTM-53WFC97C" strategy="afterInteractive" />
+            <Script id="gtm-datalayer" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
