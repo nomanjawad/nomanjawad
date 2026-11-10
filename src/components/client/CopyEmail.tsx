@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { track, locationOf } from '@/lib/track';
 
 /** "Copy email" → "Email copied!" with a mailto fallback when the clipboard is unavailable. */
 export function CopyEmail({ email, className = 'btn-ghost' }: { email: string; className?: string }) {
@@ -12,6 +13,7 @@ export function CopyEmail({ email, className = 'btn-ghost' }: { email: string; c
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(email);
+      track('email_copy', { location: locationOf(document.activeElement) });
       setDone(true);
     } catch {
       window.location.href = `mailto:${email}`;

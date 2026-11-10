@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { track } from '@/lib/track';
 import { FAQ } from '@/lib/homeCopy';
 import { CopyEmail } from './CopyEmail';
 
@@ -22,7 +23,7 @@ export function Faq({ email }: { email: string }) {
             return (
               <div key={it.q} className={`faq-item reveal${on ? ' on' : ''}`} style={{ '--rd': `${i * 60}ms` } as React.CSSProperties}>
                 <h3>
-                  <button type="button" aria-expanded={on} aria-controls={`faq-a-${i}`} id={`faq-q-${i}`} onClick={() => setOpen(on ? -1 : i)}>
+                  <button type="button" aria-expanded={on} aria-controls={`faq-a-${i}`} id={`faq-q-${i}`} onClick={() => { if (!on) track('faq_open', { question: it.q }); setOpen(on ? -1 : i); }}>
                     <span>{it.q}</span>
                     <i aria-hidden="true" />
                   </button>

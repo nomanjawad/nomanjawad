@@ -7,6 +7,7 @@ import { BackToTop } from '@/components/client/BackToTop';
 import { CommandPalette } from '@/components/client/CommandPalette';
 import { ScrollReveal } from '@/components/client/ScrollReveal';
 import { SmoothScroll } from '@/components/client/SmoothScroll';
+import { Tracking } from '@/components/client/Tracking';
 import './site.css';
 
 const kanit = Kanit({
@@ -38,6 +39,7 @@ export default async function SiteLayout({
         identity={content.identity}
       />
       <ScrollReveal />
+      <Tracking />
       <SmoothScroll />
     </div>
   );

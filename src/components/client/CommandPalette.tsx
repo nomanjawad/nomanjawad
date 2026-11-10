@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Identity, Project } from '@/lib/types';
 import { scrollToTarget } from '@/lib/smoothScroll';
+import { track } from '@/lib/track';
 
 type Cmd = { g: string; t: string; sub: string; ic: string; act: () => void };
 
@@ -66,7 +67,7 @@ export function CommandPalette({
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        setOpen((o) => !o);
+        setOpen((o) => { if (!o) track('palette_open', { via: 'keyboard' }); return !o; });
         return;
       }
       if (!open) return;
@@ -90,7 +91,7 @@ export function CommandPalette({
   useEffect(() => {
     const trigger = document.getElementById('cmdTrigger');
     if (!trigger) return;
-    const onClick = () => setOpen(true);
+    const onClick = () => { track('palette_open', { via: 'button' }); setOpen(true); };
     trigger.addEventListener('click', onClick);
     return () => trigger.removeEventListener('click', onClick);
   }, []);

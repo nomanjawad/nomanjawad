@@ -332,14 +332,14 @@ function BeatText({ beat, k, on, name, ready = true }: { beat: Beat; k: number; 
       {beat.note && <p className="st-note">{beat.note}</p>}
       {k === 0 && (
         <div className="st-ctas" inert={!on || undefined}>
-          <a href="#process" className="btn-hot">How I work</a>
-          <a href="#contact" className="btn-ghost">Get in touch</a>
+          <a href="#process" className="btn-hot" data-track="cta_click" data-track-label="How I work">How I work</a>
+          <a href="#contact" className="btn-ghost" data-track="cta_click" data-track-label="Get in touch">Get in touch</a>
         </div>
       )}
       {k === N - 1 && (
         <div className="st-ctas" inert={!on || undefined}>
-          <Link href="/#contact" className="btn-hot">Start a project</Link>
-          <Link href="/#faq" className="btn-ghost">Questions</Link>
+          <Link href="/#contact" className="btn-hot" data-track="cta_click" data-track-label="Start a project">Start a project</Link>
+          <Link href="/#faq" className="btn-ghost" data-track="cta_click" data-track-label="Questions">Questions</Link>
         </div>
       )}
     </div>
@@ -445,7 +445,7 @@ export function Story({ identity }: { identity: Identity }) {
 
   if (isStatic) {
     return (
-      <section className="story story-static" aria-label="How a project goes from brief to launch">
+      <section id="story" className="story story-static" aria-label="How a project goes from brief to launch">
         {BEATS.map((b, k) => (
           <div key={k} className="st-static-row">
             <BeatText beat={b} k={k} on name={name} />
@@ -457,7 +457,7 @@ export function Story({ identity }: { identity: Identity }) {
   }
 
   return (
-    <section className="story" aria-label="How a project goes from brief to launch">
+    <section id="story" className="story" aria-label="How a project goes from brief to launch">
       <div className="story-wrap" ref={wrapRef} style={{ height: `${N * 100}vh` }}>
         <div className="story-panel" ref={panelRef}>
           <div className="hero-aurora" aria-hidden="true" />

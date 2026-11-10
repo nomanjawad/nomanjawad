@@ -24,8 +24,8 @@ export function Hero({ hero, identity }: { hero: HeroType; identity: Identity })
           {hero.tagline && <p className="hero-tagline">{hero.tagline}</p>}
         </div>
         <div className="hero-ctas reveal" style={delay(500, 20)}>
-          <a href={hero.primaryCta.href} className="btn-hot">{hero.primaryCta.label}</a>
-          <a href={hero.secondaryCta.href} className="btn-ghost">{hero.secondaryCta.label}</a>
+          <a href={hero.primaryCta.href} className="btn-hot" data-track="cta_click" data-track-label={hero.primaryCta.label}>{hero.primaryCta.label}</a>
+          <a href={hero.secondaryCta.href} className="btn-ghost" data-track="cta_click" data-track-label={hero.secondaryCta.label}>{hero.secondaryCta.label}</a>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 'use client';
 import { useMemo, useState } from 'react';
+import { track } from '@/lib/track';
 
 /**
  * Brief builder. You fill in a sentence, the email writes itself on the right,
@@ -39,10 +40,11 @@ export function ContactForm({ email }: { email: string }) {
   const open = () => {
     if (!valid) { setError('Add your name and a line about the project first.'); return; }
     setError('');
+    track('brief_sent', { type, when, budget, has_company: Boolean(company) });
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
   const copy = async () => {
-    try { await navigator.clipboard.writeText(`To: ${email}\nSubject: ${subject}\n\n${body}`); setCopied(true); setTimeout(() => setCopied(false), 1800); } catch {}
+    try { await navigator.clipboard.writeText(`To: ${email}\nSubject: ${subject}\n\n${body}`); track('brief_copied', { type, when, budget }); setCopied(true); setTimeout(() => setCopied(false), 1800); } catch {}
   };
 
   const chips = (opts: string[], val: string, set: (v: string) => void, label: string) => (

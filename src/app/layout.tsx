@@ -15,6 +15,9 @@ const mono = JetBrains_Mono({
 
 // Keyword phrase first, brand last, 54 characters; mirrors the hero kicker and h1 so Google keeps it as the title link.
 const TITLE = `Freelance Next.js & Full-Stack Developer | ${BRAND}`;
+// Google Tag Manager containers loaded in production.
+const GTM_IDS = ['GTM-53WFC97C', 'GTM-WHV47FVM'];
+
 const DESCRIPTION =
   'Freelance full-stack developer for hire. Next.js, React and Laravel sites built from your brief or design file, fast and pixel-perfect. Dhaka-based, remote worldwide.';
 
@@ -68,7 +71,9 @@ export default function RootLayout({
         <Analytics />
         {IS_PRODUCTION && (
           <>
-            <Script src="https://www.googletagmanager.com/gtm.js?id=GTM-53WFC97C" strategy="afterInteractive" />
+            {GTM_IDS.map((id) => (
+              <Script key={id} src={`https://www.googletagmanager.com/gtm.js?id=${id}`} strategy="afterInteractive" />
+            ))}
             <Script id="gtm-datalayer" strategy="afterInteractive">
               {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}

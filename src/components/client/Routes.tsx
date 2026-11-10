@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { ROUTES } from '@/lib/homeCopy';
+import { track } from '@/lib/track';
 
 type Path = { id: string; d: string; side: 'in' | 'out' };
 
@@ -53,7 +54,7 @@ export function Routes() {
           className={`rt-item${hot === id ? ' on' : ''}`}
           data-id={id}
           data-side={side}
-          onPointerEnter={() => setHot(id)}
+          onPointerEnter={() => { setHot(id); track('route_hover', { tool: label, side }); }}
           onPointerLeave={() => setHot(null)}
           onFocus={() => setHot(id)}
           onBlur={() => setHot(null)}
