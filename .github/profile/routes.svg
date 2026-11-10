@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-label="Your idea in any form, your preferred stack, one production codebase">
+  <defs>
+    <linearGradient id="hot" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7621B0"/><stop offset="0.5" stop-color="#B600A8"/><stop offset="1" stop-color="#BE4C00"/></linearGradient>
+    <radialGradient id="cg" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#B600A8" stop-opacity="0.5"/><stop offset="1" stop-color="#B600A8" stop-opacity="0"/></radialGradient>
+    <style>
+      .mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .sans { font-family: Kanit, Inter, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+      .route { fill: none; stroke: #D7E2EA; stroke-opacity: 0.38; stroke-width: 1.8; stroke-dasharray: 6 10; stroke-linecap: round; animation: flow 1.4s linear infinite; }
+      .route.hot { stroke: #FF9B55; stroke-opacity: 1; stroke-width: 2.4; stroke-dasharray: 10 6; animation-duration: 0.6s; }
+      @keyframes flow { to { stroke-dashoffset: -16; } }
+      @media (prefers-reduced-motion: reduce) { .route { animation: none; } }
+      .box { fill: #141414; stroke: #D7E2EA; stroke-opacity: 0.22; }
+      .lbl { fill: #D7E2EA; font-size: 12.5px; letter-spacing: 0.5px; }
+      .kick { fill: #8F9BA6; font-size: 10.5px; letter-spacing: 2.4px; }
+    </style>
+  </defs>
+  <rect width="1200" height="380" rx="24" fill="#0B0B0B"/>
+
+  <text class="mono kick" x="60" y="52">YOUR IDEA, IN ANY FORM <tspan fill="#FF9B55">→</tspan></text>
+  <text class="mono kick" x="1140" y="52" text-anchor="end"><tspan fill="#FF9B55">←</tspan> YOUR PREFERRED STACK</text>
+
+  <!-- left inputs -->
+  <g class="mono">
+    <rect class="box" x="60" y="80" width="240" height="40" rx="10"/><text class="lbl" x="78" y="105">Written brief</text>
+    <rect class="box" x="60" y="134" width="240" height="40" rx="10"/><text class="lbl" x="78" y="159">Design file</text>
+    <rect class="box" x="60" y="188" width="240" height="40" rx="10"/><text class="lbl" x="78" y="213">Existing WordPress site</text>
+    <rect class="box" x="60" y="242" width="240" height="40" rx="10"/><text class="lbl" x="78" y="267">Shopify or Woo store</text>
+    <rect class="box" x="60" y="296" width="240" height="40" rx="10"/><text class="lbl" x="78" y="321">Spreadsheet of content</text>
+  </g>
+
+  <!-- right stack -->
+  <g class="mono" text-anchor="end">
+    <rect class="box" x="900" y="80" width="240" height="40" rx="10"/><text class="lbl" x="1122" y="105">Next.js</text>
+    <rect class="box" x="900" y="134" width="240" height="40" rx="10"/><text class="lbl" x="1122" y="159">Laravel</text>
+    <rect class="box" x="900" y="188" width="240" height="40" rx="10"/><text class="lbl" x="1122" y="213">WordPress</text>
+    <rect class="box" x="900" y="242" width="240" height="40" rx="10"/><text class="lbl" x="1122" y="267">Stripe · Supabase</text>
+    <rect class="box" x="900" y="296" width="240" height="40" rx="10"/><text class="lbl" x="1122" y="321">Vercel · GitHub Actions</text>
+  </g>
+
+  <!-- routes into the centre (x 300 -> 470, x 900 -> 730), centre y = 208 -->
+  <path class="route" d="M300 100 C385 100, 385 208, 470 208"/>
+  <path class="route hot" d="M300 154 C385 154, 385 208, 470 208"/>
+  <path class="route" d="M300 208 C385 208, 385 208, 470 208"/>
+  <path class="route" d="M300 262 C385 262, 385 208, 470 208"/>
+  <path class="route" d="M300 316 C385 316, 385 208, 470 208"/>
+  <path class="route hot" d="M900 100 C815 100, 815 208, 730 208"/>
+  <path class="route" d="M900 154 C815 154, 815 208, 730 208"/>
+  <path class="route" d="M900 208 C815 208, 815 208, 730 208"/>
+  <path class="route" d="M900 262 C815 262, 815 208, 730 208"/>
+  <path class="route" d="M900 316 C815 316, 815 208, 730 208"/>
+
+  <!-- centre card -->
+  <circle cx="600" cy="208" r="190" fill="url(#cg)"/>
+  <rect x="470" y="128" width="260" height="160" rx="20" fill="url(#hot)"/>
+  <g fill="#fff" fill-opacity="0.9"><rect x="492" y="150" width="11" height="11" rx="2"/><rect x="506" y="150" width="11" height="11" rx="2"/><rect x="492" y="164" width="11" height="11" rx="2"/><rect x="506" y="164" width="11" height="11" rx="2"/></g>
+  <text class="sans" x="492" y="212" font-size="19" font-weight="500" fill="#fff" letter-spacing="0.4">ONE PRODUCTION</text>
+  <text class="sans" x="492" y="234" font-size="19" font-weight="500" fill="#fff" letter-spacing="0.4">CODEBASE</text>
+  <text class="mono" x="492" y="262" font-size="10.5" letter-spacing="2.2" fill="#fff" fill-opacity="0.78">TYPED · TESTED · DOCUMENTED</text>
+</svg>
