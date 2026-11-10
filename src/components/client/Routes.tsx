@@ -69,17 +69,23 @@ export function Routes() {
       <svg className="rt-svg" width={size.w} height={size.h} viewBox={`0 0 ${size.w} ${size.h}`} aria-hidden="true">
         {paths.map((p) => <path key={p.id} d={p.d} className={`${p.side}${hot === p.id ? ' on' : ''}`} />)}
       </svg>
-      <ul className="rt-col rt-in" aria-label="What you can start with">
-        {ROUTES.inputs.map((l, i) => item(l, 'in', i))}
-      </ul>
+      <div className="rt-side rt-in">
+        <span className="rt-lbl">{ROUTES.inLabel} <i aria-hidden="true">→</i></span>
+        <ul className="rt-col" aria-label="What you can start with">
+          {ROUTES.inputs.map((l, i) => item(l, 'in', i))}
+        </ul>
+      </div>
       <div className="rt-centre">
         <span className="rt-mark" aria-hidden="true"><i /><i /><i /><i /></span>
         <b>{ROUTES.center.title}</b>
         <span className="lbl">{ROUTES.center.sub}</span>
       </div>
-      <ul className="rt-col rt-out" aria-label="What it ships to">
-        {ROUTES.outputs.map((l, i) => item(l, 'out', i))}
-      </ul>
+      <div className="rt-side rt-out">
+        <span className="rt-lbl"><i aria-hidden="true">←</i> {ROUTES.outLabel}</span>
+        <ul className="rt-col" aria-label="What it ships to">
+          {ROUTES.outputs.map((l, i) => item(l, 'out', i))}
+        </ul>
+      </div>
     </div>
   );
 }

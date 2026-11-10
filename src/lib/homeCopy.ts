@@ -51,6 +51,8 @@ export const ROUTES = {
   kicker: 'fits your stack',
   title: 'Starts in Figma. Ends in tools your team already runs.',
   hint: 'Hover a tool to trace its route.',
+  inLabel: 'Your idea, in any form',
+  outLabel: 'Your preferred stack',
   inputs: ['Figma file', 'Written brief', 'Existing WordPress site', 'Shopify or WooCommerce store', 'Spreadsheet of content'],
   center: { title: 'One production codebase', sub: 'typed · tested · documented' },
   outputs: ['Next.js', 'Laravel', 'WordPress', 'Stripe', 'HubSpot', 'Supabase', 'Vercel', 'GitHub Actions'],
