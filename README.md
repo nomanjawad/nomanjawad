@@ -6,6 +6,7 @@
 
 **Freelance full-stack developer. Next.js, React and Laravel sites built from your brief or design file, fast and pixel-perfect.**
 
+<p align=“left”> <img src=“https://komarev.com/ghpvc/?username=nomanjawad&label=Profile%20views&color=0e75b6&style=flat” alt=“nomanjawad” /> </p>
 [![Website](https://img.shields.io/badge/nomanjawad.com-B600A8?style=for-the-badge&logoColor=white)](https://www.nomanjawad.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-7621B0?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nomanjawad/)
 [![Email](https://img.shields.io/badge/Email-BE4C00?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nomanzawad@gmail.com)
